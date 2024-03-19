@@ -13,18 +13,18 @@ import {
 import Swal from "sweetalert2";
 import Link from "next/link";
 import Pagination from "../../Pagination";
-import { getUserInfo } from "@/services/auth.service";
 import checkPermission from "@/utils/checkPermission";
 import { useRouter } from "next/navigation";
 
 const AddCourseForm = () => {
   const router = useRouter();
- 
+
   const [limit, setLimit] = useState(15);
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
   const [selectedCategory, setSelectedCategory] = useState("");
+
   const {
     data: categories,
     isLoading: isLoadingCategories,
@@ -40,32 +40,27 @@ const AddCourseForm = () => {
   });
   const allSubcategory = subcategories?.subcategories;
 
-  const { data: courses, isLoading: isSubcategoryLoading, refetch } =
-    useGetAllCoursesQuery({ limit, page, searchTerm });
-  const allCourses = courses?.courses?.data;
+  const {
+    data: courses,
+    isLoading: isSubcategoryLoading,
+    refetch,
+  } = useGetAllCoursesQuery({ limit, page, searchTerm });
 
   const currentCourses = courses?.courses?.data;
-
 
   useEffect(() => {
     refetch();
   }, [limit, page, searchTerm]);
 
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('course')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("course")) {
+      router.push("/");
     }
-
-  },[])
+  }, []);
 
   const totalData = courses?.courses?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
-
-
-
-
 
   const [addCourse] = useAddCourseMutation();
   const [deleteCourses] = useDeleteCoursesMutation();
@@ -73,7 +68,6 @@ const AddCourseForm = () => {
   const { register, handleSubmit, reset, setValue } = useForm();
 
   const onSubmit = async (data) => {
-
     const content = { ...data };
 
     const file = content["file"];
@@ -90,12 +84,10 @@ const AddCourseForm = () => {
       if (resultData) {
         toast.success("course created successfully");
       }
-
     } catch (error) {
       toast.error(error.message);
     }
   };
-
 
   const handleDelete = async (id) => {
     try {
@@ -120,7 +112,6 @@ const AddCourseForm = () => {
             icon: "success",
           });
         } else {
-
           Swal.fire({
             title: "Error!",
             text: "Something went wrong with deletion.",
@@ -132,8 +123,6 @@ const AddCourseForm = () => {
       toast.error(err.message);
     }
   };
-
-
 
   return (
     <div className="container mx-auto p-4">
@@ -180,24 +169,23 @@ const AddCourseForm = () => {
                 Select a category
               </option>
               {categories?.categories?.map((category) => (
-                <option key={category?.id} value={category?.id}>
+                <option key={category?._id} value={category?._id}>
                   {category?.title}
                 </option>
               ))}
             </select>
-
           </div>
           <div className="mb-4">
             <label className="block text-sm mb-2">Sub Category:</label>
             <select
-              {...register("sub_category_id", { required: true })}
+              {...register("sub_category_id", { required: false })}
               className="w-full border border-gray-300 p-2 rounded-md"
             >
               <option value="" disabled>
                 Select a category
               </option>
               {allSubcategory?.map((subCategory) => (
-                <option key={subCategory?.id} value={subCategory?.id}>
+                <option key={subCategory?._id} value={subCategory?._id}>
                   {subCategory?.title}
                 </option>
               ))}
@@ -228,7 +216,8 @@ const AddCourseForm = () => {
             >
               Description:
             </label>
-            <textarea rows={10}
+            <textarea
+              rows={10}
               id="description"
               name="description"
               {...register("description", { required: true })}
@@ -243,7 +232,7 @@ const AddCourseForm = () => {
               type="text"
               id="syllabus"
               name="syllabus"
-              {...register("syllabus", { required: true })}
+              {...register("syllabus", { required: false })}
               className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
             />
           </div>
@@ -255,7 +244,7 @@ const AddCourseForm = () => {
               type="text"
               id="routine"
               name="syllabus"
-              {...register("routine", { required: true })}
+              {...register("routine", { required: false })}
               className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
             />
           </div>
@@ -267,7 +256,7 @@ const AddCourseForm = () => {
               type="text"
               id="study_materials"
               name="study_materials"
-              {...register("study_materials", { required: true })}
+              {...register("study_materials", { required: false })}
               className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
             />
           </div>
@@ -296,9 +285,7 @@ const AddCourseForm = () => {
         </form>
       </div>
 
-      <h1 className="text-2xl font-bold mt-12">
-        All Courses
-      </h1>
+      <h1 className="text-2xl font-bold mt-12">All Courses</h1>
       <p className="mb-4">You can update and delete courses here</p>
       {isSubcategoryLoading ? (
         <p className="text-center text-xl">Loading courses...</p>
@@ -326,7 +313,8 @@ const AddCourseForm = () => {
                     {course?.membership_type === "1" ? "Paid" : "Free"}
                   </td>
                   <td className="py-2 px-4 border-b">
-                    {course?.sub_category_id?.category_id?.title}
+                    {course?.sub_category_id?.category_id?.title ||
+                      course?.category_id?.title}
                   </td>
                   <td className="py-2 px-4 border-b">
                     <Image
@@ -337,7 +325,10 @@ const AddCourseForm = () => {
                     />
                   </td>
                   <td className="py-2 px-4 border-b md:table-cell">
-                    <Link href={`/admin/addcourse/edit/${course?.id}`} className="bg-blue-500 text-white py-1 px-2 rounded-md">
+                    <Link
+                      href={`/admin/addcourse/edit/${course?.id}`}
+                      className="bg-blue-500 text-white py-1 px-2 rounded-md"
+                    >
                       Update
                     </Link>
                   </td>
@@ -354,8 +345,11 @@ const AddCourseForm = () => {
             </tbody>
           </table>
 
-          <Pagination totalPages={totalPages} currentPage={page} setPage={setPage} />
-
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            setPage={setPage}
+          />
         </div>
       )}
     </div>

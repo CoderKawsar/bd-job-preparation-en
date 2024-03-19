@@ -1,14 +1,14 @@
-import Categories from "@/components/pages/AllCourses/categories/Categories";
+import CategoryCourses from "@/components/pages/AllCourses/categories/CategoryCourses";
 
 export const metadata = {
-  title:"কোর্স ক্যাটাগরি"
-}
+  title: "কোর্স ক্যাটাগরি",
+};
 const CategoryPage = ({ params }) => {
   const id = params?.id;
 
   return (
     <div>
-      <Categories id={id} />
+      <CategoryCourses id={id} />
     </div>
   );
 };

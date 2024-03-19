@@ -1,26 +1,13 @@
 "use client";
-import MemeberShipPlan from "@/components/ohters/MemeberShipPlan";
 import Benefits from "./Benefits";
 import BookSection from "./BookSection";
-import Category from "./Category";
-import Courses from "./Courses";
 import FreeCourse from "./FreeCourse";
 import FreeSeminar from "./FreeSeminar";
 import Hero from "./Hero";
 import HomeQuiz from "./HomeQuiz";
 import ScrollToTopButton from "./ScrollToTopButton";
 import SelectCarreer from "./SelectCarreer";
-import Testing from "./Testing";
 import Faq from "./Faq";
-import { useGetAllCoursesQuery } from "@/redux/api/courseApi";
-import BcsPrili from "./course/BcsPrili";
-import BcsWritten from "./course/BcsWritten";
-import BankPrili from "./course/BankPrili";
-import BankWritten from "./course/BankWritten";
-import NtrcaPrili from "./course/NtrcaPrili";
-import NtrcaWritten from "./course/NtrcaWritten";
-import PrimaryPrili from "./course/PrimaryPrili";
-import SubCategoryCourses from "./course/SubCategoryCourses";
 import {
   bankPriliSubId,
   bankWrittenSubId,
@@ -31,7 +18,9 @@ import {
   primaryPriliSubId,
 } from "@/utils/subCategoryId";
 import FilteringCourseBooks from "./FilteringCourseBooks";
-import Header from "@/components/shared/Header";
+import CategorySubCategoryCourses from "./CategorySubCategoryCourses";
+import CategoryBooks from "./CategoryBooks";
+import CategorySubCategoryExams from "./CategorySubCategoryExams";
 
 const HomePage = () => {
   // const {data} = useGetAllCoursesQuery({
@@ -41,9 +30,12 @@ const HomePage = () => {
   return (
     <div className="">
       <Hero />
-      <Category />
+      {/* <Category /> */}
+      <CategorySubCategoryCourses />
+      <CategoryBooks />
+      <CategorySubCategoryExams />
 
-      <Courses />
+      {/* <Courses /> */}
       <FilteringCourseBooks sub_category_id={bcsPriliSubId} />
       <FilteringCourseBooks sub_category_id={bcsWrittenSubId} />
       <FilteringCourseBooks sub_category_id={bankPriliSubId} />

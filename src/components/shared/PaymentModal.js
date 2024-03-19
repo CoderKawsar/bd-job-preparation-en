@@ -1,5 +1,5 @@
 import bkashImg from "@/assets/images/Bkash logo.png";
-import nagadImg from "@/assets/images/Nagad-Logo.png";
+import nagadImg from "@/assets/images/nagad-logo-horizontal.png";
 import Image from "next/image";
 
 function PaymentModal({ setPaymentMethod, setModalOpen, amount }) {
@@ -18,7 +18,7 @@ function PaymentModal({ setPaymentMethod, setModalOpen, amount }) {
         <button
           type="button"
           onClick={() => setPaymentMethod("nagad")}
-          className="bg-white rounded h-24 w-48 flex justify-center items-center"
+          className="bg-white rounded h-24 px-2 w-48 flex justify-center items-center"
         >
           <Image src={nagadImg} alt="Nagad" width={200} height={150} />
         </button>

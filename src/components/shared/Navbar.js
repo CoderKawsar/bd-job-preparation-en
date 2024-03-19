@@ -129,7 +129,7 @@ const Navbar = () => {
               height={0}
             />
             <span className="dark:text-cyanPrimary hover:text-bluePrimary">
-            ইজি জব প্রিপারেশন 
+              ইজি জব প্রিপারেশন
             </span>
           </Link>
 
@@ -212,9 +212,7 @@ const Navbar = () => {
 
             <Link
               href="/routines"
-
-
-               className="block dark:text-black hover:text-bluePrimary font-bold"
+              className="block dark:text-black hover:text-bluePrimary font-bold"
             >
               ক্লাস রুটিন
             </Link>
@@ -224,7 +222,6 @@ const Navbar = () => {
             >
               নোটিশ
             </Link>
-    
 
             {userLoggedIn && (
               <Link
@@ -278,9 +275,7 @@ const Navbar = () => {
                     <ul className="py-4 pl-5 text-sm text-gray-700 dark:text-black">
                       <>
                         <li>
-                         
-                            <p className="text-lg font-bold">{data?.name}</p>
-                         
+                          <p className="text-lg font-bold">{data?.name}</p>
                         </li>
                         <li>
                           <Link

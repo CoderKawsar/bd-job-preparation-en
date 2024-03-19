@@ -1,11 +1,9 @@
 "use client";
+
 import EmptyContent from "@/components/Loader/EmptyContent";
 import Error from "@/components/Loader/Error";
 import InitialLoader from "@/components/Loader/InitialLoader";
-import {
-  useGetAllBooksQuery,
-  useGetSubCategoryBookQuery,
-} from "@/redux/api/booksApi";
+import { useGetSubCategoryBookQuery } from "@/redux/api/booksApi";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -59,7 +57,7 @@ const SubCategoryBooks = ({ sub_category_id }) => {
     content = (
       <>
         {" "}
-        <EmptyContent />
+        <EmptyContent content="Book" />
       </>
     );
   }

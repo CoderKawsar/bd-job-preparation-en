@@ -31,6 +31,7 @@ function Success() {
   const [addOrder] = useAddOrderMutation();
   const nagadPaymentStatus = searchParams.get("status");
   const nagadPaymentRefId = searchParams.get("payment_ref_id");
+  const nagadPaymentMessage = searchParams.get("message");
   const payloadString = Cookies.get("creationPayload");
   const orderType = Cookies.get("order_type");
   const { books } = useSelector((state) => state.cart);
@@ -177,9 +178,9 @@ function Success() {
   return (
     <>
       <Navbar />
-      <div className=" flex  flex-col justify-center items-center my-10">
-        <div className="flex justify-center flex-col items-center border w-fit p-12 bg-green-200">
-          <div className="space-y-5">
+      <div className="flex flex-col justify-center items-center my-10 mx-2 md:mx-16">
+        <div className="w-96 md:w-full flex justify-center flex-col items-center border p-12 bg-green-200">
+          <div>
             <div className="flex justify-center">
               <Image
                 src={nagadImage}
@@ -188,24 +189,57 @@ function Success() {
                 height={200}
               />
             </div>
-            <h3 className="text-5xl text-yellowPrimary pb-8">
-              Your Payment was initiated!
-            </h3>
-            <p className="pb-10 text-xl">
-              You Can continue our paid services if you have bought successfully
-            </p>
-            <Link
-              className="mt-8 bg-bluePrimary text-white py-5 px-10 transition-all duration-300 rounded hover:bg-cyanPrimary mr-5"
-              href="/"
-            >
-              Go to Home
-            </Link>
-            <Link
-              className="mt-8 bg-yellowPrimary text-white py-5 px-10 transition-all duration-300 rounded hover:bg-cyanPrimary"
-              href="/profile"
-            >
-              Go to your Dashboard
-            </Link>
+
+            <div className="mt-6 mb-16">
+              {nagadPaymentStatus === "Success" ? (
+                <div className="flex flex-col gap-y-4 items-center">
+                  <h3 className="text-2xl md:text-3xl text-green-500 text-center">
+                    Payment Status:{" "}
+                    <span className="text-black">{nagadPaymentStatus}</span>
+                  </h3>
+                  <p className="text-xl text-green-500 text-center">
+                    Your payment_ref_id is:{" "}
+                    <span className="text-black  text-sm max-w-full break-all">
+                      {nagadPaymentRefId}
+                    </span>{" "}
+                  </p>
+                  <p className="text-center px-4 py-2 text-green-500 bg-red-200 shadow rounded font-medium">
+                    Go to Dashboard to enjoy your paid content
+                  </p>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-y-2 items-center">
+                  <h3 className="text-3xl text-red-500">
+                    Your payment was not successful.
+                  </h3>
+                  <p className="text-xl text-green-500">
+                    Payment status:{" "}
+                    <span className="text-red-500">{nagadPaymentStatus}</span>{" "}
+                  </p>
+                  <p className="text-lg text-green-500">
+                    Message:{" "}
+                    <span className="text-red-500">{nagadPaymentMessage}</span>
+                  </p>
+                  <p className="px-4 py-2 text-green-500 bg-red-200 shadow rounded font-medium">
+                    Please complete your payment successfully
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="mt-16 flex justify-center items-center">
+              <Link
+                className="bg-bluePrimary text-white text-center py-2 px-3 md:py-5 md:px-10 transition-all duration-300 rounded hover:bg-cyanPrimary mr-5"
+                href="/"
+              >
+                Go to Home
+              </Link>
+              <Link
+                className="bg-yellowPrimary text-white text-center py-2 px-3 md:py-5 md:px-10 transition-all duration-300 rounded hover:bg-cyanPrimary"
+                href="/profile"
+              >
+                Go to your Dashboard
+              </Link>
+            </div>
           </div>
         </div>
       </div>

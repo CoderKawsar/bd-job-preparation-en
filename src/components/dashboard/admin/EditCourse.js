@@ -2,7 +2,6 @@
 
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import {
-  useGetAllCoursesQuery,
   useGetSingleCourseQuery,
   useUpdateCourseMutation,
 } from "@/redux/api/courseApi";
@@ -134,7 +133,7 @@ const EditCourse = ({ id }) => {
               className="w-full border border-gray-300 p-2 rounded-md"
             >
               {categories?.categories?.map((category) => (
-                <option key={category?.id} value={category?.id}>
+                <option key={category?._id} value={category?._id}>
                   {category?.title}
                 </option>
               ))}
@@ -150,7 +149,7 @@ const EditCourse = ({ id }) => {
               defaultValue={data?.sub_category_id}
             >
               {allSubcategory?.map((subCategory) => (
-                <option key={subCategory?.id} value={subCategory?.id}>
+                <option key={subCategory?._id} value={subCategory?._id}>
                   {subCategory?.title}
                 </option>
               ))}

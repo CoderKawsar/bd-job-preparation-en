@@ -4,7 +4,7 @@ import { useGetAllCoursesQuery } from "@/redux/api/courseApi";
 import { useEffect, useState } from "react";
 
 const RoutinesShow = () => {
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(12);
     const [page, setPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
 

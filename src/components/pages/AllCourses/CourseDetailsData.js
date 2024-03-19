@@ -26,15 +26,28 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
             </h2>
 
             <div className="w-96 mx-auto">
-              <p>
-                <span className="text-bluePrimary pr-10 font-semibold">
-                ক্যাটাগরি: {data?.sub_category_id?.category_id?.title}
-                </span>
-                সাব ক্যাটাগরি:{" "}
-                <span className="text-yellowPrimary">
-                  {data?.sub_category_id?.title}
-                </span>
-              </p>
+              <div className="flex justify-center gap-x-4">
+                <p
+                  className={`text-bluePrimary ${
+                    data?.sub_category_id?.tilte ? "pr-10" : ""
+                  } font-semibold`}
+                >
+                  ক্যাটাগরি:
+                  <span className="text-black font-medium">
+                    {" "}
+                    {data?.sub_category_id?.category_id?.title ||
+                      data?.category_id?.title}
+                  </span>
+                </p>
+                {data?.sub_category_id?.title && (
+                  <p className="text-yellowPrimary">
+                    সাব ক্যাটাগরি:{" "}
+                    <span className="text-black font-medium">
+                      {data?.sub_category_id?.title}
+                    </span>
+                  </p>
+                )}
+              </div>
 
               <Image
                 className="rounded w-full"
@@ -97,7 +110,7 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
                     alt="membership"
                   />
                   <p className="text-base md:text-lg font-bold">
-                  মেম্বারশিপ টাইপ:
+                    মেম্বারশিপ টাইপ:
                     {data?.membership_type === "1" ? " পেইড" : " ফ্রি"}
                   </p>
                 </div>
@@ -113,10 +126,10 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
         <div className="md:pl-10 mt-4 md:mt-0">
           <div className=" bg-white rounded border py-10 px-5 mt-4 mx-5">
             {data && <CourseSubscriptions course_id={data?._id} />}
-          </div> 
+          </div>
 
           <div className="bg-white rounded border py-10 px-5  m-5">
-            <h2 className="text-xl font-bold">এই কোর্সের  পরীক্ষাসমূহ :</h2>
+            <h2 className="text-xl font-bold mb-4">এই কোর্সের পরীক্ষাসমূহ :</h2>
             {data && <CourseExams course_id={data?._id} />}
           </div>
         </div>

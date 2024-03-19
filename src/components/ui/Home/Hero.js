@@ -1,8 +1,6 @@
 'use client'
 import React from "react";
-import banner from "../../../assets/images/banner.png";
-import banner1 from "../../../assets/images/ban-img.png";
-import banner2 from "../../../assets/images/ban-img2.png";
+import banner from "../../../assets/images/Easy_Job_Preparation_Banner.png";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,7 +9,7 @@ const Hero = () => {
     <div>
       <div className="banner bg-cyanPrimary py-10">
         <div className="hero-content flex-col lg:flex-row-reverse z-0">
-          <Image src={banner2} className=" rounded-lg shadow-2xl z-0" width={500}  height={200} alt="hero img" />
+          <Image src={banner} className=" rounded-lg z-0" alt="hero img" />
           <div className="">
             <h1 className="text-5xl font-bold leading-relaxed text-cyanPrimary z-0">
               নিজের মত শিখুন, <br />

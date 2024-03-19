@@ -12,6 +12,7 @@ function decryptLink(encryptedLink) {
   );
   let decryptedLink = decipher.update(encryptedLink, "hex", "utf-8");
   decryptedLink += decipher.final("utf-8");
+  console.log(decryptedLink);
   return decryptedLink;
 }
 

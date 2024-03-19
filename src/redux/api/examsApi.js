@@ -37,6 +37,22 @@ export const examsApi = baseApi.injectEndpoints({
       providesTags: ["exams"],
     }),
 
+    getExamsOfASubCategory: build.query({
+      query: (subcategoryId) => ({
+        url: `${EXAMS_URL}/sub-category/${subcategoryId}`,
+        method: "GET",
+      }),
+      providesTags: ["exams"],
+    }),
+
+    getExamsOfACategory: build.query({
+      query: (categoryId) => ({
+        url: `${EXAMS_URL}/category/${categoryId}`,
+        method: "GET",
+      }),
+      providesTags: ["exams"],
+    }),
+
     addAllExams: build.mutation({
       query: (data) => ({
         url: EXAMS_URL,
@@ -55,7 +71,6 @@ export const examsApi = baseApi.injectEndpoints({
 
       invalidatesTags: ["exams"],
     }),
-
 
     deleteExam: build.mutation({
       query: (id) => ({
@@ -110,13 +125,14 @@ export const examsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["exams"],
     }),
-
   }),
 });
 
 export const {
   useGetAllExamsQuery,
   useGetSingleExamQuery,
+  useGetExamsOfASubCategoryQuery,
+  useGetExamsOfACategoryQuery,
   useDeleteExamMutation,
   useUpdateExamMutation,
   useAddAllExamsMutation,
@@ -124,5 +140,5 @@ export const {
   useGetMyExamPaymentQuery,
   useGetAllUserExamsQuery,
   useGetMyDueExamsQuery,
-  useUpdateStatusChangeMutation
+  useUpdateStatusChangeMutation,
 } = examsApi;
