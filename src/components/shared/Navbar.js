@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import logo from "../../assets/images/logo.png";
+import { useState, useEffect } from "react";
 import { FaXmark, FaBars } from "react-icons/fa6";
 import Link from "next/link";
 import Image from "next/image";
 import { IoIosArrowDown } from "react-icons/io";
-import ToggleTheme from "./ToggleTheme";
 import {
   getUserInfo,
   isLoggedIn,
@@ -19,17 +17,13 @@ import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import { IoCartOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import avatar from "../../assets/images/avatar.png";
-import {
-  useGetAllCartsByUserQuery,
-  useGetAllCartsQuery,
-} from "@/redux/api/cartApi";
+import { useGetAllCartsByUserQuery } from "@/redux/api/cartApi";
 import { useGetAllSubcategoriesQuery } from "@/redux/api/subcategoryApi";
 import {
   useGetAllCoursesQuery,
   useGetAllCoursesRoutineQuery,
 } from "@/redux/api/courseApi";
 import MobileNavbar from "./MobileNavbar";
-import Header1 from "./Header1";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,17 +31,13 @@ const Navbar = () => {
   const { data: categories } = useGetAllCategoriesQuery();
   const categoriesData = categories?.categories;
 
-  const { data: subCategories } = useGetAllSubcategoriesQuery();
+  const { data: subCategories } = useGetAllSubcategoriesQuery({ limit: 200 });
   const subCategoriesData = subCategories?.subcategories;
-
   const [hoveredCategoryId, setHoveredCategoryId] = useState(null);
   const [hoveredSubCategoryId, setHoveredSubCategoryId] = useState(null);
   const [showCategories, setShowCategories] = useState(false);
   const [showSubcategories, setShowSubcategories] = useState(false);
-  const { data: routines } = useGetAllCoursesRoutineQuery();
 
-  const allRoutines = routines?.routines;
-  const { data: courses } = useGetAllCoursesQuery();
   const { data: cart } = useGetAllCartsByUserQuery();
 
   const cartLength = cart?.carts;
@@ -152,16 +142,16 @@ const Navbar = () => {
                 >
                   {categoriesData?.map((category) => (
                     <li
-                      key={category.id}
+                      key={category._id}
                       className="group relative"
-                      onMouseEnter={() => setHoveredCategoryId(category.id)}
+                      onMouseEnter={() => setHoveredCategoryId(category._id)}
                       onMouseLeave={() => setHoveredCategoryId(null)}
                     >
                       <span className="cursor-pointer flex items-center">
                         {category?.title}
                         <IoIosArrowDown />
                       </span>
-                      {hoveredCategoryId === category.id &&
+                      {hoveredCategoryId === category._id &&
                         subCategoriesData && (
                           <ul
                             className={`absolute top-0 left-full space-y-2 text-white bg-bluePrimary py-2 shadow-md rounded-md`}
@@ -169,14 +159,14 @@ const Navbar = () => {
                             {subCategoriesData
                               .filter(
                                 (subCategory) =>
-                                  subCategory?.category_id?._id === category.id
+                                  subCategory?.category_id?._id === category._id
                               )
                               .map((subCategory) => (
                                 <li
-                                  key={subCategory?.id}
+                                  key={subCategory?._id}
                                   className="group relative"
                                   onMouseEnter={() =>
-                                    setHoveredSubCategoryId(subCategory.id)
+                                    setHoveredSubCategoryId(subCategory._id)
                                   }
                                   onMouseLeave={() =>
                                     setHoveredSubCategoryId(null)

@@ -1,16 +1,16 @@
 import Image from "next/image";
-import avatar from "../../../../assets/images/img1.png";
-import { PiNotebookBold } from "react-icons/pi";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { GiTeacher } from "react-icons/gi";
 
 const CourseCard = ({ item }) => {
+  const buyOrStartLink =
+    item?.membership_type === "1"
+      ? `/courses/details/${item?._id}/subscribe`
+      : `/user/mycourses/details/${item?._id}`;
   return (
     <>
       {/* hover:-translate-y-1 hover:scale-110 */}
       <div className="card shadow-lg my-6 transition ease-in-out delay-150  duration-300 rounded bg-white ">
-       
         <figure className="relative ">
           <Image
             className="rounded h-48 "
@@ -62,7 +62,6 @@ const CourseCard = ({ item }) => {
               __html: `${item?.description.substring(0, 50)}...`,
             }}
           ></p>
-          
 
           <div className="py-3">
             {/* {item?.description}{" "} */}
@@ -84,10 +83,12 @@ const CourseCard = ({ item }) => {
           <hr />
           <div className="text-center mt-6 mb-3 ">
             <Link
-              href={`/courses/details/${item?._id}/subscribe`}
+              href={buyOrStartLink}
               className="bg-yellowPrimary text-white py-4 px-4 transition-all duration-300 rounded  hover:bg-bluePrimary"
             >
-              কোর্সটি কিনুন
+              {item?.membership_type === "0"
+                ? "কোর্সটি শুরু করুন"
+                : "কোর্সটি কিনুন"}
             </Link>
           </div>
         </div>

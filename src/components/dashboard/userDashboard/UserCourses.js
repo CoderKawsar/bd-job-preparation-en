@@ -1,5 +1,4 @@
 import EmptyContent from "@/components/Loader/EmptyContent";
-import Error from "@/components/Loader/Error";
 import InitialLoader from "@/components/Loader/InitialLoader";
 import Timer from "@/components/pages/AllCourses/Timer";
 import { useGetMyCourseSubscriptionsHistoryQuery } from "@/redux/api/courseApi";
@@ -12,7 +11,6 @@ const UserCourses = () => {
     useGetMyCourseSubscriptionsHistoryQuery();
 
   const courseSubs = data?.courseSubscription;
-  "sourse subs", courseSubs;
 
   let content = null;
 

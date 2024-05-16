@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllCoursesQuery } from "@/redux/api/courseApi";
+import decryptLink from "@/helpers/decryptLink";
 import {
   useGetSingleCoursePlaylistQuery,
   useUpdateCoursePlaylistMutation,
@@ -16,19 +16,6 @@ const EditCoursePlylist = ({ id }) => {
   const { data } = useGetSingleCoursePlaylistQuery(id);
   const [updateCoursePlaylist] = useUpdateCoursePlaylistMutation();
 
-  const { data: courses, isLoading, isError } = useGetAllCoursesQuery();
-  const courseData = courses?.courses?.data;
-
-  // useEffect(() => {
-  //   if (data) {
-  //     // banner: data?.file?.name,
-
-  //     setValue("title", data?.title);
-  //     setValue("playlist_link", data?.playlist_link);
-  //     setValue("course_id", data?.course_id || "");
-
-  //   }
-  // }, [data, setValue]);
   const onSubmit = async (data) => {
     data;
     try {
@@ -45,15 +32,10 @@ const EditCoursePlylist = ({ id }) => {
     }
   };
 
-  const defaultValues = {
-    title: data?.title,
-    course_id: data?.course_id,
-    playlist_link: data?.playlist_link,
-  };
-
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} defaultValues={defaultValues}>
+      <h2 className="font-bold mb-4 text-2xl">Update Course Playlist</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {data?.title && (
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-600">
@@ -65,13 +47,22 @@ const EditCoursePlylist = ({ id }) => {
               name="title"
               {...register("title")}
               defaultValue={data?.title}
-              className="mt-1 p-2 w-96 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
             />
           </div>
         )}
 
+        <div className="mb-4">
+          <p className="block text-sm font-medium text-gray-600">
+            Course Name:
+          </p>
+          <p className="w-full border mt-1 px-2 py-2 cursor-not-allowed">
+            {data?.course_id?.title}
+          </p>
+        </div>
+
         {/* Course selection field */}
-        {data?.course_id && (
+        {/* {data?.course_id && (
           <div className="mb-4">
             <label
               htmlFor="courses"
@@ -92,16 +83,16 @@ const EditCoursePlylist = ({ id }) => {
                 </option>
               ) : (
                 courseData?.map((course) => (
-                  <option key={course.id} value={course.id}>
+                  <option key={course._id} value={course._id}>
                     {course.title}
                   </option>
                 ))
               )}
             </select>
           </div>
-        )}
+        )} */}
 
-        <div className="mb-4">
+        <div className="mb-4 w-full">
           <label className="block text-sm font-medium text-gray-600">
             Playlist Link:
           </label>
@@ -110,8 +101,8 @@ const EditCoursePlylist = ({ id }) => {
             required
             name="playlist_link"
             {...register("playlist_link")}
-            defaultValue={data?.playlist_link}
-            className="mt-1 p-2 w-96  border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+            defaultValue={decryptLink(data?.playlist_link)}
+            className="mt-1 p-2 w-full  border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
           />
         </div>
 

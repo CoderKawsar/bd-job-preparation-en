@@ -5,8 +5,8 @@ import { useGetAllBooksQuery } from "@/redux/api/booksApi";
 import InitialLoader from "@/components/Loader/InitialLoader";
 import EmptyContent from "@/components/Loader/EmptyContent";
 import Error from "@/components/Loader/Error";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
 import PDFViewerModal from "@/components/ohters/PDFViewerModal";
 import { useState } from "react";
 
@@ -14,8 +14,7 @@ const BookSection = () => {
   const { data, isError, isLoading } = useGetAllBooksQuery();
 
   const [openPDFModals, setOpenPDFModals] = useState([]);
-  const [showPDFModal, setShowPDFModal] = useState(false);
-  
+
   const openPDFModal = (index) => {
     const updatedModals = [...openPDFModals];
     updatedModals[index] = true;
@@ -29,79 +28,83 @@ const BookSection = () => {
   };
 
   const booksData = data?.books?.data;
- 
-  const breakpoints = {
-    
-    480: {
-        slidesPerView: 1,
-       spaceBetween: 30,
-      },
-    576: {
-        slidesPerView: 2,
-       spaceBetween: 30,
-      },
-      786: {
-     slidesPerView: 3,
-        spaceBetween: 30,
-     },
-      1024: {
-      slidesPerView: 3,
-        spaceBetween:20,
-       },
-     }
 
+  const breakpoints = {
+    480: {
+      slidesPerView: 1,
+      spaceBetween: 30,
+    },
+    576: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+    },
+    786: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+  };
 
   let content = null;
 
   if (isLoading) {
     content = (
       <>
-        <InitialLoader/>
+        <InitialLoader />
       </>
     );
   }
 
   if (!isLoading && isError) {
-    content = <Error/>;
+    content = <Error />;
   }
 
   if (!isLoading && !isError && booksData?.length === 0) {
     content = (
       <>
         {" "}
-       <EmptyContent/>
+        <EmptyContent />
       </>
     );
   }
 
   if (!isLoading && !isError && booksData?.length > 0) {
-    content = booksData?.map((item, index) => <SwiperSlide key={item?._id}><BookSectionCard  item={item} onOpenPDFModal={() => openPDFModal(index)}/></SwiperSlide>);
+    content = booksData?.map((item, index) => (
+      <SwiperSlide key={item?._id}>
+        <BookSectionCard
+          item={item}
+          onOpenPDFModal={() => openPDFModal(index)}
+        />
+      </SwiperSlide>
+    ));
   }
   return (
-    <div className="lg:px-14  px-3  py-20">
-      <div className="flex gap-5 py-5">
+    <div className="lg:px-14  px-3 pt-16 pb-20">
+      <div className="flex gap-5">
         <h2 className="text-2xl font-bold px-2  rounded ">আমাদের সকল বইসমূহ</h2>
-        <Link href="/books" className="mb-5 bg-bluePrimary hover:bg-cyanPrimary w-44 text-white px-7 py-3 rounded transition-all duration-500 delay-200">
+        <Link
+          href="/books"
+          className="mb-5 bg-bluePrimary hover:bg-cyanPrimary w-44 text-white px-7 py-3 rounded transition-all duration-500 delay-200"
+        >
           সব বই দেখুন
         </Link>
       </div>
-      <div>
-        
-    </div>
+      <div></div>
       <Swiper
         // pagination={{
         //   type: 'progressbar',
         // }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        
-        breakpoints= {breakpoints}
+        breakpoints={breakpoints}
         className="mySwiper"
       >
-        
-{content}
+        {content}
       </Swiper>
-      
+
       {openPDFModals.map((isOpen, index) => (
         <PDFViewerModal
           key={index}
@@ -110,7 +113,6 @@ const BookSection = () => {
           pdfSrc={data?.books?.data[index]?.sample_pdf_link}
         />
       ))}
-     
     </div>
   );
 };

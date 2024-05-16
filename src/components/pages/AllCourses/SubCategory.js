@@ -1,64 +1,88 @@
-'use client'
+"use client";
 
+import Loading from "@/app/loading";
 import EmptyContent from "@/components/Loader/EmptyContent";
 import Error from "@/components/Loader/Error";
 import InitialLoader from "@/components/Loader/InitialLoader";
 import Commonbanner from "@/components/banners/Commonbanner";
 import CourseCard from "@/components/ui/Home/course/CourseCard";
 import { useGetAllCoursesQuery } from "@/redux/api/courseApi";
+import Link from "next/link";
 
-const SubCategory = ({id}) => {
-    const { data, isError, isLoading } = useGetAllCoursesQuery();
-    const coursesData = data?.courses?.data;
-    
-    const filterCourseDta = coursesData?.filter((item) => item?.sub_category_id?.id ===  id)
+const SubCategory = ({ id }) => {
+  const { data, isError, isLoading } = useGetAllCoursesQuery({
+    limit: 500,
+    sub_category_id: id,
+  });
+  const coursesData = data?.courses?.data;
 
-    // (filterCourseDta)
+  // const filterCourseDta = coursesData?.filter(
+  //   (item) => item?.sub_category_id?.id === id
+  // );
 
+  // (filterCourseDta)
 
-    let content = null;
+  let content = null;
 
   if (isLoading) {
     content = (
       <>
-        <InitialLoader/>
+        <InitialLoader />
       </>
     );
   }
 
   if (!isLoading && isError) {
-    content = <Error/>;
+    content = <Error />;
   }
 
-  if (!isLoading && !isError && filterCourseDta?.length === 0) {
+  if (!isLoading && !isError && coursesData?.length === 0) {
     content = (
       <>
         {" "}
-       <EmptyContent/>
+        <EmptyContent />
       </>
     );
   }
 
-  if (!isLoading && !isError && filterCourseDta?.length > 0) {
-    content = filterCourseDta?.map((item) => <CourseCard key={item?._id} item={item} />);
+  if (!isLoading && !isError && coursesData?.length > 0) {
+    content = coursesData?.map((item) => (
+      <CourseCard key={item?._id} item={item} />
+    ));
   }
-    const breadcrumbItems = [
-        { label: 'হোম', link: '/' },
-        { label: 'কোর্সসমূহ', link: '/courses' },
-        // { label: 'ক্যাটাগরি', link:'/courses/category' },
-        { label: 'সাব ক্যাটাগরি' },
-      ];
+  const breadcrumbItems = [
+    { label: "হোম", link: "/" },
+    { label: "কোর্সসমূহ", link: "/courses" },
+    // { label: 'ক্যাটাগরি', link:'/courses/category' },
+    {
+      label: `${coursesData?.[0]?.sub_category_id?.category_id?.title} - ${coursesData?.[0]?.sub_category_id?.title}`,
+    },
+  ];
 
-   
-    return (
-        <div>
-             <Commonbanner title="সাব ক্যাটাগরি" breadcrumbItems={breadcrumbItems}/>
-             <div className="mx-14 my-20">
-       <h2 className="text-center font-bold text-xl pb-10 text-yellowPrimary">সব কোর্স</h2>
-      <div className="grid lg:grid-cols-3  gap-4">{content}</div>
-      </div>
+  return (
+    <div>
+      {!isLoading ? (
+        <Commonbanner title="সাব ক্যাটাগরি" breadcrumbItems={breadcrumbItems} />
+      ) : (
+        <Loading />
+      )}
+      <div className="mx-14 my-20">
+        <h2 className="text-center font-bold text-xl pb-10 text-yellowPrimary">
+          {coursesData?.[0]?.sub_category_id?.category_id?.title} -{" "}
+          {coursesData?.[0]?.sub_category_id?.title}
+        </h2>
+        <div className="grid lg:grid-cols-3  gap-4">{content}</div>
+        <div className="flex justify-end">
+          <Link
+            href={`/courses/category/subcategory/courseBundle/${id}`}
+            className=" bg-bluePrimary text-white hover:bg-yellowPrimary    rounded transition-all duration-500 delay-200 font-bold text-xl border px-10 py-3 lg:mb-0 mb-5"
+          >
+            সব কোর্স একসাথে কিনুন
+          </Link>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default SubCategory;

@@ -14,7 +14,6 @@ import { useGetAllSubcategoriesQuery } from "@/redux/api/subcategoryApi";
 import { useGetAllCoursesQuery } from "@/redux/api/courseApi";
 import Pagination from "../../Pagination";
 import AdminAddQuiz from "@/components/dashboard/admin/AdminAddQuiz";
-import SeeDynamicQuiz from "@/components/dashboard/admin/SeeDynamicQuiz";
 import { useRouter } from "next/navigation";
 import checkPermission from "@/utils/checkPermission";
 
@@ -30,15 +29,13 @@ const AddQuiz = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [addQuizPlaylist] = useAddQuizPlaylistMutation();
+
   const {
     data: questions,
     isLoading: isFilteredQuestionLoading,
     refetch,
-  } = useGetAllQuestionsQuery({ limit, page, searchTerm });
-
+  } = useGetAllQuestionsQuery({ limit, page, searchTerm, exam_type: "0" });
   const allQuiz = questions?.categories?.data;
-
-  const filteredQuestions = allQuiz?.filter((quiz) => quiz.exam_type === "0");
 
   const { data: categories } = useGetAllCategoriesQuery({
     limit,
@@ -66,7 +63,6 @@ const AddQuiz = () => {
     searchTerm,
     exam_type: 0,
   });
-
   const allExams = exams?.exams?.data;
 
   const [deleteQuestions] = useDeleteQuestionsMutation();
@@ -80,7 +76,7 @@ const AddQuiz = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const selectedExam = allExams?.find(
-      (exam) => exam.id === newQuestion.exam_id
+      (exam) => exam._id === newQuestion.exam_id
     );
     const transformedArray = newQuestion?.options?.map((option, index) => {
       const key = String.fromCharCode(97 + index);
@@ -93,19 +89,23 @@ const AddQuiz = () => {
       // options: newQuestion.options,
       correct_answer: newQuestion.correct_answer,
       mark: 1,
-      exam_id: selectedExam.id,
+      exam_id: selectedExam._id,
       exam_type: "0",
     };
     const res = await addQuizPlaylist(newData);
-    if (res) {
+    if (res?.data) {
       toast.success("Quiz added successfully");
+    } else {
+      toast.error(
+        "Error! not added. Check if all the questions added for this exam."
+      );
     }
   };
   // (selectedExam?.id, 'this is selected exam');
   const handleDelete = async (categoryId) => {
     try {
       const res = await deleteQuestions(categoryId);
-      if (res) {
+      if (res?.data) {
         toast.success("Quiz deleted successfully");
       }
     } catch (error) {
@@ -114,24 +114,15 @@ const AddQuiz = () => {
   };
 
   useEffect(() => {
-    const fetchSubCategory = async () => {
-      await refetchSubCategories({ category_id: selectedCategory });
-    };
-    fetchSubCategory();
+    refetchSubCategories();
   }, [selectedCategory]);
 
   useEffect(() => {
-    const fetchSubCategories = async () => {
-      await refetchCourses({ sub_category_id: selectedSubcategory });
-    };
-    fetchSubCategories();
+    refetchCourses();
   }, [selectedSubcategory]);
 
   useEffect(() => {
-    const fetchExams = async () => {
-      await refetchExams({ course_id: selectedCourse });
-    };
-    fetchExams();
+    refetchExams();
   }, [selectedCourse]);
 
   const handleOptionChange = (index, value) => {
@@ -162,13 +153,11 @@ const AddQuiz = () => {
   }, [limit, page, searchTerm]);
 
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('exam')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("exam")) {
+      router.push("/");
     }
-
-  },[])
+  }, []);
 
   const totalData = questions?.categories?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
@@ -201,7 +190,7 @@ const AddQuiz = () => {
                 </option>
                 {categories &&
                   categories?.categories?.map((category) => (
-                    <option key={category?.id} value={category?.id}>
+                    <option key={category?._id} value={category?._id}>
                       {category.title}
                     </option>
                   ))}
@@ -228,7 +217,7 @@ const AddQuiz = () => {
                 </option>
                 {!!subCategories &&
                   subCategories?.subcategories?.map((subCategory) => (
-                    <option key={subCategory?.id} value={subCategory?.id}>
+                    <option key={subCategory?._id} value={subCategory?._id}>
                       {subCategory?.title}
                     </option>
                   ))}
@@ -259,7 +248,7 @@ const AddQuiz = () => {
                   </option>
                 ) : (
                   allCourse?.map((course) => (
-                    <option key={course.id} value={course.id}>
+                    <option key={course._id} value={course._id}>
                       {course.title}
                     </option>
                   ))
@@ -294,7 +283,7 @@ const AddQuiz = () => {
                   </option>
                 ) : (
                   exams?.exams?.data?.map((exam) => (
-                    <option key={exam.id} value={exam.id}>
+                    <option key={exam._id} value={exam._id}>
                       {exam.title}
                     </option>
                   ))
@@ -501,12 +490,12 @@ const AddQuiz = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredQuestions?.map((quiz, i) => (
+              {allQuiz?.map((quiz, i) => (
                 <AdminAddQuiz
-                  key={quiz?.id}
+                  key={quiz?._id}
                   handleDelete={handleDelete}
                   refetch={refetch}
-                  filteredQuestions={filteredQuestions}
+                  filteredQuestions={allQuiz}
                   quiz={quiz}
                   i={i}
                 />

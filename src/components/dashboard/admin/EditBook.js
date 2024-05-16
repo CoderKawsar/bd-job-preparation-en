@@ -1,5 +1,11 @@
 "use client";
 
+import CategorySelectionsInput from "@/components/inputs/CategorySelectionsInput";
+import CourseSelectionsInput from "@/components/inputs/CourseSelectionsInput";
+import SubCategorySelectionsInput from "@/components/inputs/SubCategorySelectionsInput";
+import SubjectSelectionsInput from "@/components/inputs/SubjectSelectionsInput";
+import decryptLink from "@/helpers/decryptLink";
+import { extractIdsFromFieldsArray } from "@/helpers/inputFormat";
 import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
@@ -12,46 +18,49 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const EditBook = ({ id }) => {
-  const { register, handleSubmit, reset, setValue, watch } = useForm();
+  const { register, control, handleSubmit, reset, setValue, watch } = useForm();
   const router = useRouter();
   const { data } = useGetSingleBookQuery(id);
 
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const {
-    data: categories,
-    isLoading: isLoadingCategories,
-    isError: isErrorCategories,
-  } = useGetAllCategoriesQuery();
-
-  const {
-    data: subcategories,
-    isLoading: isLoadingSubcategories,
-    isError: isErrorSubcategories,
-  } = useGetAllSubcategoriesQuery({
-    category_id: selectedCategory,
-  });
-  const allSubcategory = subcategories?.subcategories;
-
   const [updateBook] = useUpdateBookMutation();
+
   useEffect(() => {
     if (data) {
-      // cover_page: data?.file?.name,
       setValue("title", data?.title);
-      //   setValue("author", data?.author);
-      //   setValue("category_id", data?.category_id || "");
-      //   setValue("sub_category_id", data?.sub_category_id || "");
-      //   setValue("membership_type", data?.membership_type || "");
-      //   setValue("syllabus", data?.syllabus);
-      //   setValue("routine", data?.routine);
-      //   setValue("description", data?.description);
-      //   setValue("study_materials", data?.study_materials);
+      setValue("writer", data?.writer);
+      setValue("price", data?.price);
+      setValue("discount_price", data?.discount_price);
+      setValue("description", data?.description);
+      setValue("format", data?.format);
+      setValue("sample_pdf_link", data?.sample_pdf_link);
+      setValue("pdf_link", decryptLink(data?.pdf_link));
     }
   }, [data, setValue]);
+
   const onSubmit = async (data) => {
     data.price = Number(data?.price);
     data.discount_price = Number(data?.discount_price);
 
     const content = { ...data };
+
+    content.subject_id = extractIdsFromFieldsArray(content.subjects, "subject");
+    delete content.subjects;
+
+    content.category_id = extractIdsFromFieldsArray(
+      content.categories,
+      "category"
+    );
+    delete content.categories;
+
+    content.sub_category_id = extractIdsFromFieldsArray(
+      content.subCategories,
+      "subCategory"
+    );
+    delete content.subCategories;
+
+    content.course_id = extractIdsFromFieldsArray(content.courses, "course");
+    delete content.courses;
+
     const file = content["file"];
 
     const result = JSON.stringify(content);
@@ -74,31 +83,11 @@ const EditBook = ({ id }) => {
     }
   };
 
-  const defaultValues = {
-    title: data?.title,
-    writer: data?.writer,
-    price: data?.price,
-    discount_price: data?.discount_price,
-    // category_id: data?.category_id,
-    // sub_category_id: data?.sub_category_id,
-    // membership_type: data?.membership_type,
-    description: data?.description,
-    sample_pdf_link: data?.sample_pdf_link,
-    pdf_link: data?.pdf_link,
-    format: data?.format,
-
-    cover_page: data?.file?.name,
-  };
-
   return (
     <div>
       <h2>Update Book </h2>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        defaultValues={defaultValues}
-        className="space-y-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label
             htmlFor="name"
@@ -111,7 +100,7 @@ const EditBook = ({ id }) => {
             id="title"
             name="title"
             {...register("title", { required: true })}
-            defaultValue={data?.title}
+            // defaultValue={data?.title}
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
@@ -127,7 +116,7 @@ const EditBook = ({ id }) => {
             id="writer"
             name="writer"
             {...register("writer")}
-            defaultValue={data?.writer}
+            // defaultValue={data?.writer}
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
@@ -143,7 +132,6 @@ const EditBook = ({ id }) => {
             id="price"
             name="price"
             {...register("price")}
-            defaultValue={data?.price}
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
@@ -159,7 +147,6 @@ const EditBook = ({ id }) => {
             id="discount_price"
             name="discount_price"
             {...register("discount_price")}
-            defaultValue={data?.discount_price}
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
@@ -175,7 +162,6 @@ const EditBook = ({ id }) => {
             id="description"
             name="description"
             {...register("description")}
-            defaultValue={data?.description}
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
@@ -192,7 +178,6 @@ const EditBook = ({ id }) => {
             id="sample_pdf_link"
             name="sample_pdf_link"
             {...register("sample_pdf_link")}
-            defaultValue={data?.sample_pdf_link}
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
@@ -207,7 +192,6 @@ const EditBook = ({ id }) => {
             id="format"
             name="format"
             {...register("format")}
-            defaultValue={data?.format}
             className="mt-1 p-2 border rounded-md w-full"
           >
             <option value="hard copy">Hard Copy</option>
@@ -244,7 +228,6 @@ const EditBook = ({ id }) => {
               id="pdf_link"
               name="pdf_link"
               {...register("pdf_link")}
-              defaultValue={data?.pdf_link}
               className="mt-1 p-2 border rounded-md w-full"
             />
           </div>
@@ -354,6 +337,19 @@ const EditBook = ({ id }) => {
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
+
+        {/* <div className="mb-4">
+            <SubjectSelectionsInput control={control} register={register} />
+          </div>
+          <div className="mb-4">
+            <CategorySelectionsInput control={control} register={register} />
+          </div>
+          <div className="mb-4">
+            <SubCategorySelectionsInput control={control} register={register} />
+          </div>
+          <div className="mb-4">
+            <CourseSelectionsInput control={control} register={register} />
+          </div> */}
 
         <button
           type="submit"

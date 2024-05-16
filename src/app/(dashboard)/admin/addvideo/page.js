@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import Pagination from "../../Pagination";
 import { useRouter } from "next/navigation";
 import checkPermission from "@/utils/checkPermission";
+import decryptLink from "@/helpers/decryptLink";
 
 const AddVideo = () => {
   const router = useRouter();
@@ -23,9 +24,12 @@ const AddVideo = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [addPlaylistVideo] = useAddPlaylistVideoMutation();
-  const { data, refetch: refetchPlaylist } = useGetAllPlaylistQuery({ limit, page, searchTerm });
+  const { data, refetch: refetchPlaylist } = useGetAllPlaylistQuery({
+    limit,
+    page,
+    searchTerm,
+  });
   const coursePLaylists = data?.playlists?.data;
-
 
   const [deleteVideoPlaylist] = useDeleteVideoPlaylistMutation();
 
@@ -33,40 +37,45 @@ const AddVideo = () => {
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
-  const { data: categories, refetch: refetchCategories } = useGetAllCategoriesQuery({ limit, page, searchTerm });
+  const { data: categories, refetch: refetchCategories } =
+    useGetAllCategoriesQuery({ limit, page, searchTerm });
 
   const { data: subCategories, refetch: refetchSubCategories } =
     useGetAllSubcategoriesQuery({
       category_id: selectedCategory,
-      limit, page, searchTerm
+      limit,
+      page,
+      searchTerm,
     });
   const { data: courses, refetch: refetchCourses } = useGetAllCoursesQuery({
     sub_category_id: selectedSubcategory,
-    limit, page, searchTerm
+    limit,
+    page,
+    searchTerm,
   });
   const allCourse = courses?.courses?.data;
-
-
 
   useEffect(() => {
     refetchPlaylist();
   }, [limit, page, searchTerm]);
 
+  useEffect(() => {
+    refetchSubCategories();
+  }, [selectedCategory]);
 
-  ('info', data?.playlists);
+  useEffect(() => {
+    refetchCourses();
+  }, [selectedSubcategory]);
 
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('course_video')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("course_video")) {
+      router.push("/");
     }
-
-  },[])
+  }, []);
 
   const totalData = data?.playlists?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
-
 
   const [initialFormData, setInitialFormData] = useState({
     title: "",
@@ -86,6 +95,10 @@ const AddVideo = () => {
 
       if (res) {
         toast.success("video playlist added successfully");
+        setInitialFormData({
+          title: "",
+          playlist_link: "",
+        });
       }
     } catch (error) {
       toast.error("Error during POST request:", error);
@@ -131,8 +144,6 @@ const AddVideo = () => {
     }
   };
 
-
-
   return (
     <div className=" my-8 ">
       <h2 className="text-2xl font-bold mb-4">Add Video PlayList</h2>
@@ -172,7 +183,7 @@ const AddVideo = () => {
             </option>
             {categories &&
               categories?.categories?.map((category) => (
-                <option key={category?.id} value={category?.id}>
+                <option key={category?._id} value={category?._id}>
                   {category.title}
                 </option>
               ))}
@@ -199,7 +210,7 @@ const AddVideo = () => {
             </option>
             {!!subCategories &&
               subCategories?.subcategories?.map((subCategory) => (
-                <option key={subCategory?.id} value={subCategory?.id}>
+                <option key={subCategory?._id} value={subCategory?._id}>
                   {subCategory?.title}
                 </option>
               ))}
@@ -264,7 +275,7 @@ const AddVideo = () => {
         </button>
       </form>
 
-      <div className=" overflow-x-auto mt-10  ">
+      <div className="overflow-x-auto mt-10">
         <table className="min-w-full  bg-white border border-gray-300">
           <thead>
             <tr>
@@ -282,18 +293,27 @@ const AddVideo = () => {
                 <td className="py-2 px-4 border-b">
                   {playlist?.course_id?.title}
                 </td>
-                <td className="py-2 pl-2 border-b">
+                <td className="py-2 pl-2 border-b w-40">
                   <a
-                    href={playlist?.playlist_link}
+                    href={
+                      playlist?.playlist_link
+                        ? decryptLink(playlist.playlist_link)
+                        : ""
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-500 hover:underline"
                   >
-                    {playlist.playlist_link}
+                    {playlist?.playlist_link
+                      ? decryptLink(playlist.playlist_link)
+                      : ""}
                   </a>
                 </td>
                 <td className="py-2 px-4 border-b md:table-cell">
-                  <Link href={`/admin/addvideo/edit/${playlist?.id}`} className="bg-blue-500 text-white py-1 px-2 rounded-md">
+                  <Link
+                    href={`/admin/addvideo/edit/${playlist?.id}`}
+                    className="bg-blue-500 text-white py-1 px-2 rounded-md"
+                  >
                     Update
                   </Link>
                 </td>
@@ -310,8 +330,11 @@ const AddVideo = () => {
           </tbody>
         </table>
 
-        <Pagination totalPages={totalPages} currentPage={page} setPage={setPage} />
-
+        <Pagination
+          totalPages={totalPages}
+          currentPage={page}
+          setPage={setPage}
+        />
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const AdminAddExams = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  // const { data, isError, isLoading } = useGetAllCoursesQuery();
+
   const { data: categories } = useGetAllCategoriesQuery(undefined);
   const { data: subCategories, refetch: refetchSubCategories } =
     useGetAllSubcategoriesQuery({
@@ -26,6 +26,7 @@ const AdminAddExams = () => {
     sub_category_id: selectedSubcategory,
   });
   const allCourse = courses?.courses?.data;
+
   const [newQuestion, setNewQuestion] = useState({
     title: "",
     description: "",
@@ -37,27 +38,19 @@ const AdminAddExams = () => {
   });
 
   useEffect(() => {
-    const fetchSubCategory = async () => {
-      await refetchSubCategories({ category_id: selectedCategory });
-    };
-    fetchSubCategory();
+    refetchSubCategories();
   }, [selectedCategory]);
 
   useEffect(() => {
-    const fetchSubCategories = async () => {
-      await refetchCourses({ sub_category_id: selectedSubcategory });
-    };
-    fetchSubCategories();
+    refetchCourses();
   }, [selectedSubcategory]);
 
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('exam')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("exam")) {
+      router.push("/");
     }
-
-  },[])
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -117,7 +110,7 @@ const AdminAddExams = () => {
             </option>
             {categories &&
               categories?.categories?.map((category) => (
-                <option key={category?.id} value={category?.id}>
+                <option key={category?._id} value={category?._id}>
                   {category.title}
                 </option>
               ))}
@@ -144,7 +137,7 @@ const AdminAddExams = () => {
             </option>
             {!!subCategories &&
               subCategories?.subcategories?.map((subCategory) => (
-                <option key={subCategory?.id} value={subCategory?.id}>
+                <option key={subCategory?._id} value={subCategory?._id}>
                   {subCategory?.title}
                 </option>
               ))}
@@ -174,7 +167,7 @@ const AdminAddExams = () => {
               </option>
             ) : (
               allCourse?.map((course) => (
-                <option key={course.id} value={course.id}>
+                <option key={course._id} value={course._id}>
                   {course.title}
                 </option>
               ))
@@ -349,10 +342,10 @@ const AdminAddExams = () => {
             className="mt-1 p-3 border rounded w-full focus:outline-none focus:border-indigo-500"
           >
             <option value="" disabled>
-              Select Exam
+              Select Exam Type
             </option>
-            <option value="0">Quiz</option>
-            <option value="1">Questions</option>
+            <option value="0">Quiz Exam</option>
+            <option value="1">Written Exam</option>
           </select>
         </div>
         <button

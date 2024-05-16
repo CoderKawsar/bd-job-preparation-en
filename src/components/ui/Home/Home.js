@@ -21,6 +21,8 @@ import FilteringCourseBooks from "./FilteringCourseBooks";
 import CategorySubCategoryCourses from "./CategorySubCategoryCourses";
 import CategoryBooks from "./CategoryBooks";
 import CategorySubCategoryExams from "./CategorySubCategoryExams";
+import SubjectBooks from "./SubjectBooks";
+import ProstutiVittikBooks from "./ProstutiVittikBooks";
 
 const HomePage = () => {
   // const {data} = useGetAllCoursesQuery({
@@ -33,21 +35,23 @@ const HomePage = () => {
       {/* <Category /> */}
       <CategorySubCategoryCourses />
       <CategoryBooks />
+      <SubjectBooks />
+      <ProstutiVittikBooks />
       <CategorySubCategoryExams />
 
       {/* <Courses /> */}
-      <FilteringCourseBooks sub_category_id={bcsPriliSubId} />
+      {/* <FilteringCourseBooks sub_category_id={bcsPriliSubId} />
       <FilteringCourseBooks sub_category_id={bcsWrittenSubId} />
       <FilteringCourseBooks sub_category_id={bankPriliSubId} />
       <FilteringCourseBooks sub_category_id={bankWrittenSubId} />
       <FilteringCourseBooks sub_category_id={ntrcaPriliSubId} />
       <FilteringCourseBooks sub_category_id={ntrcaWrittenSubId} />
-      <FilteringCourseBooks sub_category_id={primaryPriliSubId} />
+      <FilteringCourseBooks sub_category_id={primaryPriliSubId} /> */}
 
-      <FreeCourse />
       <BookSection />
-      <FreeSeminar />
+      <FreeCourse />
 
+      <FreeSeminar />
       <Benefits />
       <Faq />
       <HomeQuiz />

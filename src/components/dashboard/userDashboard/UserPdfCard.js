@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import book from "../../../assets/images/book.jpg";
 import { useState } from "react";
 import UserPdfCardShow from "./UserPdfCardShow";
 
@@ -26,7 +24,7 @@ const UserPdfCard = ({ item, index }) => {
       {myAllOrders &&
         myAllOrders?.map((order, index) => (
           <UserPdfCardShow
-            key={order?.id}
+            key={order?.book_id}
             bookId={order?.book_id}
             // onClose={() => closePDFModal(index)}
             order={order}
@@ -34,14 +32,17 @@ const UserPdfCard = ({ item, index }) => {
           />
         ))}
 
-      {openPDFModals?.map((isOpen, index) => (
-        <PDFViewerModal
-          key={index}
-          isOpen={isOpen}
-          onClose={() => closePDFModal(index)}
-          pdfSrc={data[index]?.pdf_link}
-        />
-      ))}
+      {/* {openPDFModals?.map((isOpen, index) => (
+        <div>
+          <PDFViewerModal
+            key={index}
+            isOpen={isOpen}
+            onClose={() => closePDFModal(index)}
+            pdfSrc={data[index]?.pdf_link}
+          />
+          <p>{data[index]?.pdf_link}</p>
+        </div>
+      ))} */}
     </>
   );
 };

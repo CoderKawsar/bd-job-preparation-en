@@ -2,7 +2,7 @@ import React from "react";
 
 const Pagination = ({ totalPages, currentPage, setPage }) => {
   return (
-    <div className="flex items-center justify-center my-4 ml-64 md:ml-0">
+    <div className="flex items-center justify-center mt-12 mb-4 ml-64 md:ml-0">
       <div className="flex items-center">
         <button
           className="mx-2 px-4 py-2 border rounded-md"

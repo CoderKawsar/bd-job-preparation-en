@@ -1,7 +1,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { FaAddressBook, FaBookOpen, FaFileVideo } from "react-icons/fa";
+import {
+  FaAddressBook,
+  FaBook,
+  FaBookOpen,
+  FaNewspaper,
+  FaFileVideo,
+} from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import { IoIosNotifications } from "react-icons/io";
@@ -9,7 +15,7 @@ import { PiExamFill } from "react-icons/pi";
 import { SiCoursera } from "react-icons/si";
 import { MdSubscriptions } from "react-icons/md";
 import { FaBorderAll } from "react-icons/fa6";
-import { MdRememberMe, MdQuiz } from "react-icons/md";
+import { MdQuiz } from "react-icons/md";
 import { useState } from "react";
 import { getUserInfo } from "@/services/auth.service";
 import { useGetSingleUserQuery } from "@/redux/api/authApi";
@@ -19,7 +25,7 @@ import { usePathname } from "next/navigation";
 const UserSidebar = () => {
   const pathname = usePathname();
   const { role, permission, userId } = getUserInfo();
-  
+
   const { data: user } = useGetSingleUserQuery(userId);
   //   (user)
 
@@ -34,17 +40,21 @@ const UserSidebar = () => {
     setIsOpen(false);
   };
   return (
-    <div className="z-50" >
+    <div className="z-50">
       <button className="block lg:hidden px-2 py-1 " onClick={toggleSidebar}>
         ☰
       </button>
       <div
-        className={`bg-gray-200 h-screen w-64 fixed top-0 left-0 overflow-y-auto transition-transform transform lg:transform-none ${isOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`bg-gray-200 h-screen w-64 fixed top-0 left-0 overflow-y-auto transition-transform transform lg:transform-none ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <div className="p-4 flex justify-between items-center mt-16">
           {isOpen && (
-            <button className="text-black font-bold text-xl" onClick={closeSidebar}>
+            <button
+              className="text-black font-bold text-xl"
+              onClick={closeSidebar}
+            >
               ✕
             </button>
           )}
@@ -55,187 +65,216 @@ const UserSidebar = () => {
             <>
               <ul className=" text-start">
                 <li>
-                  <Link
-                    href="/profile" passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/profile" ? "active" : ""
-                      }`}>
-
+                  <Link href="/profile" passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/profile" ? "active" : ""
+                      }`}
+                    >
                       <ImProfile fontSize={20} /> প্রোফাইল
                     </a>
                   </Link>
                 </li>
 
-               
-                {checkPermission("course") && <li>
-                  <Link
-                    href={"/admin/addcourse"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addcourse" ? "active" : ""
-                      }`}>
+                {checkPermission("course") && (
+                  <li>
+                    <Link href={"/admin/addcourse"} passHref legacyBehavior>
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/addcourse" ? "active" : ""
+                        }`}
+                      >
+                        <SiCoursera />
+                        কোর্স যোগ করুন
+                      </a>
+                    </Link>
+                  </li>
+                )}
+                {checkPermission("subscription") && (
+                  <li>
+                    <Link
+                      href={"/admin/addSubscription"}
+                      passHref
+                      legacyBehavior
+                    >
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/addSubscription" ? "active" : ""
+                        }`}
+                      >
+                        <MdSubscriptions fontSize={20} />
+                        সাবস্ক্রিপশন যোগ করুন
+                      </a>
+                    </Link>
+                  </li>
+                )}
+                {checkPermission("course_video") && (
+                  <li>
+                    <Link href={"/admin/addvideo"} passHref legacyBehavior>
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/addvideo" ? "active" : ""
+                        }`}
+                      >
+                        <FaFileVideo />
+                        ভিডিও যোগ করুন
+                      </a>
+                    </Link>
+                  </li>
+                )}
+                {checkPermission("exam") && (
+                  <li>
+                    <Link href={"/admin/addexams"} passHref legacyBehavior>
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/addexams" ? "active" : ""
+                        }`}
+                      >
+                        <PiExamFill />
+                        পরীক্ষা যোগ করুন
+                      </a>
+                    </Link>
+                  </li>
+                )}
 
-                      <SiCoursera />
-                      কোর্স যোগ করুন
-                    </a>
-                  </Link>
-                </li>}
-                {checkPermission("subscription") && <li>
-                  <Link
-                    href={"/admin/addSubscription"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addSubscription" ? "active" : ""
-                      }`}>
+                {checkPermission("exam") && (
+                  <li>
+                    <Link href={"/admin/addquiz"} passHref legacyBehavior>
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/addquiz" ? "active" : ""
+                        }`}
+                      >
+                        <MdQuiz /> কুইজ যোগ করুন
+                      </a>
+                    </Link>
+                  </li>
+                )}
+                {checkPermission("exam") && (
+                  <li>
+                    <Link href={"/admin/addquestions"} passHref legacyBehavior>
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/addquestions" ? "active" : ""
+                        }`}
+                      >
+                        <BsFillQuestionSquareFill /> লিখিত প্রশ্ন যোগ করুন
+                      </a>
+                    </Link>
+                  </li>
+                )}
+                {checkPermission("book") && (
+                  <li>
+                    <Link href={"/admin/addbooks"} passHref legacyBehavior>
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/addbooks" ? "active" : ""
+                        }`}
+                      >
+                        <FaBookOpen />
+                        বই যোগ করুন
+                      </a>
+                    </Link>
+                  </li>
+                )}
+                {checkPermission("order") && (
+                  <li>
+                    <Link href={"/admin/allorders"} passHref legacyBehavior>
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/allorders" ? "active" : ""
+                        }`}
+                      >
+                        <FaBookOpen />
+                        সব অর্ডার সমূহ
+                      </a>
+                    </Link>
+                  </li>
+                )}
 
-                      <MdSubscriptions fontSize={20} />
-                      সাবস্ক্রিপশন যোগ করুন
-                    </a>
-                  </Link>
-                </li>}
-                {checkPermission("course_video") && <li>
-                  <Link
-                    href={"/admin/addvideo"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addvideo" ? "active" : ""
-                      }`}>
-
-                      <FaFileVideo />
-                      ভিডিও যোগ করুন
-                    </a>
-                  </Link>
-                </li>}
-                {checkPermission("exam") && <li>
-                  <Link
-                    href={"/admin/addexams"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addexams" ? "active" : ""
-                      }`}>
-
-                      <PiExamFill />
-                      পরীক্ষা যোগ করুন
-                    </a>
-                  </Link>
-                </li>}
-
-                {checkPermission("exam") && <li>
-
-
-                  <Link
-                    href={"/admin/addquiz"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addquiz" ? "active" : ""
-                      }`}>
-
-                      <MdQuiz /> কুইজ যোগ করুন
-                    </a>
-                  </Link>
-                </li> }
-                {checkPermission("exam") && <li>
-                  <Link
-                    href={"/admin/addquestions"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addquestions" ? "active" : ""
-                      }`}>
-
-                      <BsFillQuestionSquareFill /> লিখিত প্রশ্ন যোগ করুন
-                    </a>
-                  </Link>
-                </li>
-          }
-                {checkPermission("book") && <li>
-                  <Link
-                    href={"/admin/addbooks"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addbooks" ? "active" : ""
-                      }`}>
-
-                      <FaBookOpen />
-                      বই যোগ করুন
-                    </a>
-                  </Link>
-                </li>}
-                {checkPermission("order") && <li>
-                  <Link
-                    href={"/admin/allorders"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/allorders" ? "active" : ""
-                      }`}>
-
-                      <FaBookOpen />
-                      সব অর্ডার সমূহ
-                    </a>
-                  </Link>
-                </li>}
-
-                {checkPermission("order") &&<li>
-                  <Link
-                    href={"/admin/alluserscourses"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/alluserscourses" ? "active" : ""
-                      }`}>
-
-                      <FaBookOpen />
-                      সব কেনা কোর্স সমূহ
-                    </a>
-                  </Link>
-                </li>
-          }
-               {checkPermission("exam") && <li>
-                  <Link
-                    href={"/admin/allexams"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/allexams" ? "active" : ""
-                      }`}>
-
-                      <FaBookOpen />
-                      সব পরিক্ষা  সমূহ
-                    </a>
-                  </Link>
-                </li>}
+                {checkPermission("order") && (
+                  <li>
+                    <Link
+                      href={"/admin/alluserscourses"}
+                      passHref
+                      legacyBehavior
+                    >
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/alluserscourses" ? "active" : ""
+                        }`}
+                      >
+                        <FaBookOpen />
+                        সব কেনা কোর্স সমূহ
+                      </a>
+                    </Link>
+                  </li>
+                )}
+                {checkPermission("exam") && (
+                  <li>
+                    <Link href={"/admin/allexams"} passHref legacyBehavior>
+                      <a
+                        className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                          pathname === "/admin/allexams" ? "active" : ""
+                        }`}
+                      >
+                        <FaBookOpen />
+                        সব পরিক্ষা সমূহ
+                      </a>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </>
           ) : role === "super_admin" ? (
             <>
               <ul className="flex flex-col items-start">
                 <li>
-                  <Link
-                    href="/profile" passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/profile" ? "active" : ""
-                      }`}>
-
+                  <Link href="/profile" passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/profile" ? "active" : ""
+                      }`}
+                    >
                       <ImProfile fontSize={20} /> প্রোফাইল
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/superAdmin/allusers"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/superAdmin/allusers" ? "active" : ""
-                      }`}>
-
-                      <ImProfile fontSize={20} />ব্যবহারকারী
+                  <Link href={"/superAdmin/allusers"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/superAdmin/allusers" ? "active" : ""
+                      }`}
+                    >
+                      <ImProfile fontSize={20} />
+                      ব্যবহারকারী
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/superAdmin/alladmin"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/superAdmin/alladmin" ? "active" : ""
+                      }`}
+                    >
+                      <ImProfile fontSize={20} />
+                      সকল এডমিন
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href={"/superAdmin/alladmin"} passHref legacyBehavior
+                    href={"/superAdmin/addcategory"}
+                    passHref
+                    legacyBehavior
                   >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/superAdmin/alladmin" ? "active" : ""
-                      }`}>
-
-                      <ImProfile fontSize={20} />সকল এডমিন
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={"/superAdmin/addcategory"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addcategory" ? "active" : ""
-                      }`}>
-
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addcategory" ? "active" : ""
+                      }`}
+                    >
                       <FaAddressBook />
                       সকল বিভাগ
                     </a>
@@ -243,11 +282,15 @@ const UserSidebar = () => {
                 </li>
                 <li>
                   <Link
-                    href={"/superAdmin/addsubcategory"} passHref legacyBehavior
+                    href={"/superAdmin/addsubcategory"}
+                    passHref
+                    legacyBehavior
                   >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addsubcategory" ? "active" : ""
-                      }`}>
-
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addsubcategory" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <FaAddressBook />
                       সকল উপ বিভাগ
@@ -255,12 +298,12 @@ const UserSidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/addcourse"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addcourse" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/addcourse"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addcourse" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <SiCoursera fontSize={20} />
                       কোর্স যোগ করুন
@@ -268,12 +311,12 @@ const UserSidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/addSubscription"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addSubscription" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/addSubscription"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addSubscription" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <MdSubscriptions fontSize={20} />
                       সাবস্ক্রিপশন যোগ করুন
@@ -281,12 +324,12 @@ const UserSidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/addvideo"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addvideo" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/addvideo"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addvideo" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <FaFileVideo />
                       ভিডিও যোগ করুন
@@ -294,12 +337,12 @@ const UserSidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/addexams"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addexams" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/addexams"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addexams" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <PiExamFill />
                       পরীক্ষা যোগ করুন
@@ -307,49 +350,62 @@ const UserSidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/addquiz"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addquiz" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/addquiz"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addquiz" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <MdQuiz /> কুইজ যোগ করুন
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/addquestions"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addquestions" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/addquestions"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addquestions" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <BsFillQuestionSquareFill /> লিখিত প্রশ্ন যোগ করুন
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/addbooks"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/addbooks" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/addbooks"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/addbooks" ? "active" : ""
+                      }`}
+                    >
                       {" "}
-                      <FaBookOpen />
+                      <FaBook />
                       বই যোগ করুন
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/allorders"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/allorders" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/superAdmin/addsubject"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/superAdmin/addsubject" ? "active" : ""
+                      }`}
+                    >
+                      {" "}
+                      <FaNewspaper />
+                      সাবজেক্ট যোগ করুন
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/admin/allorders"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/allorders" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <FaBookOpen />
                       সব অর্ডার সমূহ
@@ -357,12 +413,12 @@ const UserSidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/alluserscourses"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/alluserscourses" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/alluserscourses"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/alluserscourses" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <FaBookOpen />
                       সব কেনা কোর্স সমূহ
@@ -370,25 +426,25 @@ const UserSidebar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/admin/allexams"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/admin/allexams" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/admin/allexams"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/admin/allexams" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <FaBookOpen />
-                      সব পরিক্ষা  সমূহ
+                      সব পরিক্ষা সমূহ
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={"/superAdmin/addnotice"} passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/superAdmin/addnotice" ? "active" : ""
-                      }`}>
-
+                  <Link href={"/superAdmin/addnotice"} passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/superAdmin/addnotice" ? "active" : ""
+                      }`}
+                    >
                       {" "}
                       <IoIosNotifications size={30} />
                       নোটিশ যোগ করুন
@@ -403,70 +459,69 @@ const UserSidebar = () => {
                 <li>
                   <Link href="/profile" passHref legacyBehavior>
                     <a
-                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/profile" ? "active" : ""
-                        }`}
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/profile" ? "active" : ""
+                      }`}
                     >
                       <ImProfile fontSize={20} /> প্রোফাইল
                     </a>
                   </Link>
                 </li>
-
                 <li>
-                  <Link
-                    href="/user/mycourses" passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/user/mycourses" ? "active" : ""
-                      }`}>
-
+                  <Link href="/user/mycourses" passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/user/mycourses" ? "active" : ""
+                      }`}
+                    >
                       <SiCoursera fontSize={18} /> আমার কোর্স
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/user/mypdfbook" passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/user/mypdfbook" ? "active" : ""
-                      }`}>
-
-                      <SiCoursera fontSize={18} /> আমার কেনা  বইসমুহ
+                  <Link href="/user/mypdfbook" passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/user/mypdfbook" ? "active" : ""
+                      }`}
+                    >
+                      <SiCoursera fontSize={18} /> আমার কেনা বইসমুহ
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/user/myexams" passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/user/myexams" ? "active" : ""
-                      }`}>
-
+                  <Link href="/user/myexams" passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/user/myexams" ? "active" : ""
+                      }`}
+                    >
                       <SiCoursera fontSize={18} /> আমার পরিক্ষাসমুহ
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/user/myresults" passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/user/myresults" ? "active" : ""
-                      }`}>
-
+                  <Link href="/user/myresults" passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/user/myresults" ? "active" : ""
+                      }`}
+                    >
                       <SiCoursera fontSize={18} /> আমার রেজাল্টসমূহ
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/user/userorder" passHref legacyBehavior
-                  >
-                    <a className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${pathname === "/user/userorder" ? "active" : ""
-                      }`}>
-
+                  <Link href="/user/userorder" passHref legacyBehavior>
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/user/userorder" ? "active" : ""
+                      }`}
+                    >
                       <FaBorderAll fontSize={18} /> অর্ডার হিসট্রি
                     </a>
                   </Link>
                 </li>
-
                 {/* <li>
                   <Link
                     href="/user/membershipplan"
@@ -494,18 +549,17 @@ const UserSidebar = () => {
         </ul>
       </div>
       <style jsx>{`
-       .menu a.active {
-         background-color: #172554;
-         color: #ffffff;
-       }
-       .menu a:hover {
-         background-color: #172554;
-         color: #ffffff;
-       }
-     `}</style>
+        .menu a.active {
+          background-color: #172554;
+          color: #ffffff;
+        }
+        .menu a:hover {
+          background-color: #172554;
+          color: #ffffff;
+        }
+      `}</style>
     </div>
   );
-
 
   // return (
   //   <div className="z-50" >

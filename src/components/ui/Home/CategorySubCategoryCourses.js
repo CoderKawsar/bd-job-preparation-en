@@ -67,11 +67,11 @@ const CategorySubCategoryCourses = () => {
     content = categoriesData?.map((item) => (
       <SwiperSlide key={item?._id}>
         <div className=" bg-opacity-50  rounded-lg shadow-lg border border-black bg-gray-200  transition-all transform duration-300 delay-200 hover:bg-gray-300 hover:rounded-lg">
-          <div className="text-center flex justify-center items-center">
-            <div className="pt-4">
-              {/* category title */}
-              <h2 className="py-5 font-semibold ">{item?.title} </h2>
-            </div>
+          <div className="flex justify-center items-center bg-bluePrimary rounded-t-md">
+            {/* category title */}
+            <h2 className="py-5 font-semibold text-white text-3xl text-center drop-shadow-md">
+              {item?.title}{" "}
+            </h2>
           </div>
           {/* sub categories work starts here */}
           <div
@@ -89,7 +89,7 @@ const CategorySubCategoryCourses = () => {
                   <div
                     className={`text-center flex flex-col py-2 ${
                       index === 0 && "border-l-0"
-                    } border-l  border-y border-black`}
+                    } border-l  border-t border-black`}
                   >
                     {subCategory?.title}
                   </div>
@@ -117,7 +117,7 @@ const CategorySubCategoryCourses = () => {
               (!item?.subCategories?.length && (
                 <div>
                   {/* if no sub category found then show only tick icon in place of sub-categories */}
-                  <p className="flex justify-center items-center py-2 border-y border-black">
+                  <p className="flex justify-center items-center py-2 border-t border-black">
                     &nbsp;
                     <FaCheck />
                     &nbsp;

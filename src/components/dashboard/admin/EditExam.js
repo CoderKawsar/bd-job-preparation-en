@@ -199,10 +199,10 @@ const EditExam = ({ id }) => {
               className="mt-1 p-3 border rounded w-full focus:outline-none focus:border-indigo-500"
             >
               <option value="" disabled>
-                Select Exam
+                Select Exam Type
               </option>
-              <option value="0">Quiz</option>
-              <option value="1">Questions</option>
+              <option value="0">Quiz Exam</option>
+              <option value="1">Written Exam</option>
             </select>
           </div>
         )}

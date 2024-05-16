@@ -1,7 +1,6 @@
 "use client";
 import { useGetSingleBookQuery } from "@/redux/api/booksApi";
 import Image from "next/image";
-import book from "../../../assets/images/book.jpg";
 import { useState } from "react";
 import PDFViewerModal from "@/components/ohters/PDFViewerModal";
 import decryptLink from "@/helpers/decryptLink";
@@ -43,7 +42,7 @@ const UserPdfCardShow = ({ bookId, order, index }) => {
         {isModalOpen && (
           <PDFViewerModal
             isOpen={isModalOpen}
-            pdfSrc={decryptLink(data?.pdf_link)}
+            pdfSrc={data?.pdf_link ? decryptLink(data?.pdf_link) : ""}
             onClose={onClosePDFModal}
           />
         )}

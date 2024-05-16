@@ -110,23 +110,23 @@ const UsersDetails = ({ user, index }) => {
   };
   return (
     <tr>
-      <td className="border   py-2 md:table-cell">{index + 1}</td>
+      <td className="border text-center py-2 md:table-cell">{index + 1}</td>
       <td className="border px-4  py-2 md:table-cell">{user.name}</td>
       <td className="border px-2  py-2 md:table-cell">{user.email}</td>
       <td className="border px-2  py-2 md:table-cell">{user.contact_no}</td>
 
       <td
-        className={`border px-2  py-2 md:table-cell ${getColorClass(
+        className={`border px-2 text-center py-2 md:table-cell ${getColorClass(
           user.role
         )} `}
       >
         {user.role}
       </td>
 
-      <td className="border">
+      <td className="border text-center">
         <button
           onClick={() => handleChangeRole(user?._id, user?.role)}
-          className={` hover:bg-blue-700 font-semibold text-white  py-2 rounded text-sm px-1 ${
+          className={` hover:bg-blue-700 font-semibold text-white  py-2 rounded text-sm px-1.5 ${
             user?.role === "admin" ? "bg-yellow-500" : "bg-blue-500"
           } my-2 ${
             user?.role === "super_admin"
