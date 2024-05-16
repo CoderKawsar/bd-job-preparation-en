@@ -69,7 +69,7 @@ const FreeCourse = () => {
 
   return (
     <div>
-      <div className="lg:px-14  px-3 pt-6">
+      <div className="lg:px-14  px-3 pt-6 mb-20">
         <div className="flex gap-5 pb-4">
           <h2 className="text-2xl font-bold px-2  rounded ">ফ্রী কোর্সসমূহ</h2>
           <Link
