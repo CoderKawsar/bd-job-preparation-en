@@ -1,13 +1,9 @@
 "use client";
 
 import AdminPermissions from "@/components/dashboard/admin/AdminPermission";
-import {
-  useGetAllUsersQuery,
-} from "@/redux/api/usersApi";
+import { useGetAllUsersQuery } from "@/redux/api/usersApi";
 import { useEffect, useState } from "react";
 import Pagination from "../../Pagination";
-
-
 
 export const adminPermissions = [
   "user",
@@ -15,12 +11,9 @@ export const adminPermissions = [
   "subscription",
   "course_video",
   "exam",
-  "quiz",
-  "question",
   "book",
   "order_status",
   "order",
-
 ];
 
 const AllAdminPage = () => {
@@ -28,30 +21,23 @@ const AllAdminPage = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-
   const {
     data,
     isLoading,
     isError,
     refetch: refetchAdmins,
   } = useGetAllUsersQuery({
-    role: "admin", 
+    role: "admin",
     limit,
-    page, 
+    page,
     searchTerm,
   });
- 
-
 
   const admins = data?.data?.data || [];
-
 
   const filteredUsers = admins.filter((user) =>
     user?.contact_no?.includes(searchTerm)
   );
-
-
-
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -64,7 +50,6 @@ const AllAdminPage = () => {
 
   const totalData = data?.data?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
-
 
   if (isLoading) {
     return <p>Loading users...</p>;
@@ -126,9 +111,11 @@ const AllAdminPage = () => {
             </tbody>
           </table>
 
-          <Pagination totalPages={totalPages} currentPage={page} setPage={setPage}/>
-
-
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            setPage={setPage}
+          />
         </div>
       ) : (
         <p>No admin available.</p>

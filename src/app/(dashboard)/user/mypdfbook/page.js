@@ -2,9 +2,7 @@
 
 import InitialLoader from "@/components/Loader/InitialLoader";
 import UserPdfCard from "@/components/dashboard/userDashboard/UserPdfCard";
-import PDFViewerModal from "@/components/ohters/PDFViewerModal";
 import { useGetMyAllOrdersDetailsQuery } from "@/redux/api/orderApi";
-import { useState } from "react";
 
 const MyPurchasePdfPage = () => {
   const { data, isLoading, isError } = useGetMyAllOrdersDetailsQuery();

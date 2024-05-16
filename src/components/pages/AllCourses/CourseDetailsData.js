@@ -3,6 +3,7 @@ import InitialLoader from "@/components/Loader/InitialLoader";
 import Image from "next/image";
 import CourseExams from "./CourseExams";
 import CourseSubscriptions from "./CourseSubscriptions";
+import CourseBooks from "./CourseBooks";
 
 const CourseDetailsData = ({ data, isError, isLoading }) => {
   let content = null;
@@ -131,6 +132,11 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
           <div className="bg-white rounded border py-10 px-5  m-5">
             <h2 className="text-xl font-bold mb-4">এই কোর্সের পরীক্ষাসমূহ :</h2>
             {data && <CourseExams course_id={data?._id} />}
+          </div>
+
+          <div className="bg-white rounded border py-10 px-5  m-5">
+            <h2 className="text-xl font-bold mb-4">এই কোর্সের বইসমূহ :</h2>
+            {data && <CourseBooks course_id={data?._id} />}
           </div>
         </div>
       </div>

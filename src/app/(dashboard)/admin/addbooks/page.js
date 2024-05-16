@@ -7,14 +7,17 @@ import {
 } from "@/redux/api/booksApi";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { useGetAllCoursesQuery } from "@/redux/api/courseApi";
 import Swal from "sweetalert2";
-import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
-import { useGetAllSubcategoriesQuery } from "@/redux/api/subcategoryApi";
 import Pagination from "../../Pagination";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import checkPermission from "@/utils/checkPermission";
+import SubjectSelectionsInput from "@/components/inputs/SubjectSelectionsInput";
+import CategorySelectionsInput from "@/components/inputs/CategorySelectionsInput";
+import SubCategorySelectionsInput from "@/components/inputs/SubCategorySelectionsInput";
+import CourseSelectionsInput from "@/components/inputs/CourseSelectionsInput";
+import { extractIdsFromFieldsArray } from "@/helpers/inputFormat";
+import decryptLink from "@/helpers/decryptLink";
 
 const AddBooks = () => {
   const router = useRouter();
@@ -22,96 +25,92 @@ const AddBooks = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-
-  const { data: allBooks, isLoading: isBooksLoading, refetch} = useGetAllBooksQuery({
+  const {
+    data: allBooks,
+    isLoading: isBooksLoading,
+    refetch,
+  } = useGetAllBooksQuery({
     limit,
     page,
     searchTerm,
   });
-
   const currentBooks = allBooks?.books?.data;
 
   const [deleteBooks] = useDeleteBooksMutation();
   const [addBooks] = useAddBooksMutation();
-  const [repetitions, setRepetitions] = useState(1);
-  const [fields, setFields] = useState([{ category_id: '', subcategory_id: '', course_id: '' }]);
-  const [selectedCategories, setSelectedCategories] = useState(Array.from({ length: 1 }, () => ''));
-  const [selectedSubcategories, setSelectedSubcategories] = useState(Array.from({ length: 1 }, () => ''));
 
-
-  const {
-    data: categories,
-    isLoading: isLoadingCategories,
-    isError: isErrorCategories,
-  } = useGetAllCategoriesQuery({limit, page, searchTerm});
-
-  const {
-    data: subcategories,
-    isLoading: isLoadingSubcategories,
-    isError: isErrorSubcategories,
-  } = useGetAllSubcategoriesQuery({
-    category_id: selectedCategories,
-    limit, page, searchTerm,
-  });
-
-
-  const allSubcategory = subcategories?.subcategories;
-
-
-  const { data } = useGetAllCoursesQuery({
-    sub_category_id: selectedSubcategories,
-    limit, page, searchTerm,
-  });
-
-
-
-  const allCourse = data?.courses?.data;
-  const [repetitionData, setRepetitionData] = useState([{ category_id: '', subcategory_id: '', course_id: '' }]);
-
-  const addRepetition = () => {
-    setRepetitions(repetitions + 1);
-    const newRepetition = { category_id: '', subcategory_id: '', course_ids: [''] };
-    setRepetitionData([...repetitionData, newRepetition]);
-  };
-
-  const removeRepetition = (index) => {
-    setRepetitions(repetitions - 1);
-    const updatedRepetitionData = [...repetitionData];
-    updatedRepetitionData.splice(index, 1);
-    setRepetitionData(updatedRepetitionData);
-  };
-
-
-  const { register, handleSubmit, reset, watch, setValue } = useForm();
-
+  const { register, control, handleSubmit, reset, watch, setValue } = useForm();
 
   const onSubmit = async (data) => {
-    data.price = Number(data?.price);
-    data.discount_price = Number(data?.discount_price);
+    const confirmAdd = await Swal.fire({
+      title: "বইয়ের সব তথ্য ঠিকঠাক আছে তা আপনি নিশ্চিত?",
+      text: "আপনি যদি নিশ্চিত হোন তবে 'হ্যাঁ' বোতামে ক্লিক করুন অন্যথায় 'না/অনিশ্চিত' বোতামে ক্লিক করে আরেকবার চেক করে আসুন।",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "হ্যাঁ",
+      cancelButtonText: "না/অনিশ্চিত",
+    });
 
-    const content = { ...data };
+    if (confirmAdd.isConfirmed) {
+      data.price = Number(data?.price);
+      data.discount_price = Number(data?.discount_price);
 
-    const file = content["file"];
+      const content = { ...data };
 
-    content.course_id = data?.categories?.map((category) => category.course_id) || [];
-    const { categories, ...othersData } = content;
-   
-    const result = JSON.stringify(othersData);
-    const formData = new FormData();
-    formData.append("file", file[0]);
-    formData.append("data", result);
-   
-    try {
-      const resultData = await addBooks(formData);
+      content.subject_id = extractIdsFromFieldsArray(
+        content.subjects,
+        "subject"
+      );
+      delete content.subjects;
 
-      if (resultData) {
-        toast.success("Book created successfully");
+      content.category_id = extractIdsFromFieldsArray(
+        content.categories,
+        "category"
+      );
+      delete content.categories;
+
+      content.sub_category_id = extractIdsFromFieldsArray(
+        content.subCategories,
+        "subCategory"
+      );
+      delete content.subCategories;
+
+      content.course_id = extractIdsFromFieldsArray(content.courses, "course");
+      delete content.courses;
+
+      const file = content["file"];
+
+      const result = JSON.stringify(content);
+      const formData = new FormData();
+      formData.append("file", file[0]);
+      formData.append("data", result);
+
+      try {
+        const resultData = await addBooks(formData);
+
+        if (resultData?.data) {
+          toast.success("Book created successfully");
+          Swal.fire({
+            title: "Added!",
+            text: "বই যোগ করা হয়েছে",
+            icon: "success",
+          });
+        } else {
+          toast.error("Error! Book not added!!!");
+        }
+      } catch (error) {
+        toast.error(error.message);
+        Swal.fire({
+          title: "Error!",
+          text: "Something went wrong when adding.",
+          icon: "error",
+        });
       }
-    } catch (error) {
-      toast.error(error.message);
     }
   };
-  
+
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
@@ -147,27 +146,23 @@ const AddBooks = () => {
     }
   };
 
-  
   useEffect(() => {
     refetch();
   }, [limit, page, searchTerm]);
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('book')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("book")) {
+      router.push("/");
     }
-
-  },[])
+  }, []);
 
   const totalData = allBooks?.books?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
 
-return (
+  return (
     <>
       <div className="container mx-auto  p-6">
         <h2 className="text-2xl font-semibold mb-6">Add Book</h2>
-
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label
@@ -230,7 +225,6 @@ return (
               className="mt-1 p-2 border rounded-md w-full"
             />
           </div>
-
           <div>
             <label
               htmlFor="description"
@@ -245,7 +239,6 @@ return (
               className="mt-1 p-2 border rounded-md w-full"
             />
           </div>
-
           <div>
             <label
               htmlFor="pdf_link"
@@ -278,7 +271,6 @@ return (
               <option value="pdf">PDF</option>
             </select>
           </div>
-
           {/* Conditionally render PDF Link input based on the selected format */}
           {watch("format") === "pdf" && (
             <div>
@@ -297,96 +289,6 @@ return (
               />
             </div>
           )}
-          {repetitionData.map((repetition, repetitionIndex) => (
-            <div key={repetitionIndex}>
-              {fields.map((field, index) => (
-                <div key={index} className="mb-4">
-                  <div className="mb-4">
-                    <label className="block text-sm font-bold mb-2">Category</label>
-                    <select
-                      {...register(`categories.${repetitionIndex}.category_id`)}
-                      onChange={(e) => {
-                        const updatedCategories = [...selectedCategories];
-                        updatedCategories[repetitionIndex] = e.target.value;
-                        setSelectedCategories(updatedCategories);
-
-                        // Reset subcategory and course when the category changes
-                        setValue(`categories.${repetitionIndex}.sub_category_id`, '');
-                        setValue(`categories.${repetitionIndex}.course_id`, '');
-                      }}
-                      value={selectedCategories[repetitionIndex]}
-                      className="w-full border border-gray-300 p-2 rounded-md"
-                    >
-                      <option value="" disabled>
-                        Select a category
-                      </option>
-                      {categories?.categories?.map((category) => (
-                        <option key={category?.id} value={category?.id}>
-                          {category?.title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-sm font-bold mb-2">Sub Category</label>
-                    <select
-                      {...register(`categories.${repetitionIndex}.sub_category_id`)}
-                      disabled={!selectedCategories[repetitionIndex]}
-                      onChange={(e) => {
-                        const updatedSubcategories = [...selectedSubcategories];
-                        updatedSubcategories[repetitionIndex] = e.target.value;
-                        setSelectedSubcategories(updatedSubcategories);
-
-                        // Reset course when the subcategory changes
-                        setValue(`categories.${repetitionIndex}.course_id`, '');
-                      }}
-                      value={selectedSubcategories[repetitionIndex]}
-                      className="w-full border border-gray-300 p-2 rounded-md"
-                    >
-                      <option value="" disabled>
-                        Select a subcategory
-                      </option>
-                      {allSubcategory?.map((subCategory) => (
-                        <option key={subCategory?.id} value={subCategory?.id}>
-                          {subCategory?.title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="">
-                    <label className="block text-sm font-bold mb-2">Course</label>
-                    <select
-                      disabled={!selectedSubcategories[repetitionIndex]}
-                      {...register(`categories.${repetitionIndex}.course_id`)}
-                      className="w-full border border-gray-300 p-2 rounded-md"
-                    >
-                      {allCourse?.length === 0 ? (
-                        <option value="" disabled>
-                          No courses available
-                        </option>
-                      ) : (
-                        allCourse?.map((course) => (
-                          <option key={course.id} value={course.id}>
-                            {course?.title}
-                          </option>
-                        ))
-                      )}
-                    </select>
-                  </div>
-                  <button type="button" onClick={() => removeRepetition(index)} className="text-red-500 mt-2">
-                    Remove
-                  </button>
-                </div>
-              ))}
-            </div>
-          ))}
-
-
-          <button type="button" onClick={addRepetition} className="text-blue-500 mt-2">
-            Add More
-          </button>
-
           <div>
             <label
               htmlFor="cover_page"
@@ -402,7 +304,18 @@ return (
               className="mt-1 p-2 border rounded-md w-full"
             />
           </div>
-
+          <div className="mb-4">
+            <SubjectSelectionsInput control={control} register={register} />
+          </div>
+          <div className="mb-4">
+            <CategorySelectionsInput control={control} register={register} />
+          </div>
+          <div className="mb-4">
+            <SubCategorySelectionsInput control={control} register={register} />
+          </div>
+          <div className="mb-4">
+            <CourseSelectionsInput control={control} register={register} />
+          </div>
           <button
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded-md w-full"
@@ -411,9 +324,7 @@ return (
           </button>
         </form>
 
-        <h1 className="text-2xl font-bold mb-4 mt-12">
-        Update & Delete Books
-        </h1>
+        <h1 className="text-2xl font-bold mb-4 mt-12">Update & Delete Books</h1>
         {isBooksLoading ? (
           <p className="text-center text-xl">Loading books...</p>
         ) : (
@@ -435,9 +346,7 @@ return (
               <tbody>
                 {currentBooks?.map((book, i) => (
                   <tr key={book._id}>
-                    <td className="py-2 px-4 border-b">
-                      {book?.title}
-                    </td>
+                    <td className="py-2 px-4 border-b">{book?.title}</td>
                     <td className="py-2 px-4 border-b">{book?.writer}</td>
                     <td className="py-2 px-4 border-b">{book?.price}</td>
                     <td className="py-2 px-4 border-b">
@@ -454,7 +363,7 @@ return (
                     <td className="py-2 px-4 border-b">
                       {book.format === "pdf" ? (
                         <a
-                          href={book.pdf_link}
+                          href={decryptLink(book?.pdf_link)}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -465,14 +374,17 @@ return (
                       )}
                     </td>
                     <td className="py-2 px-4 border-b md:table-cell">
-                      <Link href={`/admin/addbooks/edit/${book?._id}`} className="bg-blue-500 text-white py-1 px-2 rounded-md">
+                      <Link
+                        href={`/admin/addbooks/edit/${book?._id}`}
+                        className="bg-blue-500 text-white py-1 px-2 rounded-md"
+                      >
                         Update
                       </Link>
                     </td>
                     <td className="py-2 px-4 border-b md:table-cell">
                       <button
                         className="bg-red-500 text-white py-1 px-2 rounded-md"
-                        onClick={() => handleDelete(book?.id)}
+                        onClick={() => handleDelete(book?._id)}
                       >
                         Delete
                       </button>
@@ -482,8 +394,11 @@ return (
               </tbody>
             </table>
 
-     <Pagination totalPages={totalPages} currentPage={page} setPage={setPage}/>
-
+            <Pagination
+              totalPages={totalPages}
+              currentPage={page}
+              setPage={setPage}
+            />
           </div>
         )}
       </div>

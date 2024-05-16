@@ -8,7 +8,6 @@ import {
   useGetAllQuestionsQuery,
 } from "@/redux/api/questionsApi";
 import { useGetAllSubcategoriesQuery } from "@/redux/api/subcategoryApi";
-import Link from "next/link";
 
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -32,76 +31,70 @@ const AddQuestions = () => {
   const [mark, setMark] = useState(null);
   const [addQuizPlaylist] = useAddQuizPlaylistMutation();
 
-
-  const { data: categories } = useGetAllCategoriesQuery({ limit, page, searchTerm });
+  const { data: categories } = useGetAllCategoriesQuery({
+    limit,
+    page,
+    searchTerm,
+  });
   const { data: subCategories, refetch: refetchSubCategories } =
     useGetAllSubcategoriesQuery({
       category_id: selectedCategory,
-      limit, page, searchTerm,
+      limit,
+      page,
+      searchTerm,
     });
   const { data: courses, refetch: refetchCourses } = useGetAllCoursesQuery({
     sub_category_id: selectedSubcategory,
-    limit, page, searchTerm,
+    limit,
+    page,
+    searchTerm,
   });
-
   const allCourse = courses?.courses?.data;
 
   const { data: exams, refetch: refetchExams } = useGetAllExamsQuery({
     course_id: selectedCourse,
     exam_type: 1,
-    limit, page, searchTerm,
+    limit,
+    page,
+    searchTerm,
   });
-
-
   const allExams = exams?.exams?.data;
 
+  const { data: questions, refetch } = useGetAllQuestionsQuery({
+    limit,
+    page,
+    searchTerm,
+    exam_type: "1",
+  });
+  const allQuestions = questions?.categories?.data;
 
-  const { data: questions, refetch } = useGetAllQuestionsQuery({ limit, page, searchTerm });
-
-  const allQuiz = questions?.categories?.data;
-  const filteredQuestions = allQuiz?.filter((quiz) => quiz?.exam_type === "1");
   const [deleteQuestions] = useDeleteQuestionsMutation();
-
-
 
   useEffect(() => {
     refetch();
   }, [limit, page, searchTerm]);
 
-
   const totalData = questions?.categories?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
 
-
   useEffect(() => {
-    const fetchSubCategory = async () => {
-      await refetchSubCategories({ category_id: selectedCategory });
-    };
-    fetchSubCategory();
+    refetchSubCategories();
   }, [selectedCategory]);
 
   useEffect(() => {
-    const fetchSubCategories = async () => {
-      await refetchCourses({ sub_category_id: selectedSubcategory });
-    };
-    fetchSubCategories();
+    refetchCourses();
   }, [selectedSubcategory]);
 
   useEffect(() => {
-    const fetchExams = async () => {
-      await refetchExams({ course_id: selectedCourse });
-    };
-    fetchExams();
+    refetchExams();
   }, [selectedCourse]);
 
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('exam')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("exam")) {
+      router.push("/");
     }
-
-  },[])
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -111,13 +104,17 @@ const AddQuestions = () => {
     try {
       const res = await addQuizPlaylist({
         question,
-        convertMark,
+        mark: convertMark,
         exam_type: "1",
         exam_id: selectedExam,
       });
 
-      if (res) {
+      if (res?.data) {
         toast.success("question added successfully");
+      } else {
+        toast.error(
+          "Error! not added. Check if all the questions added for this exam."
+        );
       }
     } catch (error) {
       toast.error("An error occurred:", error);
@@ -127,17 +124,16 @@ const AddQuestions = () => {
     try {
       const result = await updateStatusChange({
         id: examId,
-        is_active: !activeStatus
-      })
+        is_active: !activeStatus,
+      });
       if (result) {
-        toast.success("Successfully change the status")
+        toast.success("Successfully change the status");
       }
-      refetchExams()
+      refetchExams();
     } catch (error) {
-      console.error("Error Updating status", error)
-
+      console.error("Error Updating status", error);
     }
-  }
+  };
   // question delete function
   const handleDelete = async (id) => {
     try {
@@ -177,7 +173,7 @@ const AddQuestions = () => {
       // Handle any errors that occur during the process
       toast.error(err.message);
     }
-  };;
+  };
 
   return (
     <>
@@ -206,7 +202,7 @@ const AddQuestions = () => {
               </option>
               {categories &&
                 categories?.categories?.map((category) => (
-                  <option key={category?.id} value={category?.id}>
+                  <option key={category?._id} value={category?._id}>
                     {category.title}
                   </option>
                 ))}
@@ -233,7 +229,7 @@ const AddQuestions = () => {
               </option>
               {!!subCategories &&
                 subCategories?.subcategories?.map((subCategory) => (
-                  <option key={subCategory?.id} value={subCategory?.id}>
+                  <option key={subCategory?._id} value={subCategory?._id}>
                     {subCategory?.title}
                   </option>
                 ))}
@@ -264,7 +260,7 @@ const AddQuestions = () => {
                 </option>
               ) : (
                 allCourse?.map((course) => (
-                  <option key={course.id} value={course.id}>
+                  <option key={course._id} value={course._id}>
                     {course.title}
                   </option>
                 ))
@@ -297,14 +293,13 @@ const AddQuestions = () => {
                 </option>
               ) : (
                 allExams?.map((exam) => (
-                  <option key={exam.id} value={exam.id}>
+                  <option key={exam._id} value={exam._id}>
                     {exam?.title}
                   </option>
                 ))
               )}
             </select>
           </div>
-
 
           <div className="mb-4">
             <label
@@ -364,14 +359,23 @@ const AddQuestions = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredQuestions?.map((quiz, i) => (
-                <AdminChangeWrittenStatus key={quiz?._id} refetch={refetch} quiz={quiz} i={i} handleDelete={handleDelete}></AdminChangeWrittenStatus>
+              {allQuestions?.map((quiz, i) => (
+                <AdminChangeWrittenStatus
+                  key={quiz?._id}
+                  refetch={refetch}
+                  quiz={quiz}
+                  i={i}
+                  handleDelete={handleDelete}
+                ></AdminChangeWrittenStatus>
               ))}
             </tbody>
           </table>
 
-          <Pagination totalPages={totalPages} currentPage={page} setPage={setPage} />
-
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            setPage={setPage}
+          />
         </div>
       </div>
     </>

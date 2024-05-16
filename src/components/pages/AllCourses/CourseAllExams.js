@@ -123,7 +123,7 @@ const CourseAllExams = ({ course_id }) => {
             }}
             className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary z-0  cursor-pointer w-fit"
           >
-            {exam?.exam_type === "0" ? "কুইজ কিনুন" : "প্রশ্ন কিনুন"}
+            পরিক্ষা দিন
           </p>
         </td>
       </tr>

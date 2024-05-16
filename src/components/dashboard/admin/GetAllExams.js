@@ -4,7 +4,11 @@ import Pagination from "@/app/(dashboard)/Pagination";
 import EmptyContent from "@/components/Loader/EmptyContent";
 import Error from "@/components/Loader/Error";
 import InitialLoader from "@/components/Loader/InitialLoader";
-import { useDeleteExamMutation, useGetAllExamsQuery, useUpdateStatusChangeMutation } from "@/redux/api/examsApi";
+import {
+  useDeleteExamMutation,
+  useGetAllExamsQuery,
+  useUpdateStatusChangeMutation,
+} from "@/redux/api/examsApi";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -18,25 +22,21 @@ const GetAllExams = () => {
   const [searchTerm, setSearchTerm] = useState("");
   // const { data: questions, isLoading: isFilteredQuestionLoading } = useGetAllQuestionsQuery({ exam_type: 0 });
   // const allQuiz = questions?.categories?.data;
-  const { data, isLoading, isError, refetch } = useGetAllExamsQuery({ limit, page, searchTerm });
+  const { data, isLoading, isError, refetch } = useGetAllExamsQuery({
+    limit,
+    page,
+    searchTerm,
+  });
 
   //   (data?.exams?.data);
   const examsData = data?.exams?.data;
-
-
-
-  ('info', data?.exams?.meta);
 
   useEffect(() => {
     refetch();
   }, [limit, page, searchTerm]);
 
-
   const totalData = data?.exams?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
-
-
-
 
   let content = null;
 
@@ -62,7 +62,9 @@ const GetAllExams = () => {
   }
 
   if (!isLoading && !isError && examsData?.length > 0) {
-    content = examsData?.map((item, i) => <ExamApprovedByAdmin item={item} i={i} />);
+    content = examsData?.map((item, i) => (
+      <ExamApprovedByAdmin item={item} i={i} />
+    ));
   }
 
   return (
@@ -78,7 +80,9 @@ const GetAllExams = () => {
               <th className="py-2 px-4 border-b">Exam Type</th>
               <th className="py-2 px-4 border-b">Fee</th>
               <th className="py-2 px-4 border-b">Total Exam Marks</th>
-              <th className="py-2 px-4 border-b">Total Add This Question Mark</th>
+              <th className="py-2 px-4 border-b">
+                Total Add This Question Mark
+              </th>
               <th className="py-2 px-4 border-b">IsActive</th>
               <th className="py-2 px-4 border-b">Approved Exam</th>
               <th className="py-2 px-4 border-b">Update</th>
@@ -88,7 +92,11 @@ const GetAllExams = () => {
           <tbody>{content}</tbody>
         </table>
 
-        <Pagination totalPages={totalPages} currentPage={page} setPage={setPage} />
+        <Pagination
+          totalPages={totalPages}
+          currentPage={page}
+          setPage={setPage}
+        />
       </div>
     </div>
   );

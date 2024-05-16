@@ -32,7 +32,7 @@ function ExamLists({ exams }) {
 
     const examPaymentPayload = {
       user_id: getUserInfo()?.userId,
-      exam_id: exam?.id,
+      exam_id: exam?._id,
     };
 
     Cookies.set("order_type", "exam");
@@ -93,7 +93,7 @@ function ExamLists({ exams }) {
                     }}
                     className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary z-0 cursor-pointer lg:w-[100px]"
                   >
-                    {exam?.exam_type === "0" ? "কুইজ কিনুন" : "প্রশ্ন কিনুন"}
+                    পরিক্ষা দিন
                   </button>
                 </td>
               </tr>

@@ -2,7 +2,6 @@
 
 import {
   useGivePermissionMutation,
-  usePermissionCheckQuery,
   useRemovePermissionMutation,
 } from "@/redux/api/usersApi";
 import toast from "react-hot-toast";

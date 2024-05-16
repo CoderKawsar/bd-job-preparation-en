@@ -5,15 +5,17 @@ import { useGetAllCoursesQuery } from "@/redux/api/courseApi";
 import InitialLoader from "@/components/Loader/InitialLoader";
 import Error from "@/components/Loader/Error";
 import EmptyContent from "@/components/Loader/EmptyContent";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 import CourseCard from "./course/CourseCard";
 
 const FreeCourse = () => {
   const { data, isError, isLoading } = useGetAllCoursesQuery();
 
   const coursesData = data?.courses?.data;
-  const filteredCourses = coursesData?.filter((item) => item?.membership_type === "0");
+  const filteredCourses = coursesData?.filter(
+    (item) => item?.membership_type === "0"
+  );
 
   const breakpoints = {
     480: {
@@ -67,12 +69,12 @@ const FreeCourse = () => {
 
   return (
     <div>
-      <div className="lg:px-14  px-3 py-10">
-        <div className="flex gap-5 py-10">
+      <div className="lg:px-14  px-3 pt-6">
+        <div className="flex gap-5 pb-4">
           <h2 className="text-2xl font-bold px-2  rounded ">ফ্রী কোর্সসমূহ</h2>
           <Link
             href="/courses"
-            className="mb-5 bg-bluePrimary hover:bg-cyanPrimary w-44 text-white px-7 py-3 rounded transition-all duration-500 delay-200"
+            className=" bg-bluePrimary hover:bg-cyanPrimary w-44 text-white px-7 py-3 rounded transition-all duration-500 delay-200"
           >
             সব কোর্স দেখুন
           </Link>

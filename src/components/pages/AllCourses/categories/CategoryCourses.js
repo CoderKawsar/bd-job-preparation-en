@@ -18,8 +18,6 @@ const CategoryCourses = ({ id }) => {
   });
   const coursesData = data?.courses?.data;
 
-  console.log(coursesData, "course data");
-
   let content = null;
 
   if (isLoading || categoryLoading) {
