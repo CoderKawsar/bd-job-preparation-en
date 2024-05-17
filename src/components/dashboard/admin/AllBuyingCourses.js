@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
 import InitialLoader from "@/components/Loader/InitialLoader";
 import Timer from "@/components/pages/AllCourses/Timer";
-import { useGetAllSubscriptionsHistoryQuery, } from "@/redux/api/courseApi";
+import { useGetAllSubscriptionsHistoryQuery } from "@/redux/api/courseApi";
 import Image from "next/image";
 import Link from "next/link";
 import AllBuyingCourseDetails from "./AllBuyingCourseDetails";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import Pagination from "@/app/(dashboard)/Pagination";
 import { useRouter } from "next/navigation";
 import checkPermission from "@/utils/checkPermission";
-
+import EmptyContent from "@/components/Loader/EmptyContent";
 
 const AllBuyingCourses = () => {
   const router = useRouter();
@@ -18,24 +18,21 @@ const AllBuyingCourses = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-    const { data, isLoading, isError, refetch  } =
-    useGetAllSubscriptionsHistoryQuery({limit, page, searchTerm});
+  const { data, isLoading, isError, refetch } =
+    useGetAllSubscriptionsHistoryQuery({ limit, page, searchTerm });
 
   const courseSubs = data?.subscriptionsHistory?.data;
-
 
   useEffect(() => {
     refetch();
   }, [limit, page, searchTerm]);
 
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('order')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("order")) {
+      router.push("/");
     }
-
-  },[])
+  }, []);
 
   const totalData = data?.subscriptionsHistory?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
@@ -58,18 +55,16 @@ const AllBuyingCourses = () => {
     ));
   }
 
-
-    return (
-        <div className="">
-
-<div className="border">
+  return (
+    <div className="">
+      <div className="border">
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
             <thead>
               <tr className="">
-              <th>কোর্সের নাম</th>
-              <th>কোর্স প্রশিক্ষক</th>
+                <th>কোর্সের নাম</th>
+                <th>কোর্স প্রশিক্ষক</th>
                 <th>কোর্সের সময় </th>
                 <th>কোর্সের ক্যাটাগরি </th>
                 <th>কোর্সের সাবক্যাটাগরি</th>
@@ -81,11 +76,14 @@ const AllBuyingCourses = () => {
           </table>
         </div>
       </div>
-    
- <Pagination totalPages={totalPages} currentPage={page} setPage={setPage}/>
-     
+
+      <Pagination
+        totalPages={totalPages}
+        currentPage={page}
+        setPage={setPage}
+      />
     </div>
-    );
+  );
 };
 
 export default AllBuyingCourses;
