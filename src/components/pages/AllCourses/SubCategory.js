@@ -7,6 +7,7 @@ import InitialLoader from "@/components/Loader/InitialLoader";
 import Commonbanner from "@/components/banners/Commonbanner";
 import CourseCard from "@/components/ui/Home/course/CourseCard";
 import { useGetAllCoursesQuery } from "@/redux/api/courseApi";
+import { useGetSingleSubCategoryQuery } from "@/redux/api/subcategoryApi";
 import Link from "next/link";
 
 const SubCategory = ({ id }) => {
@@ -15,6 +16,8 @@ const SubCategory = ({ id }) => {
     sub_category_id: id,
   });
   const coursesData = data?.courses?.data;
+
+  const { data: subCategory } = useGetSingleSubCategoryQuery(id);
 
   // const filterCourseDta = coursesData?.filter(
   //   (item) => item?.sub_category_id?.id === id
@@ -55,7 +58,9 @@ const SubCategory = ({ id }) => {
     { label: "কোর্সসমূহ", link: "/courses" },
     // { label: 'ক্যাটাগরি', link:'/courses/category' },
     {
-      label: `${coursesData?.[0]?.sub_category_id?.category_id?.title} - ${coursesData?.[0]?.sub_category_id?.title}`,
+      label: `${subCategory?.category_id?.title || ""} - ${
+        subCategory?.title || ""
+      }`,
     },
   ];
 
@@ -68,8 +73,7 @@ const SubCategory = ({ id }) => {
       )}
       <div className="mx-14 my-20">
         <h2 className="text-center font-bold text-xl pb-10 text-yellowPrimary">
-          {coursesData?.[0]?.sub_category_id?.category_id?.title} -{" "}
-          {coursesData?.[0]?.sub_category_id?.title}
+          {subCategory?.category_id?.title || ""} - {subCategory?.title || ""}
         </h2>
         <div className="grid lg:grid-cols-3  gap-4">{content}</div>
         <div className="flex justify-end">

@@ -19,10 +19,6 @@ import { useSelector } from "react-redux";
 import avatar from "../../assets/images/avatar.png";
 import { useGetAllCartsByUserQuery } from "@/redux/api/cartApi";
 import { useGetAllSubcategoriesQuery } from "@/redux/api/subcategoryApi";
-import {
-  useGetAllCoursesQuery,
-  useGetAllCoursesRoutineQuery,
-} from "@/redux/api/courseApi";
 import MobileNavbar from "./MobileNavbar";
 
 const Navbar = () => {
@@ -138,19 +134,21 @@ const Navbar = () => {
               </span>
               {categoriesData && (
                 <ul
-                  className={`absolute hidden min-w-[10em] px-4 text-white py-2 space-y-2 shadow-md group-hover:block text-left rounded-md transition-all duration-300 bg-bluePrimary`}
+                  className={`absolute hidden min-w-[14em] px-4 text-white py-2 space-y-2 shadow-md group-hover:block text-left rounded-md transition-all duration-300 bg-bluePrimary`}
                 >
                   {categoriesData?.map((category) => (
                     <li
                       key={category._id}
-                      className="group relative"
+                      className="group relative hover:text-yellowPrimary"
                       onMouseEnter={() => setHoveredCategoryId(category._id)}
                       onMouseLeave={() => setHoveredCategoryId(null)}
                     >
-                      <span className="cursor-pointer flex items-center">
-                        {category?.title}
-                        <IoIosArrowDown />
-                      </span>
+                      <Link href={`/courses/category/${category?._id}`}>
+                        <span className="cursor-pointer flex items-center">
+                          {category?.title}
+                          <IoIosArrowDown />
+                        </span>
+                      </Link>
                       {hoveredCategoryId === category._id &&
                         subCategoriesData && (
                           <ul
@@ -164,7 +162,7 @@ const Navbar = () => {
                               .map((subCategory) => (
                                 <li
                                   key={subCategory?._id}
-                                  className="group relative"
+                                  className="group relative hover:text-yellowPrimary"
                                   onMouseEnter={() =>
                                     setHoveredSubCategoryId(subCategory._id)
                                   }
