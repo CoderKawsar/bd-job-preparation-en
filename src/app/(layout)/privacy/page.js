@@ -1,6 +1,6 @@
 export const metadata = {
-    title:"privacy policy"
-}
+  title: "privacy policy",
+};
 const PrivactPage = () => {
   return (
     <div className="mx-14 py-10 space-y-5">
@@ -114,8 +114,8 @@ const PrivactPage = () => {
         </li>
         <li>
           <p>
-            <strong>Website</strong> refers to Easy Job Preparetion,
-            accessible from{" "}
+            <strong>Website</strong> refers to BD Job Preparation, accessible
+            from{" "}
             <a
               href="http://localhost:3000/"
               rel="external nofollow noopener"

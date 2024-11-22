@@ -12,7 +12,13 @@ import { storeUserInfo } from "@/services/auth.service";
 const RegisterPage = () => {
   const [userSignup] = useUserSignupMutation();
   const router = useRouter();
-  const { register, handleSubmit, reset, setError, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm();
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -31,14 +37,14 @@ const RegisterPage = () => {
         storeUserInfo({ accessToken: res?.accessToken });
         toast.success("ইউজার সফল্ভাবে রেজিস্টার হয়েছে ।");
         router.push("/");
-      }
-      else {
-        toast.error("Email or Mobile number already exists. Please use a different Email or Number.");
+      } else {
+        toast.error(
+          "Email or Mobile number already exists. Please use a different Email or Number."
+        );
       }
     } catch (err) {
       toast.error(err.message);
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -46,7 +52,7 @@ const RegisterPage = () => {
     <div className="bg-white border rounded shadow-lg max-w-md mx-auto py-5 my-10 z-0">
       <div>
         <h2 className="text-lg font-bold text-center pb-10 pt-5 text-cyanPrimary">
-        ইজি জব প্রিপারেশনে আপনাকে স্বাগতম।
+          বিডি জব প্রিপারেশনে আপনাকে স্বাগতম।
         </h2>
 
         <div className="mb-10">
@@ -93,7 +99,8 @@ const RegisterPage = () => {
                   required: "মোবাইল নাম্বার প্রয়োজন",
                   pattern: {
                     value: /^\d{11}$/,
-                    message: "মোবাইল নাম্বারটি  ১১ টি সংখ্যা হতে হবে এবং এমন হবে 01742561023",
+                    message:
+                      "মোবাইল নাম্বারটি  ১১ টি সংখ্যা হতে হবে এবং এমন হবে 01742561023",
                   },
                   // pattern: {
                   //   value: /^[0-9]{11}$/, // Regular expression for exactly 11 digits
@@ -103,7 +110,6 @@ const RegisterPage = () => {
                 placeholder=" 01742561023 আপনার মোবাইল নাম্বার "
                 className="border py-4 px-3 rounded outline-none hover:border-gray-500  w-80  bg-gray-200"
               />
-
             </div>
             {errors.contact_no && (
               <p className="text-red-500">{errors.contact_no.message}</p>

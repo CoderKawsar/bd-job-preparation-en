@@ -17,6 +17,7 @@ import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import { IoCartOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import avatar from "../../assets/images/avatar.png";
+import logoImage from "@/assets/images/logo_main.png";
 import { useGetAllCartsByUserQuery } from "@/redux/api/cartApi";
 import { useGetAllSubcategoriesQuery } from "@/redux/api/subcategoryApi";
 import MobileNavbar from "./MobileNavbar";
@@ -108,14 +109,14 @@ const Navbar = () => {
             className="text-lg font-semibold flex items-center space-x-2"
           >
             <Image
-              src="https://i.ibb.co/F4C6DrK/easy-job-prepareting-removebg-preview.png"
-              alt="Easy Job Preparetion"
+              src={logoImage}
+              alt="BD Job Preparation"
               className=" inline-block items-center"
-              width={35}
+              width={40}
               height={0}
             />
             <span className="dark:text-cyanPrimary hover:text-bluePrimary">
-              ইজি জব প্রিপারেশন
+              বিডি জব প্রিপারেশন
             </span>
           </Link>
 

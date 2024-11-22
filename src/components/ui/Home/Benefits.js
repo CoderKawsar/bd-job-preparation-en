@@ -50,7 +50,7 @@ const data = [
     id: 7,
     img: img6,
     title: "ভেরিফাইড সার্টিফিকেট",
-    desc: "কোর্স শেষে আপনার পারফরম্যান্সের উপর গ্রেডিং করা হবে। সে অনুযায়ী আপনি ইজি জব প্রিপারেশন থেকে সার্টিফিকেট পাবেন।",
+    desc: "কোর্স শেষে আপনার পারফরম্যান্সের উপর গ্রেডিং করা হবে। সে অনুযায়ী আপনি বিডি জব প্রিপারেশন থেকে সার্টিফিকেট পাবেন।",
   },
   {
     id: 8,
@@ -65,7 +65,7 @@ const Benefits = () => {
     <div className="lg:px-14 py-10 px-3">
       <h2 className="lg:text-3xl md:text-xl font-bold pt-5 pb-10 dark:text-cyanPrimary">
         {" "}
-        ইজি জব প্রিপারেশন থেকে আপনি কী কী সুবিধা পাবেন
+        বিডি জব প্রিপারেশন থেকে আপনি কী কী সুবিধা পাবেন
       </h2>
 
       <div className="grid lg:grid-cols-2 gap-4">
@@ -76,7 +76,12 @@ const Benefits = () => {
           >
             <div className="flex gap-5  px-4">
               <div>
-                <Image src={item?.img} alt="benefit8" height={200} width={200} />
+                <Image
+                  src={item?.img}
+                  alt="benefit8"
+                  height={200}
+                  width={200}
+                />
               </div>
               <div>
                 <h4 className="font-semibold text-xl py-2">{item?.title}</h4>

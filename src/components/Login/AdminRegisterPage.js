@@ -28,7 +28,10 @@ const AdminRegisterPage = () => {
       // (res, ' from res');
       toast.success("ইউজার সফল্ভাবে রেজিস্টার হয়েছে ।");
     } catch (err) {
-      if (err.data?.statusCode === 500 && err.data?.errorMessages.includes("duplicate key")) {
+      if (
+        err.data?.statusCode === 500 &&
+        err.data?.errorMessages.includes("duplicate key")
+      ) {
         // Handle duplicate key error (email already exists)
         toast.error("Email already exists. Please use a different email.");
       } else {
@@ -41,8 +44,8 @@ const AdminRegisterPage = () => {
     <div className="bg-white border rounded shadow-lg max-w-md mx-auto py-5 my-10 z-0">
       <div>
         <h2 className="text-lg font-bold text-center pb-10 pt-5 text-cyanPrimary">
-        ইজি জব প্রিপারেশনে আপনাকে স্বাগতম।
-        </h2> 
+          বিডি জব প্রিপারেশনে আপনাকে স্বাগতম।
+        </h2>
 
         <div className="mb-10">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
@@ -104,7 +107,10 @@ const AdminRegisterPage = () => {
             <p>
               {" "}
               আপনার এক্যাউন্ট আছে ?{" "}
-              <Link href="/login" className="text-bold text-bluePrimary text-lg hover:underline">
+              <Link
+                href="/login"
+                className="text-bold text-bluePrimary text-lg hover:underline"
+              >
                 লগইন করুন
               </Link>
             </p>
@@ -116,5 +122,3 @@ const AdminRegisterPage = () => {
 };
 
 export default AdminRegisterPage;
-
-

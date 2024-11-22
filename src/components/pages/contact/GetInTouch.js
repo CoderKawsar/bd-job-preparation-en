@@ -13,7 +13,7 @@ const GetInTouch = () => {
         <h2 className=" font-bold text-2xl">আমাদের সাথে যোগাযোগ করুন</h2>
       </div>
       <div className="grid lg:grid-cols-2 gap-10">
-        <div className="grid lg:grid-cols-2 gap-7"> 
+        <div className="grid lg:grid-cols-2 gap-7">
           <Link href="/">
             <div className="bg-white rounded shadow-md  h-48 pt-10 cursor-pointer hover:shadow-xl hover:bg-yellowPrimary hover:text-white transition-all transform duration-300 delay-200 hover:-translate-y-1 hover:scale-110">
               <div className="space-y-2 text-center">
@@ -21,9 +21,9 @@ const GetInTouch = () => {
                   <TbWorld className="text-4xl text-bluePrimary rounded-full bg-blue-200 p-2" />
                 </div>
 
-                <h2 className="font-bold text-xl">আমাদের  ওয়েবসাইট</h2>
-                <p className="">ইজি জব প্রিপারেশন</p>
-              </div> 
+                <h2 className="font-bold text-xl">আমাদের ওয়েবসাইট</h2>
+                <p className="">বিডি জব প্রিপারেশন</p>
+              </div>
             </div>
           </Link>
           <div className="bg-white rounded shadow-md  h-48 pt-10 cursor-pointer hover:shadow-xl hover:bg-yellowPrimary hover:text-white transition-all transform duration-300 delay-200 hover:-translate-y-1 hover:scale-110">
@@ -45,7 +45,7 @@ const GetInTouch = () => {
               <h2 className="font-bold text-xl">আমাদের ইমেইল করুন</h2>
               <p className="">easyjobpreperation@gmail.com</p>
             </div>
-          </div> 
+          </div>
           <div className="bg-white rounded shadow-md  h-48 pt-10 cursor-pointer hover:shadow-xl hover:bg-yellowPrimary hover:text-white transition-all transform duration-300 delay-200 hover:-translate-y-1 hover:scale-110">
             <div className="space-y-2 text-center">
               <div className="flex justify-center items-center">
@@ -53,9 +53,7 @@ const GetInTouch = () => {
               </div>
 
               <h2 className="font-bold text-xl">আমাদের ঠিকানা</h2>
-              <p className=""> 
-              ঢাকা অফিস: দিলকুশা আর/এ, মতিঝিল, ঢাকা-১২২৩
-              </p>
+              <p className="">ঢাকা অফিস: দিলকুশা আর/এ, মতিঝিল, ঢাকা-১২২৩</p>
             </div>
           </div>
         </div>

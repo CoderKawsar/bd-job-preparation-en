@@ -4,7 +4,11 @@ import { FiLogOut } from "react-icons/fi";
 import ToggleTheme from "../shared/ToggleTheme";
 import { useRouter } from "next/navigation";
 import { authKey } from "@/constants/storage";
-import { getUserInfo, isLoggedIn, removeUserInfo } from "@/services/auth.service";
+import {
+  getUserInfo,
+  isLoggedIn,
+  removeUserInfo,
+} from "@/services/auth.service";
 import { useGetSingleUserQuery } from "@/redux/api/authApi";
 
 const DashNavbar = () => {
@@ -20,13 +24,12 @@ const DashNavbar = () => {
     router.push("/login");
   };
 
-
   return (
     <div className=" bg-gray-200 border-b border-b-gray-300 sticky top-0 z-50">
       <div className="navbar px-5">
         <div className="navbar-start ">
           <Link href="/" className="text-lg font-bold text-cyan-900">
-          ইজি জব প্রিপারেশন
+            বিডি জব প্রিপারেশন
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -52,7 +55,6 @@ const DashNavbar = () => {
               </Link>
             </div>
           )}
-
         </div>
       </div>
     </div>

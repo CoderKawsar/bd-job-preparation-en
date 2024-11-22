@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import logo from "../../assets/images/logo.png";
+import mainLogo from "@/assets/images/logo_main.png";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import Link from "next/link";
 import { CgFacebook } from "react-icons/cg";
@@ -28,20 +28,20 @@ const Footer = () => {
             className="text-xl font-semibold flex items-center space-x-2"
           >
             <Image
-              src="https://i.ibb.co/F4C6DrK/easy-job-prepareting-removebg-preview.png"
+              src={mainLogo}
               alt="logo"
               className=" inline-block items-center"
               width={35}
               height={0}
             />
             <span className="text-white hover:text-bluePrimary text-xl">
-              ইজি জব প্রিপারেশন
+              বিডি জব প্রিপারেশন
             </span>
           </a>
           <p className="leading-loose  py-7">
             যেকোনো বয়সের শিক্ষার্থী, প্রফেশনাল ও ফ্রিল্যান্সারদের <br /> জন্য
-            ইজি জব প্রিপারেশন হলো দেশের সেরা স্কিল ডেভেলপমেন্ট <br />
-            সলিউশন। ইজি জব প্রিপারেশন ইন্ডাস্ট্রির এক্সপার্টদের বানানো <br />{" "}
+            বিডি জব প্রিপারেশন হলো দেশের সেরা স্কিল ডেভেলপমেন্ট <br />
+            সলিউশন। বিডি জব প্রিপারেশন ইন্ডাস্ট্রির এক্সপার্টদের বানানো <br />{" "}
             ক্যারিয়ার ট্র্যাক প্রোগ্রাম ও ফাউন্ডেশন কোর্সগুলো <br /> দেশে আপনার
             সফল ক্যারিয়ার নিশ্চিত করবে।
           </p>
@@ -132,31 +132,25 @@ const Footer = () => {
             ঢাকা অফিস: দিলকুশা আর/এ, মতিঝিল, ঢাকা-১২২৩
           </a>
           <a className="link link-hover">
-            কুষ্টিয়া অফিস: বান্ধপাড়া, খোকসা বাজার, খোকসা, কুষ্টিয়া-৭০২০।
+            কুষ্টিয়া অফিস: খোকসা বাজার, খোকসা, কুষ্টিয়া-৭০২০।
           </a>
           <a className="link link-hover">
             রংপুর অফিস: শাপলা চত্বর, রংপুর সদর-৫৪০০
           </a>{" "}
           <a className="link link-hover">
-            রাজশাহী অফিস: সোনাদিঘীর মোর, রাজশাহী-৬০০০।
+            রাজশাহী অফিস: সোনাদিঘীর মোড়, রাজশাহী-৬০০০।
           </a>
           <a className="link link-hover">
             চট্টগ্রাম অফিস: আন্দরকিল্লা, চট্টগ্রাম-৪০০০
           </a>
-          <a className="link link-hover">+৮৮০ ১৮ ৮৬৩ ৪৭৩৫০</a>
-          <a className="link link-hover">easyjobpreperation@gmail.com</a>
+          <a className="link link-hover">+880 1700 000000</a>
+          <a className="link link-hover">test_email@gmail.com</a>
         </nav>
       </footer>
       <footer className="footer footer-center pb-5 bg-cyanPrimary text-white">
         <aside>
-          <p>Copyright © 2024 - All rights reserved by Easy Job Preparetion</p>
-
-          <a
-            target="_blank"
-            href="https://www.linkedin.com/in/ProgrammerShahJalal/"
-          >
-            Developed by Elite Developer Unity
-          </a>
+          <p>Copyright © 2024 - All rights reserved by BD Job Preparation</p>
+          Developed by Elite Developer Unity
         </aside>
       </footer>
     </div>

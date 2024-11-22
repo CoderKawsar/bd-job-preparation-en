@@ -158,7 +158,7 @@ function Success() {
           }
         } catch (error) {
           toast.error(
-            "Order failed!  Contact to Easy Job Preparetion admin!",
+            "Order failed!  Contact to BD Job Preparation admin!",
             error
           );
         }
