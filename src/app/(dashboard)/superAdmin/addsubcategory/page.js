@@ -1,7 +1,11 @@
 "use client";
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import { useDeleteCoursesMutation } from "@/redux/api/courseApi";
-import { useAddSubcategoryMutation, useDeleteSubCategoryMutation, useGetAllSubcategoriesQuery } from "@/redux/api/subcategoryApi";
+import {
+  useAddSubcategoryMutation,
+  useDeleteSubCategoryMutation,
+  useGetAllSubcategoriesQuery,
+} from "@/redux/api/subcategoryApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
@@ -22,18 +26,19 @@ const AdminAddSubCategory = () => {
     isError: isErrorCategories,
   } = useGetAllCategoriesQuery({ limit, page, searchTerm });
 
-  const { data: subcategories, isLoading: isSubcategoryLoading, refetch } = useGetAllSubcategoriesQuery({ limit, page, searchTerm });
+  const {
+    data: subcategories,
+    isLoading: isSubcategoryLoading,
+    refetch,
+  } = useGetAllSubcategoriesQuery({ limit, page, searchTerm });
 
   const allSubcategory = subcategories?.subcategories;
 
-  const [deleteCourses] = useDeleteCoursesMutation()
-  const [deleteSubCategory] = useDeleteSubCategoryMutation()
-
+  const [deleteSubCategory] = useDeleteSubCategoryMutation();
 
   useEffect(() => {
     refetch();
   }, [limit, page, searchTerm]);
-
 
   // const totalData = questions?.categories?.meta?.total;
   // const totalPages = Math.ceil(totalData / limit);
@@ -42,47 +47,38 @@ const AdminAddSubCategory = () => {
     // (data);
     const content = { ...data };
 
-    const file = content['file']
+    // const file = content["file"];
     // (file)
     // delete content['file'];
-    const result = JSON.stringify(content)
+    const result = JSON.stringify(content);
     // (result, "json")
     const formData = new FormData();
-    formData.append('file', file[0]);
-    formData.append('data', result);
+    // formData.append("file", file[0]);
+    formData.append("data", result);
     // (formData, 'formdaata')
     try {
-
-      const resultData = await addSubcategory(formData)
-        (resultData, 'after ap call')
+      const resultData = await addSubcategory(formData);
       if (resultData) {
         toast.success("subcategory created successfully");
-
       }
       // (resultData, ' from add category async')
-
     } catch (error) {
-      toast.error(error.message)
-
+      toast.error(error.message);
     }
-
   };
-  const handleDelete = async (categoryId) => {
+  const handleDelete = async (subCategoryId) => {
     try {
-      await deleteCourses(categoryId);
-
-      // toast.success("Category deleted successfully");
+      await deleteSubCategory(subCategoryId);
+      toast.success("Category deleted successfully");
     } catch (error) {
       toast.error("Failed to delete category");
-
-
     }
   };
 
   return (
     <div className="container mx-auto mt-8">
-      {/* <h1 className="text-2xl font-bold mb-4">Add Subcategory</h1> */}
-      {/* <form onSubmit={handleSubmit(onSubmit)}>
+      <h1 className="text-2xl font-bold mb-4">Add Subcategory</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2">
             Subcategory Title
@@ -91,11 +87,10 @@ const AdminAddSubCategory = () => {
             type="text"
             name="title"
             {...register("title", { required: true })}
-
             className="w-full border border-gray-300 p-2 rounded-md"
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-sm font-bold mb-2">
             Subcategory Icon
           </label>
@@ -103,23 +98,20 @@ const AdminAddSubCategory = () => {
             type="file"
             name="file"
             {...register("file", { required: true })}
-
             className="w-full border border-gray-300 p-2 rounded-md"
           />
-        </div>
+        </div> */}
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2">Category</label>
           <select
-
             {...register("category_id", { required: true })}
-
             className="w-full border border-gray-300 p-2 rounded-md"
           >
             <option value="" disabled>
               Select a category
             </option>
             {categories?.categories?.map((category) => (
-              <option key={category?.id} value={category?._id}>
+              <option key={category?._id} value={category?._id}>
                 {category?.title}
               </option>
             ))}
@@ -131,7 +123,7 @@ const AdminAddSubCategory = () => {
         >
           Add Subcategory
         </button>
-      </form> */}
+      </form>
       <h1 className="text-2xl font-bold mb-4 mt-12">Update Sub Category</h1>
       {isSubcategoryLoading ? (
         <p>Loading...</p>
@@ -143,37 +135,46 @@ const AdminAddSubCategory = () => {
                 <th className="py-2 px-4 border-b">Title</th>
                 {/* <th className="py-2 px-4 border-b">Icon</th> */}
                 <th className="py-2 px-4 border-b">Category</th>
+                {/* <th className="py-2 px-4 border-b">Update</th> */}
                 <th className="py-2 px-4 border-b">Update</th>
-                {/* <th className="py-2 px-4 border-b">Update</th>
-                <th className="py-2 px-4 border-b">Delete</th> */}
+                <th className="py-2 px-4 border-b">Delete</th>
               </tr>
             </thead>
             <tbody>
               {allSubcategory?.map((subcategory, i) => (
                 <tr key={subcategory?._id} className="block md:table-row">
-                  <td className="py-2 px-4 border-b md:table-cell">{i + 1}) {subcategory?.title}</td>
+                  <td className="py-2 px-4 border-b md:table-cell">
+                    {i + 1}. {subcategory?.title}
+                  </td>
                   {/* <td className="py-2 px-4 border-b md:table-cell">
                     <img src={subcategory?.icon} alt="Subcategory Icon" className="w-10 h-10" />
                   </td> */}
-                  <td className="py-2 px-4 border-b md:table-cell">{subcategory?.category_id?.title}</td>
                   <td className="py-2 px-4 border-b md:table-cell">
-                    <Link href={`/superAdmin/addsubcategory/edit/${subcategory?._id}`} className="bg-blue-500 text-white py-1 px-2 rounded-md">Update</Link>
+                    {subcategory?.category_id?.title}
                   </td>
-                  {/*<td className="py-2 px-4 border-b md:table-cell">
-                    <button className="bg-red-500 text-white py-1 px-2 rounded-md" onClick={() => handleDelete(subcategory?.id)}>Delete</button>
-                  </td> */}
+                  <td className="py-2 px-4 border-b md:table-cell">
+                    <Link
+                      href={`/superAdmin/addsubcategory/edit/${subcategory?._id}`}
+                      className="bg-blue-500 text-white py-1 px-2 rounded-md"
+                    >
+                      Update
+                    </Link>
+                  </td>
+                  <td className="py-2 px-4 border-b md:table-cell">
+                    <button
+                      className="bg-red-500 text-white py-1 px-2 rounded-md"
+                      onClick={() => handleDelete(subcategory?._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
 
-
-
           {/* <Pagination totalPages={totalPages} currentPage={page} setPage={setPage}/> */}
-
         </div>
-
-
       )}
     </div>
   );

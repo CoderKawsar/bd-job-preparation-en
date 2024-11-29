@@ -1,5 +1,6 @@
 import bkashImg from "@/assets/images/Bkash logo.png";
 import nagadImg from "@/assets/images/nagad-logo-horizontal.png";
+import stripeImg from "@/assets/images/stripe_logo.png";
 import Image from "next/image";
 
 function PaymentModal({ setPaymentMethod, setModalOpen, amount }) {
@@ -8,6 +9,19 @@ function PaymentModal({ setPaymentMethod, setModalOpen, amount }) {
       <h2 className="text-center mb-6 text-3xl">পেমেন্ট পদ্ধতি</h2>
       <p className="text-center mb-4 text-xl">টাকার পরিমাণ: {amount} টাকা</p>
       <div className="flex gap-4 mb-4">
+        <button
+          type="button"
+          onClick={() => setPaymentMethod("stripe")}
+          className="bg-white rounded h-24 w-48 flex justify-center items-center"
+        >
+          <Image
+            src={stripeImg}
+            className="px-4"
+            alt="Stripe"
+            width={200}
+            height={150}
+          />
+        </button>
         <button
           type="button"
           onClick={() => setPaymentMethod("bkash")}

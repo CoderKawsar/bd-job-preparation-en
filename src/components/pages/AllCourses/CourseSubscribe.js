@@ -70,6 +70,20 @@ const CourseSubscribe = ({ course_id }) => {
         }
       );
       router.push(payment?.data);
+    } else if (paymentMethod === "stripe") {
+      const { data: payment } = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/stripe/payment/create`,
+        {
+          amount: `${subscription?.cost}`,
+          subscription_id: subscription?.id,
+        },
+        {
+          headers: {
+            Authorization: getFromLocalStorage(authKey),
+          },
+        }
+      );
+      router.push(payment?.url);
     }
   };
 

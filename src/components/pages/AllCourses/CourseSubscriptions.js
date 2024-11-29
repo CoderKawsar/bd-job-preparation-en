@@ -64,6 +64,20 @@ function CourseSubscriptions({ course_id }) {
         }
       );
       router.push(payment?.data);
+    } else if (paymentMethod === "stripe") {
+      const { data: payment } = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/stripe/payment/create`,
+        {
+          amount: `${subscription?.cost}`,
+          subscription_id: subscription?.id,
+        },
+        {
+          headers: {
+            Authorization: getFromLocalStorage(authKey),
+          },
+        }
+      );
+      router.push(payment?.url);
     }
   };
 
@@ -94,7 +108,7 @@ function CourseSubscriptions({ course_id }) {
       <tr className="hover" key={subscription?._id}>
         <td>{subscription?.name}</td>
         <td>{subscription?.subscription_duration_in_months} Months</td>
-        <td>{subscription?.cost}{" "}টাকা</td>
+        <td>{subscription?.cost} টাকা</td>
         <td>
           <p
             onClick={() => {
@@ -113,7 +127,6 @@ function CourseSubscriptions({ course_id }) {
   return (
     <>
       <div>
-        
         <table className="table table-auto">
           {/* head */}
           <thead>

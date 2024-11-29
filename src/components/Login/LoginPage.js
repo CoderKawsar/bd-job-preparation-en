@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import { FiCopy } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useUserLoginMutation } from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
-import { getUserInfo, storeUserInfo } from "@/services/auth.service";
+import { storeUserInfo } from "@/services/auth.service";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
@@ -21,6 +22,17 @@ const LoginPage = () => {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        toast.success("Copied to clipboard");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   const onSubmit = async (data) => {
@@ -127,6 +139,61 @@ const LoginPage = () => {
                 রেজিস্টার করুন
               </Link>
             </p>
+          </div>
+          <div className="border-t pt-4">
+            <div>
+              <h3 className="text-center w-fit mx-auto font-bold text-xl border-b-2">
+                Credentials For Testing
+              </h3>
+            </div>
+            <div className="text-center mt-4">
+              <h5 className="font-semibold border-b w-fit mx-auto">
+                Super Admin
+              </h5>
+              <div className="flex justify-center items-center">
+                <p className="font-semibold">Email: </p>
+                <div
+                  onClick={() => copyToClipboard("super_admin@gmail.com")}
+                  className="cursor-pointer ml-1 py-1 flex items-center"
+                >
+                  <p>super_admin@gmail.com</p>
+                  <FiCopy className="mx-2" size={12} />
+                </div>
+              </div>
+              <div className="flex justify-center items-center">
+                <p className="font-semibold">Password: </p>
+                <div
+                  onClick={() => copyToClipboard("123456789")}
+                  className="cursor-pointer ml-1 py-1 flex items-center"
+                >
+                  <p>123456789</p>
+                  <FiCopy className="mx-2" size={12} />
+                </div>
+              </div>
+            </div>
+            <div className="text-center mt-2">
+              <h5 className="font-semibold border-b w-fit mx-auto">Student</h5>
+              <div className="flex justify-center items-center">
+                <p className="font-semibold">Email: </p>
+                <div
+                  onClick={() => copyToClipboard("student@gmail.com")}
+                  className="cursor-pointer ml-1 py-1 flex items-center"
+                >
+                  <p>student@gmail.com</p>
+                  <FiCopy className="mx-2" size={12} />
+                </div>
+              </div>
+              <div className="flex justify-center items-center">
+                <p className="font-semibold">Password: </p>
+                <div
+                  onClick={() => copyToClipboard("12345678")}
+                  className="relative cursor-pointer ml-1 py-1 flex items-center"
+                >
+                  <p>12345678</p>
+                  <FiCopy className="mx-2" size={12} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

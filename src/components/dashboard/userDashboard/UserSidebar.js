@@ -10,11 +10,11 @@ import {
 } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
-import { IoIosNotifications } from "react-icons/io";
 import { PiExamFill } from "react-icons/pi";
 import { SiCoursera } from "react-icons/si";
 import { MdSubscriptions } from "react-icons/md";
 import { FaBorderAll } from "react-icons/fa6";
+import { FaCog, FaBell } from "react-icons/fa";
 import { MdQuiz } from "react-icons/md";
 import { useState } from "react";
 import { getUserInfo } from "@/services/auth.service";
@@ -446,8 +446,25 @@ const UserSidebar = () => {
                       }`}
                     >
                       {" "}
-                      <IoIosNotifications size={30} />
+                      <FaBell size={22} />
                       নোটিশ যোগ করুন
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={"/superAdmin/addsettings"}
+                    passHref
+                    legacyBehavior
+                  >
+                    <a
+                      className={`transition-all text-cyan-900 text-lg py-2 rounded flex items-center gap-3 bg-gray-200 ${
+                        pathname === "/superAdmin/addsettings" ? "active" : ""
+                      }`}
+                    >
+                      {" "}
+                      <FaCog size={22} />
+                      সেটিংস
                     </a>
                   </Link>
                 </li>

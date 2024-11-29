@@ -56,6 +56,21 @@ const BundleCourses = ({ bundle, i, isLast, sub_category_id }) => {
         }
       );
       router.push(payment?.data);
+    } else if (paymentMethod === "stripe") {
+      const { data: payment } = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/stripe/payment/create`,
+        {
+          amount: `${bundle?.total_cost}`,
+          sub_category_id,
+          subscription_duration_in_months: selectedSubscriptionDuration,
+        },
+        {
+          headers: {
+            Authorization: getFromLocalStorage(authKey),
+          },
+        }
+      );
+      router.push(payment?.url);
     }
   };
 

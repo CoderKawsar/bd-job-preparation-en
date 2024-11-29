@@ -168,9 +168,33 @@ const CheckOut = () => {
             }
           );
           router.push(payment?.data);
+        } else if (paymentMethod === "stripe") {
+          const shipping_address = Cookies.get("creationPayload");
+          const booksPayload = books?.map((book) => {
+            return {
+              book_id: book?._id,
+              quantity: book?.quantity,
+            };
+          });
+
+          const { data: payment } = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/stripe/payment/create`,
+            {
+              amount: `${Number(shippingCharge) + Number(total)}`,
+              shipping_address,
+              books: booksPayload,
+            },
+            {
+              headers: {
+                Authorization: getFromLocalStorage(authKey),
+              },
+            }
+          );
+          router.push(payment?.url);
         }
       }
     } catch (error) {
+      console.log(error);
       toast.error("Error during payment");
     }
   };
@@ -185,7 +209,7 @@ const CheckOut = () => {
 
         asyncOperation();
       } catch (error) {
-        ("Error during asynchronous operation:", error);
+        "Error during asynchronous operation:", error;
       }
     };
 
@@ -208,7 +232,7 @@ const CheckOut = () => {
             className={`grid lg:grid-cols-2 auto-cols-auto gap-5 py-20 justify-center`}
           >
             <div>
-              {shippingCharge ? ( 
+              {shippingCharge ? (
                 <div>
                   <h2 className="font-semibold text-yellowPrimary pb-5 text-xl">
                     আপনার শিপিং ঠিকানা
@@ -348,7 +372,6 @@ const CheckOut = () => {
                             </p>
                           )}
                         </div> */}
-
                         <div className="col-span-2">
                           <label className="block text-sm font-medium text-gray-700">
                             ঠিকানা
@@ -393,7 +416,7 @@ const CheckOut = () => {
 
             <div>
               <h2 className="font-semibold text-yellowPrimary pb-5 text-xl">
-                আপনার অর্ডারকৃত বইসমূহ 
+                আপনার অর্ডারকৃত বইসমূহ
               </h2>
               <CheckoutCart shippingCharge={shippingCharge} total={total} />
             </div>
@@ -407,32 +430,32 @@ const CheckOut = () => {
                 <span className="font-bold pr-3">
                   <FaArrowLeftLong />
                 </span>
-                ঝুড়িতে ফিরে যান 
+                ঝুড়িতে ফিরে যান
               </Link>
-              {
-                userLoggedIn ? <button
+              {userLoggedIn ? (
+                <button
                   type="button"
                   onClick={handlePlaceOrderBtn}
                   className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary  flex items-center"
                 >
-                  অর্ডার প্লেস করুন 
+                  অর্ডার প্লেস করুন
                   <span className="font-bold pl-3">
                     <FaArrowRightLong />
                   </span>
-                </button> :
-                  <Link href='/login'>
-                    <button
-                      type="button"
-                      className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary  flex items-center"
-                    >
-                     অর্ডার প্লেস করতে লগ ইন করুন 
-                      <span className="font-bold pl-3">
-                        <FaArrowRightLong />
-                      </span>
-                    </button>
-                  </Link>
-              }
-
+                </button>
+              ) : (
+                <Link href="/login">
+                  <button
+                    type="button"
+                    className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary  flex items-center"
+                  >
+                    অর্ডার প্লেস করতে লগ ইন করুন
+                    <span className="font-bold pl-3">
+                      <FaArrowRightLong />
+                    </span>
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
           {/* ====================  Payment modal  ==========================================*/}
@@ -440,7 +463,7 @@ const CheckOut = () => {
             <PaymentModal
               setModalOpen={setModalOpen}
               setPaymentMethod={setPaymentMethod}
-              amount={total}
+              amount={`${Number(shippingCharge || 0) + Number(total)}`}
             />
           )}
         </form>

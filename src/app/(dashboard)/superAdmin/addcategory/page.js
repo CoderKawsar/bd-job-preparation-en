@@ -19,20 +19,20 @@ const AdminAddCategory = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data: categories, refetch } = useGetAllCategoriesQuery({ limit, page, searchTerm });
+  const { data: categories, refetch } = useGetAllCategoriesQuery({
+    limit,
+    page,
+    searchTerm,
+  });
 
   const allCategory = categories?.categories;
 
   const [addCategory] = useAddCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
 
- 
-
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
     // (data)
-
-
 
     const content = { ...data };
     const file = content["file"];
@@ -97,20 +97,18 @@ const AdminAddCategory = () => {
     }
   };
 
-
   useEffect(() => {
     refetch();
   }, [limit, page, searchTerm]);
-  
 
   // ('info', categories);
   // const totalData = questions?.categories?.meta?.total;
   // const totalPages = Math.ceil(totalData / limit);
 
   return (
-    <div >
-      {/* <h1 className="text-2xl font-bold mb-4">Add Category</h1> */}
-      {/* <form onSubmit={handleSubmit(onSubmit)}>
+    <div>
+      <h1 className="text-2xl font-bold mb-4">Add Category</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2">Category Name</label>
           <input
@@ -135,12 +133,10 @@ const AdminAddCategory = () => {
         >
           Add Category
         </button>
-      </form> */}
+      </form>
 
       <div>
-        <h1 className="text-2xl font-bold mb-4 mt-12">
-          Category List
-        </h1>
+        <h1 className="text-2xl font-bold mb-4 mt-12">Category List</h1>
         {allCategory ? (
           <ul className="border p-5 rounded-md">
             {allCategory?.map((category, i) => (
@@ -150,7 +146,7 @@ const AdminAddCategory = () => {
               >
                 <div className=" flex items-center ">
                   <h2 className="text-xl font-bold  pr-5">
-                    {i + 1}) {category.title}
+                    {i + 1}. {category.title}
                   </h2>
                   {/* {category.icon && (
                     <img
@@ -162,17 +158,20 @@ const AdminAddCategory = () => {
                   )} */}
                 </div>
                 <div>
-                  <Link href={`/superAdmin/addcategory/edit/${category?._id}`} className="mx-4">
+                  <Link
+                    href={`/superAdmin/addcategory/edit/${category?._id}`}
+                    className="mx-4"
+                  >
                     <button className="bg-blue-500 text-white py-1 px-2 rounded-md">
                       Update
                     </button>
                   </Link>
-                  {/* <button
+                  <button
                     className="bg-red-500 text-white py-1 px-2 rounded-md"
-                    onClick={() => handleDelete(category.id)}
+                    onClick={() => handleDelete(category?._id)}
                   >
                     Delete
-                  </button> */}
+                  </button>
                 </div>
               </li>
             ))}

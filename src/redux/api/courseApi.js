@@ -130,7 +130,7 @@ export const courseApi = baseApi.injectEndpoints({
     }),
     subscribeToCourseBundle: build.mutation({
       query: (data) => ({
-        url: `${COURSES_URL}//buy-all-of-a-sub-category`,
+        url: `${COURSES_URL}/buy-all-of-a-sub-category`,
         method: "POST",
         data: data,
       }),

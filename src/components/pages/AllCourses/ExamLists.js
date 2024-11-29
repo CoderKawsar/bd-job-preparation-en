@@ -17,6 +17,7 @@ function ExamLists({ exams }) {
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedExam, setSelectedExam] = useState(null);
+  console.log("paymentMethod", paymentMethod);
 
   // effects
   useEffect(() => {
@@ -58,6 +59,20 @@ function ExamLists({ exams }) {
         }
       );
       router.push(payment?.data);
+    } else if (paymentMethod === "stripe") {
+      const { data: payment } = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/stripe/payment/create`,
+        {
+          amount: exam?.fee,
+          exam_id: exam?._id,
+        },
+        {
+          headers: {
+            Authorization: getFromLocalStorage(authKey),
+          },
+        }
+      );
+      router.push(payment?.url);
     }
   };
 

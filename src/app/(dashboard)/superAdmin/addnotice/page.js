@@ -3,28 +3,24 @@ import AllNoticesPage from "@/components/dashboard/admin/AllNoticesPage";
 import { useAddNoticeMutation } from "@/redux/api/noticeApi";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import Swal from "sweetalert2";
 
 const AdminNoticeCreatePage = () => {
   const { register, handleSubmit, reset } = useForm();
   const [addNotice] = useAddNoticeMutation();
-  
 
   const onSubmit = async (data) => {
     try {
       const resultData = await addNotice(data);
-     
+
       if (resultData?.data?._id) {
         toast.success("Notice created successfully");
         reset();
       }
-     
     } catch (error) {
       toast.error(error.message);
     }
   };
 
- 
   return (
     <div>
       <h2 className="text-center font-bold text-3xl my-4"> নোটিশ যোগ করুন </h2>

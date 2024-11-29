@@ -26,6 +26,14 @@ export const settingsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["settings"],
     }),
+    addOrEditShippingCharge: build.mutation({
+      query: (data) => ({
+        url: `${SETTINGS_URL}/shipping-charge`,
+        method: "PATCH",
+        data: data,
+      }),
+      invalidatesTags: ["settings"],
+    }),
     getShipppingChargeInsideDhaka: build.query({
       query: () => ({
         url: `${SETTINGS_URL}/shipping-charge-inside-dhaka`,
@@ -52,6 +60,7 @@ export const settingsApi = baseApi.injectEndpoints({
 
 export const {
   useAddSettingsMutation,
+  useAddOrEditShippingChargeMutation,
   useGetShipppingChargeInsideDhakaQuery,
   useGetShipppingChargeOutsideDhakaQuery,
   useGetAllSettingsQuery,
