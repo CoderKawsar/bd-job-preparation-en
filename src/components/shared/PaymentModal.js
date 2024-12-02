@@ -12,7 +12,7 @@ function PaymentModal({ setPaymentMethod, setModalOpen, amount }) {
         <button
           type="button"
           onClick={() => setPaymentMethod("stripe")}
-          className="bg-white rounded h-24 w-48 flex justify-center items-center"
+          className="bg-white rounded h-24 w-48 flex justify-center items-center hover:bg-gray-200"
         >
           <Image
             src={stripeImg}
@@ -25,17 +25,34 @@ function PaymentModal({ setPaymentMethod, setModalOpen, amount }) {
         <button
           type="button"
           onClick={() => setPaymentMethod("bkash")}
-          className="bg-white rounded h-24 w-48 flex justify-center items-center"
+          className="bg-white rounded h-24 w-48 flex justify-center items-center hover:bg-gray-200"
         >
           <Image src={bkashImg} alt="Bkash" width={200} height={150} />
         </button>
         <button
           type="button"
           onClick={() => setPaymentMethod("nagad")}
-          className="bg-white rounded h-24 px-2 w-48 flex justify-center items-center"
+          className="bg-white rounded h-24 px-2 w-48 flex justify-center items-center hover:bg-gray-200"
         >
           <Image src={nagadImg} alt="Nagad" width={200} height={150} />
         </button>
+      </div>
+      <div className="text-center mt-12">
+        <p className="border border-black mx-auto w-fit py-2 px-4 rounded mb-2">
+          Use Stripe Payment For Demo Purpose
+        </p>
+        <p>
+          Demo Card number:{" "}
+          <span className="text-sm font-thin font-sans">
+            4242 4242 4242 4242
+          </span>
+        </p>
+        <p>
+          MM/YY: <span className="text-sm font-thin font-sans">12/29</span>
+        </p>
+        <p>
+          CVV: <span className="text-sm font-thin font-sans">123</span>
+        </p>
       </div>
       <div className="flex justify-center">
         <button
