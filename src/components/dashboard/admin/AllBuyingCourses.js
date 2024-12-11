@@ -1,10 +1,7 @@
 "use client";
 
 import InitialLoader from "@/components/Loader/InitialLoader";
-import Timer from "@/components/pages/AllCourses/Timer";
 import { useGetAllSubscriptionsHistoryQuery } from "@/redux/api/courseApi";
-import Image from "next/image";
-import Link from "next/link";
 import AllBuyingCourseDetails from "./AllBuyingCourseDetails";
 import { useEffect, useState } from "react";
 import Pagination from "@/app/(dashboard)/Pagination";
@@ -63,13 +60,13 @@ const AllBuyingCourses = () => {
             {/* head */}
             <thead>
               <tr className="">
-                <th>কোর্সের নাম</th>
-                <th>কোর্স প্রশিক্ষক</th>
-                <th>কোর্সের সময় </th>
-                <th>কোর্সের ক্যাটাগরি </th>
-                <th>কোর্সের সাবক্যাটাগরি</th>
-                <th> কোর্সের মূল্য</th>
-                <th>প্রকাশের তারিখ</th>
+                <th>Course Title</th>
+                <th>Course Instructor</th>
+                <th>Duration </th>
+                <th>Category </th>
+                <th>Sub-category</th>
+                <th>Price</th>
+                <th>Publish Date</th>
               </tr>
             </thead>
             <tbody>{content}</tbody>

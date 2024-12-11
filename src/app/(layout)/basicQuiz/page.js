@@ -12,18 +12,29 @@ const quizData = [
   {
     id: "1",
     question: "ব্যকরণ শব্দের অর্থ কী?",
-    options: ["বিশেষভাবে বিভাজন", "বিশেষভাবে বিয়োজন", "বিশেষভাবে বিশ্লেষণ", "বিশেষভাবে সংযোজন"],
+    options: [
+      "বিশেষভাবে বিভাজন",
+      "বিশেষভাবে বিয়োজন",
+      "বিশেষভাবে বিশ্লেষণ",
+      "বিশেষভাবে সংযোজন",
+    ],
     correctAnswer: "বিশেষভাবে বিশ্লেষণ",
   },
   {
     id: "2",
     question: "Bag and baggage ' idiom - এর অর্থ কি?",
-    options: ["Belongings", "Heavy things", "Costly things", "Leaving nothing behind"],
+    options: [
+      "Belongings",
+      "Heavy things",
+      "Costly things",
+      "Leaving nothing behind",
+    ],
     correctAnswer: "Leaving nothing behind",
   },
   {
     id: "3",
-    question: "টাকায় ৩টি করে লেবু কিনে টাকায় ২টি করে বিক্রি করলে শতকরা কত লাভ হবে?",
+    question:
+      "টাকায় ৩টি করে লেবু কিনে টাকায় ২টি করে বিক্রি করলে শতকরা কত লাভ হবে?",
     options: ["৫০%", "৩৩%", "৩০%", "৩১%"],
     correctAnswer: "৫০%",
   },
@@ -36,7 +47,12 @@ const quizData = [
   {
     id: "5",
     question: "কোনটি কম্পিউটারের সকল কার্যক্রম নিয়ন্ত্রণ করে?",
-    options: ["কন্ট্রোল ইউনিট", "গাণিতিক ইউনিট", "সেন্ট্রাল প্রসেসিং ইউনিট", "যুক্তি বর্তনী ইউনিট"],
+    options: [
+      "কন্ট্রোল ইউনিট",
+      "গাণিতিক ইউনিট",
+      "সেন্ট্রাল প্রসেসিং ইউনিট",
+      "যুক্তি বর্তনী ইউনিট",
+    ],
     correctAnswer: "সেন্ট্রাল প্রসেসিং ইউনিট",
   },
   // Add more quiz data...
@@ -48,8 +64,8 @@ const calculateCorrectAnswers = (userAnswers) => {
   }, 0);
 };
 const BasicQuizPage = () => {
-  const {userId} = getUserInfo();
-  const {data} = useGetSingleUserQuery(userId)
+  const { userId } = getUserInfo();
+  const { data } = useGetSingleUserQuery(userId);
   const [showResults, setShowResults] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
 
@@ -58,10 +74,9 @@ const BasicQuizPage = () => {
   //   setShowResults(true);
   // };
   const breadcrumbItems = [
-    { label: 'হোম', link: '/' },
-    { label: 'বেসিক কুইজ' },
+    { label: "Home", link: "/" },
+    { label: "Basic Quiz" },
   ];
-  
 
   const handleSubmit = (answers) => {
     setUserAnswers(answers);
@@ -70,7 +85,7 @@ const BasicQuizPage = () => {
     const correctAnswersCount = calculateCorrectAnswers(answers);
     const correctAnswersLength = quizData.length;
 
-    let message = '';
+    let message = "";
     if (correctAnswersCount === correctAnswersLength) {
       message = `Excellent! Perfect Score! You answered all ${correctAnswersLength} questions correctly.`;
     } else if (correctAnswersCount >= 4) {
@@ -84,43 +99,50 @@ const BasicQuizPage = () => {
     Swal.fire({
       title: "Congratulations!!!",
       text: message,
-      icon: "success"
+      icon: "success",
     });
   };
 
   return (
     <>
-    <Commonbanner title="বেসিক কুইজ" breadcrumbItems={breadcrumbItems}/>
+      <Commonbanner title="Basic Quiz" breadcrumbItems={breadcrumbItems} />
       <div className=" px-14 text-center">
-      <div className="py-16 bg-white rounded shadow-lg my-4">
-      {/* <h2 className="text-2xl font-bold text-center text-yellowPrimary">Welcome {data?.name} </h2> */}
-        {!showResults ? (
-          <Quiz quizData={quizData} onSubmit={handleSubmit} />
-        ) : (
-          <div>
-            <h2 className="text-2xl font-bold pb-5"> Congratulation!!! Your Results </h2>
-            <ul className="pb-10 text-start px-10 ">
-              {quizData.map((question, index) => (
-                <li key={index} className="py-2 ">
-                  {index +1} . {' '}
-                  {question.question} 
-                  <span className="text-red-400">
-                  - Your Answer: {userAnswers[index]},
-                  </span>
-                  {"   "}
-                   <span className="text-green-600">Correct Answer:{" "}
-                  {question.correctAnswer}</span>
-                </li>
-              ))}
-            </ul>
+        <div className="py-16 bg-white rounded shadow-lg my-4">
+          {/* <h2 className="text-2xl font-bold text-center text-yellowPrimary">Welcome {data?.name} </h2> */}
+          {!showResults ? (
+            <Quiz quizData={quizData} onSubmit={handleSubmit} />
+          ) : (
+            <div>
+              <h2 className="text-2xl font-bold pb-5">
+                {" "}
+                Congratulation!!! Your Results{" "}
+              </h2>
+              <ul className="pb-10 text-start px-10 ">
+                {quizData.map((question, index) => (
+                  <li key={index} className="py-2 ">
+                    {index + 1} . {question.question}
+                    <span className="text-red-400">
+                      - Your Answer: {userAnswers[index]},
+                    </span>
+                    {"   "}
+                    <span className="text-green-600">
+                      Correct Answer: {question.correctAnswer}
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
-            <Link href="/" className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary ">Go Home</Link>
-          </div>
-        )}
+              <Link
+                href="/"
+                className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary "
+              >
+                Go Home
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </>
-  
   );
 };
 

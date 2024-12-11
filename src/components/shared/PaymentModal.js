@@ -6,8 +6,8 @@ import Image from "next/image";
 function PaymentModal({ setPaymentMethod, setModalOpen, amount }) {
   return (
     <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-gray-100 p-10 rounded-md transition-all duration-300 ease-in-out">
-      <h2 className="text-center mb-6 text-3xl">পেমেন্ট পদ্ধতি</h2>
-      <p className="text-center mb-4 text-xl">টাকার পরিমাণ: {amount} টাকা</p>
+      <h2 className="text-center mb-6 text-3xl">Payment Method</h2>
+      <p className="text-center mb-4 text-xl">Amount: ${amount}</p>
       <div className="flex gap-4 mb-4">
         <button
           type="button"

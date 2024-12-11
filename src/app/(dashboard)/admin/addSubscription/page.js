@@ -135,7 +135,7 @@ const AddSubscription = () => {
   return (
     <div className="container mx-auto w-full">
       <form onSubmit={handleSubmit} className=" p-8 border rounded shadow">
-        <h1 className="mb-8 text-3xl font-bold">সাবস্ক্রিপশন যোগ করুন</h1>
+        <h1 className="mb-8 text-3xl font-bold">Add Subscription</h1>
         <div className="mb-4">
           <label
             htmlFor="name"
@@ -178,7 +178,7 @@ const AddSubscription = () => {
             type="number"
             id="cost"
             name="cost"
-            placeholder="such as ৳ 2500"
+            placeholder="such as $ 2500"
             className="mt-1 p-3 border rounded w-full focus:outline-none focus:border-indigo-500"
           />
         </div>
@@ -301,7 +301,7 @@ const AddSubscription = () => {
                   {subscription?.subscription_duration_in_months}
                 </td>
                 <td className="lg:border text-center border-gray-300 px-4 py-2">
-                  ৳ {subscription?.cost}
+                  $ {subscription?.cost}
                 </td>
                 <td className="lg:border text-center border-gray-300 px-4 py-2">
                   {subscription?.course_id?.title}

@@ -81,7 +81,7 @@ const UserEditShippingPage = () => {
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            placeholder="আপনার ঠিকানা"
+            placeholder="Your Address"
             className="input input-bordered input-md w-full max-w-xs mr-5 outline-none mb-4"
           />
 
@@ -89,7 +89,7 @@ const UserEditShippingPage = () => {
             type="text"
             value={billing_name}
             onChange={(e) => setBilling_name(e.target.value)}
-            placeholder="আপনার বিলিং নাম"
+            placeholder="Your Billing Name"
             className="input input-bordered input-md w-full max-w-xs mr-5 outline-none mb-4"
           />
 
@@ -97,7 +97,7 @@ const UserEditShippingPage = () => {
             type="number"
             value={contact_no}
             onChange={(e) => setContact_no(e.target.value)}
-            placeholder="আপনার মোবাইল নাম্বার"
+            placeholder="Your Mobile Number"
             className="input input-bordered input-md w-full max-w-xs mb-4 mr-5"
           />
 
@@ -105,7 +105,7 @@ const UserEditShippingPage = () => {
             type="text"
             value={district}
             onChange={(e) => setDistrict(e.target.value)}
-            placeholder="আপনার জেলা"
+            placeholder="Your District"
             className="input input-bordered input-md w-full max-w-xs mb-4 mr-5"
           />
 
@@ -113,7 +113,7 @@ const UserEditShippingPage = () => {
             type="text"
             value={division}
             onChange={(e) => setDivision(e.target.value)}
-            placeholder="আপনার বিভাগ"
+            placeholder="Your Division"
             className="input input-bordered input-md w-full max-w-xs mb-4 mr-5"
           />
 
@@ -121,7 +121,7 @@ const UserEditShippingPage = () => {
             type="text"
             value={upazilla}
             onChange={(e) => setUpazilla(e.target.value)}
-            placeholder="আপনার উপজেলা"
+            placeholder="Your Upazilla"
             className="input input-bordered input-md w-full max-w-xs mb-4 mr-5"
           />
 
@@ -129,7 +129,7 @@ const UserEditShippingPage = () => {
 
           <input
             type="submit"
-            value="সেভ করুন"
+            value="Save"
             className="flex items-center gap-3 bg-sky-900 text-white transition-all  hover:bg-blue-900 cursor-pointer px-5 py-2 rounded"
           />
         </form>

@@ -40,8 +40,8 @@ function SubCategoryExams({ params }) {
   if (!examsLoading && !examsError && exams?.length === 0) {
     content = (
       <h5 className="font-semibold text-center bg-green-600 text-white p-3 rounded text-md">
-        {subCategory?.category_id?.title} - {subCategory?.title} এর আপাতত কোনো
-        পরীক্ষা নেই
+        No exams found for {subCategory?.category_id?.title} -{" "}
+        {subCategory?.title}
       </h5>
     );
   }
@@ -54,8 +54,7 @@ function SubCategoryExams({ params }) {
     <div className="mx-4 md:mx-16 mb-16">
       <div className="flex justify-center mb-4">
         <h2 className="w-fit border-b-2 border-gray-300 pb-2 mt-16 font-bold text-3xl mb-6">
-          {subCategory?.category_id?.title} - {subCategory?.title} এর
-          পরীক্ষাসমুহঃ
+          {subCategory?.category_id?.title} - {subCategory?.title} Exams:
         </h2>
       </div>
       <div>{content}</div>

@@ -1,21 +1,18 @@
-
 import Commonbanner from "@/components/banners/Commonbanner";
 import RoutinesShow from "@/components/pages/AllRoutine/RoutinesShow";
 
 export const metadata = {
-  title: "ক্লাস রুটিন"
-}
+  title: "Class Routine",
+};
 const RoutinesPage = () => {
-
   const breadcrumbItems = [
-    { label: 'হোম', link: '/' },
-    { label: 'ক্লাস রুটিন' },
+    { label: "Home", link: "/" },
+    { label: "Class Routine" },
   ];
-
 
   return (
     <>
-      <Commonbanner title="ক্লাস রুটিন" breadcrumbItems={breadcrumbItems} />
+      <Commonbanner title="Class Routine" breadcrumbItems={breadcrumbItems} />
 
       <RoutinesShow />
     </>

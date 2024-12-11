@@ -36,7 +36,7 @@ const Timer = ({ expireDate }) => {
   return (
     <div>
       <h2 className="py-5 font-semibold">
-        {timeLeft.days > 0 && <span>এখন থেকে {timeLeft.days} দিন বাকি </span>}
+        {timeLeft.days > 0 && <span>Remains: {timeLeft.days} days </span>}
         {timeLeft.days === 1 && (
           <>
             {timeLeft.hours > 0 && <span>{timeLeft.hours} hours </span>}

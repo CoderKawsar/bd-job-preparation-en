@@ -1,9 +1,8 @@
 import RegisterPage from "@/components/Login/RegisterPage";
 
 export const metadata = {
-  title: 'রেজিস্টার'
-  
-}
+  title: "Register",
+};
 
 const Register = () => {
   return (

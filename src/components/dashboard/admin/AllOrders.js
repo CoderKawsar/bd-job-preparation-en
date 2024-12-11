@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useGetAllOrdersQuery } from "@/redux/api/ordersApi";
 import AllOrdersDetials from "./AllOrdersDetials";
 import InitialLoader from "@/components/Loader/InitialLoader";
@@ -18,7 +18,11 @@ const AllOrders = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(25);
 
-  const { data, isLoading, isError, refetch } = useGetAllOrdersQuery({limit, page, searchTerm});
+  const { data, isLoading, isError, refetch } = useGetAllOrdersQuery({
+    limit,
+    page,
+    searchTerm,
+  });
 
   const ordersData = data?.orders?.data;
 
@@ -26,13 +30,15 @@ const AllOrders = () => {
     if (ordersData) {
       const filteredAndSortedOrders = ordersData
         .filter((order) =>
-        order?.user_id?.name.toLowerCase().includes(searchTerm.toLowerCase())
+          order?.user_id?.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
         .sort((a, b) => {
           if (sortField === "name") {
             const nameA = a.user_id?.name?.toUpperCase() || "";
             const nameB = b.user_id?.name?.toUpperCase() || "";
-            return sortOrder === "asc" ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+            return sortOrder === "asc"
+              ? nameA.localeCompare(nameB)
+              : nameB.localeCompare(nameA);
           } else if (sortField === "createdAt") {
             const timeA = new Date(a.createdAt).getTime();
             const timeB = new Date(b.createdAt).getTime();
@@ -52,29 +58,25 @@ const AllOrders = () => {
   };
 
   const debouncedTerm = useDebounced({
-    searchQuery:searchTerm,
-    delay:600
-  })
-
+    searchQuery: searchTerm,
+    delay: 600,
+  });
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
     setPage(1);
   };
 
-
-useEffect(() => {
-  setSearchTerm(debouncedTerm);
-}, [debouncedTerm]);
+  useEffect(() => {
+    setSearchTerm(debouncedTerm);
+  }, [debouncedTerm]);
 
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('order')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("order")) {
+      router.push("/");
     }
-
-  },[])
+  }, []);
 
   let content = null;
 
@@ -83,23 +85,25 @@ useEffect(() => {
   } else if (!isError && filteredOrders.length === 0) {
     content = (
       <div className="flex justify-center items-center font-bold bg-green-400 text-white py-3 rounded text-lg">
-        <h5>{searchTerm ? "No matching orders found" : "All Orders table is Empty Now"}</h5>
+        <h5>
+          {searchTerm
+            ? "No matching orders found"
+            : "All Orders table is Empty Now"}
+        </h5>
       </div>
     );
   } else if (!isError && filteredOrders.length > 0) {
-    content = filteredOrders.map((item) => <AllOrdersDetials key={item?.id} item={item} />);
+    content = filteredOrders.map((item) => (
+      <AllOrdersDetials key={item?.id} item={item} />
+    ));
   }
-
 
   useEffect(() => {
     refetch();
   }, [limit, page, searchTerm]);
 
- 
   const totalData = data?.orders?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
-
-
 
   return (
     <div>
@@ -118,29 +122,36 @@ useEffect(() => {
             <thead>
               <tr className="">
                 <th>
-                  <button onClick={() => handleSortClick("name")} className="btn">
-                    নাম
+                  <button
+                    onClick={() => handleSortClick("name")}
+                    className="btn"
+                  >
+                    Name
                   </button>
                 </th>
-                <th>অর্ডার কৃত বইসমুহ </th>
-                <th> সর্বমোট মূল্য</th>
+                <th>Ordered Books </th>
+                <th> Total Price</th>
                 <th>
-                  <button onClick={() => handleSortClick("createdAt")} className="btn">
-                    কেনার <br/> তারিখ
+                  <button
+                    onClick={() => handleSortClick("createdAt")}
+                    className="btn"
+                  >
+                    Buy <br /> Date
                   </button>
                 </th>
-                <th>ট্রান্সজেকশন আইডি</th>
-                <th>প্রেরণের ঠিকানা</th>
-                <th>স্ট্যাটাস</th>
+                <th>Trx ID</th>
+                <th>Delivery Address</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>{content}</tbody>
           </table>
 
-
-          <Pagination totalPages={totalPages} currentPage={page} setPage={setPage}/>
-
-
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            setPage={setPage}
+          />
         </div>
       </div>
     </div>
@@ -148,4 +159,3 @@ useEffect(() => {
 };
 
 export default AllOrders;
-

@@ -16,29 +16,28 @@ const AllUserExams = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data, isLoading, isError, refetch: refetchUserExam } = useGetAllUserExamsQuery({ limit, page, searchTerm });
+  const {
+    data,
+    isLoading,
+    isError,
+    refetch: refetchUserExam,
+  } = useGetAllUserExamsQuery({ limit, page, searchTerm });
 
   const allExams = data?.exams?.data;
-
 
   useEffect(() => {
     refetchUserExam();
   }, [limit, page, searchTerm]);
 
   //check permission
-  useEffect(()=>{
-    if(!checkPermission('exam')){
-
-     router.push('/')
+  useEffect(() => {
+    if (!checkPermission("exam")) {
+      router.push("/");
     }
-
-  },[])
-
+  }, []);
 
   const totalData = data?.exams?.meta?.total;
   const totalPages = Math.ceil(totalData / limit);
-
-
 
   let content = null;
 
@@ -63,7 +62,9 @@ const AllUserExams = () => {
     );
   }
   if (!isLoading && !isError && allExams?.length > 0) {
-    content = allExams?.map((item) => <AllExamDetails key={item?.id} item={item} />)
+    content = allExams?.map((item) => (
+      <AllExamDetails key={item?.id} item={item} />
+    ));
   }
   return (
     <div className="py-10">
@@ -73,29 +74,27 @@ const AllUserExams = () => {
         <table className="min-w-full bg-white border border-gray-300 text-center">
           <thead className="hidden md:table-header-group">
             <tr>
-              <th className="py-2 px-2 border-b">ছাত্রী/ছাত্রের নাম</th>
-              <th className="py-2 px-2 border-b">কোর্সের নাম</th>
-              <th className="py-2 px-2 border-b">পরিক্ষার নাম</th>
-              <th className="py-2 px-2 border-b"> পরিক্ষার সময় </th>
-              <th className="py-2 px-2 border-b">পরিক্ষার ধরন</th>
-              <th className="py-2 px-2 border-b">পরিক্ষার ফী</th>
-              <th className="py-2 px-2 border-b">টোটাল মার্ক্স</th>
-              <th className="py-2 px-2 border-b">উত্তর দেখুন</th>
-              <th className="py-2 px-2 border-b">ক্যুইজ মার্ক্স</th>
-              <th className="py-2 px-2 border-b">লিখিত মার্ক্স</th>
-              <th className="py-2 px-2 border-b">নম্বর দিন</th>
-
-
+              <th className="py-2 px-2 border-b">Student Name</th>
+              <th className="py-2 px-2 border-b">Course Title</th>
+              <th className="py-2 px-2 border-b">Exam Title</th>
+              <th className="py-2 px-2 border-b">Exam Time </th>
+              <th className="py-2 px-2 border-b">Exam Type</th>
+              <th className="py-2 px-2 border-b">Exam Fee</th>
+              <th className="py-2 px-2 border-b">Total Marks</th>
+              <th className="py-2 px-2 border-b">See Answer</th>
+              <th className="py-2 px-2 border-b">Quiz Mark</th>
+              <th className="py-2 px-2 border-b">Written Mark</th>
+              <th className="py-2 px-2 border-b">Give Mark</th>
             </tr>
           </thead>
-          <tbody>
-            {content}
-
-          </tbody>
+          <tbody>{content}</tbody>
         </table>
 
-        <Pagination totalPages={totalPages} currentPage={page} setPage={setPage} />
-
+        <Pagination
+          totalPages={totalPages}
+          currentPage={page}
+          setPage={setPage}
+        />
       </div>
     </div>
   );

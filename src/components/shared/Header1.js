@@ -18,14 +18,12 @@ const Header1 = () => {
   const [hoveredCategoryId, setHoveredCategoryId] = useState(null);
   const [hoveredSubCategoryId, setHoveredSubCategoryId] = useState(null);
   const [hoveredCourseId, setHoveredCourseId] = useState(null);
- 
+
   return (
     <>
       <div className="flex justify-center">
         <span className="cursor-pointer flex items-center lg:hover:text-bluePrimary sm:hover:text-white font-bold">
-        <Link href="/routines">
-              ক্লাস রুটিন
-          </Link>
+          <Link href="/routines">Class Routine</Link>
         </span>
       </div>
       {/*  */}
@@ -34,4 +32,3 @@ const Header1 = () => {
 };
 
 export default Header1;
-

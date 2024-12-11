@@ -22,8 +22,8 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
         <div className="md:pr-10">
           <div className="space-y-4 mb-10 grid grid-cols-1 gap-2 ">
             <h2 className="text-xl font-bold mt-5 mx-12 text-center text-blue-600">
-              {data?.title} কোর্সে আপনাকে কোর্স প্রশিক্ষক {data?.author} এবং
-              "ইজি লার্নিং প্ল্যাটফর্ম" এর পক্ষ থেকে স্বাগতম 🎉
+              {data?.title} Welcome from your course instructor: {data?.author}{" "}
+              and "BD Job Preparation" 🎉
             </h2>
 
             <div className="w-96 mx-auto">
@@ -33,7 +33,7 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
                     data?.sub_category_id?.tilte ? "pr-10" : ""
                   } font-semibold`}
                 >
-                  ক্যাটাগরি:
+                  Category:
                   <span className="text-black font-medium">
                     {" "}
                     {data?.sub_category_id?.category_id?.title ||
@@ -42,7 +42,7 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
                 </p>
                 {data?.sub_category_id?.title && (
                   <p className="text-yellowPrimary">
-                    সাব ক্যাটাগরি:{" "}
+                    Sub-Category:{" "}
                     <span className="text-black font-medium">
                       {data?.sub_category_id?.title}
                     </span>
@@ -69,7 +69,7 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
                       alt="study materials"
                     />
                     <p className="text-base md:text-lg font-bold">
-                      স্টাডি ম্যাটেরিয়ালস
+                      Study Materials
                     </p>
                   </a>
                 </div>
@@ -83,7 +83,7 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
                       alt="syllabus"
                     />
                     <p className="text-base md:text-lg font-bold">
-                      সম্পূর্ণ সিলেবাস দেখুন
+                      View Syllabus
                     </p>
                   </div>
                 </a>
@@ -97,7 +97,7 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
                       alt="free seminar"
                     />
                     <p className="text-base md:text-lg font-bold">
-                      ফ্রি সেমিনারে যোগ দিন
+                      Attend Free Seminar
                     </p>
                   </div>
                 </a>
@@ -111,8 +111,8 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
                     alt="membership"
                   />
                   <p className="text-base md:text-lg font-bold">
-                    মেম্বারশিপ টাইপ:
-                    {data?.membership_type === "1" ? " পেইড" : " ফ্রি"}
+                    Membership Type:
+                    {data?.membership_type === "1" ? " Paid" : " Free"}
                   </p>
                 </div>
               </div>
@@ -130,12 +130,12 @@ const CourseDetailsData = ({ data, isError, isLoading }) => {
           </div>
 
           <div className="bg-white rounded border py-10 px-5  m-5">
-            <h2 className="text-xl font-bold mb-4">এই কোর্সের পরীক্ষাসমূহ :</h2>
+            <h2 className="text-xl font-bold mb-4">Exams of this course:</h2>
             {data && <CourseExams course_id={data?._id} />}
           </div>
 
           <div className="bg-white rounded border py-10 px-5  m-5">
-            <h2 className="text-xl font-bold mb-4">এই কোর্সের বইসমূহ :</h2>
+            <h2 className="text-xl font-bold mb-4">Books of this course :</h2>
             {data && <CourseBooks course_id={data?._id} />}
           </div>
         </div>

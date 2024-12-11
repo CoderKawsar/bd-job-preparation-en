@@ -1,17 +1,15 @@
-import LoginPage from "@/components/Login/LoginPage"
+import LoginPage from "@/components/Login/LoginPage";
 
 export const metadata = {
-  title: 'লগইন'
-  
-}
+  title: "Login",
+};
 
 const Login = () => {
   return (
     <div>
- <LoginPage/>
-
+      <LoginPage />
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

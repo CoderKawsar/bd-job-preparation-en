@@ -4,13 +4,10 @@ import OurMission from "./OurMission";
 import ChooseUs from "./ChooseUs";
 
 const AboutUs = () => {
-  const breadcrumbItems = [
-    { label: 'হোম', link: '/' },
-    { label: 'আমাদের সম্পর্কে' },
-  ];
+  const breadcrumbItems = [{ label: "Home", link: "/" }, { label: "About Us" }];
   return (
     <div className=" ">
-      <Commonbanner title="আমাদের সম্পর্কে" breadcrumbItems={breadcrumbItems} />
+      <Commonbanner title="About Us" breadcrumbItems={breadcrumbItems} />
       <FirstPartAbout />
       <OurMission />
       <ChooseUs />

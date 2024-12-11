@@ -43,14 +43,14 @@ const AddBooks = () => {
 
   const onSubmit = async (data) => {
     const confirmAdd = await Swal.fire({
-      title: "বইয়ের সব তথ্য ঠিকঠাক আছে তা আপনি নিশ্চিত?",
-      text: "আপনি যদি নিশ্চিত হোন তবে 'হ্যাঁ' বোতামে ক্লিক করুন অন্যথায় 'না/অনিশ্চিত' বোতামে ক্লিক করে আরেকবার চেক করে আসুন।",
+      title: "Are you sure that everything is correct?",
+      text: "If you are sure then click on 'Yes' otherwise click on 'No/Unsure'",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "হ্যাঁ",
-      cancelButtonText: "না/অনিশ্চিত",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No/Unsure",
     });
 
     if (confirmAdd.isConfirmed) {
@@ -94,7 +94,7 @@ const AddBooks = () => {
           toast.success("Book created successfully");
           Swal.fire({
             title: "Added!",
-            text: "বই যোগ করা হয়েছে",
+            text: "Book added successfully.",
             icon: "success",
           });
         } else {
@@ -114,14 +114,14 @@ const AddBooks = () => {
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
-        title: "আপনি এই বইটি মুছে ফেলার বিষয়ে নিশ্চিত?",
-        text: "আপনি যদি এটি মুছতে চান তবে 'হ্যাঁ মুছুন' বোতামে ক্লিক করুন অন্যথায় 'বাতিল' বোতামে ক্লিক করুন।",
+        title: "Are you sure you want to delete this book?",
+        text: "If you are sure to delete this book, click 'Yes' otherwise click 'No'.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "হ্যাঁ মুছুন",
-        cancelButtonText: "বাতিল",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
       });
 
       if (result.isConfirmed) {

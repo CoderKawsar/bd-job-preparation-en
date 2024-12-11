@@ -44,7 +44,7 @@ const LoginPage = () => {
         // User login successful
         storeUserInfo({ accessToken: res?.accessToken });
 
-        toast.success("আপনি সফল্ভাবে লগইন হয়েছেন ।");
+        toast.success("You are logged in successfully.");
         router.push("/");
       } else if (res?.message == "User not found here!") {
         // User not found or other error from the server
@@ -53,7 +53,7 @@ const LoginPage = () => {
         );
       } else {
         // User not found or other error
-        toast.error("আপনার ইমেইল বা মোবাইল নাম্বার বা পাসওয়ার্ড  সঠিক নয় । ");
+        toast.error("Your mobile number or email is incorrect.");
       }
     } catch (err) {
       if (err?.message === "User not found here!") {
@@ -75,7 +75,7 @@ const LoginPage = () => {
     <div className="bg-white border rounded shadow-lg max-w-md mx-auto py-5 my-10 z-7">
       <div>
         <h2 className="text-lg font-bold text-center pb-10 pt-5 text-cyanPrimary z-7">
-          বিডি জব প্রিপারেশনে আপনাকে স্বাগতম।
+          Welcome to BD Job Preparation
         </h2>
 
         <div className="mb-10">
@@ -95,7 +95,7 @@ const LoginPage = () => {
               <input
                 type="text"
                 {...register("email_or_contact")}
-                placeholder="আপনার মোবাইল নাম্বার / ইমেইল"
+                placeholder="Your Mobile Number / Email"
                 className="border py-4 px-3 rounded outline-none hover:border-gray-500  w-80  bg-gray-200"
                 required
               />
@@ -105,7 +105,7 @@ const LoginPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  placeholder="পাসওয়ার্ড লিখুন"
+                  placeholder="Enter Password"
                   className="border py-4 px-3 rounded outline-none hover:border-gray-500 w-full bg-gray-200 pr-10"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -123,7 +123,7 @@ const LoginPage = () => {
 
             <input
               type="submit"
-              value="লগইন করুন"
+              value="Login"
               className="bg-bluePrimary text-white py-4 px-3 transition-all duration-300 rounded hover:bg-cyanPrimary w-80 ml-16 cursor-pointer"
             />
           </form>
@@ -131,12 +131,12 @@ const LoginPage = () => {
           <div className="py-5 text-center">
             <p>
               {" "}
-              আপনার এক্যাউন্ট নাই ?{" "}
+              Don't have an account ?{" "}
               <Link
                 href="/register"
                 className="text-bold text-bluePrimary text-lg hover:underline"
               >
-                রেজিস্টার করুন
+                Register
               </Link>
             </p>
           </div>

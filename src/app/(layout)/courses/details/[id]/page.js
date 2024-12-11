@@ -1,18 +1,16 @@
-import CourseDetails from "@/components/pages/AllCourses/CourseDetails"
+import CourseDetails from "@/components/pages/AllCourses/CourseDetails";
 
-export const metadata = { 
-    title: "কোর্স  ডিটেইলস ",
-  };
+export const metadata = {
+  title: "Course Details",
+};
 
-const CourseDetailsPage = ({params}) => {
-    const {id} = params;
+const CourseDetailsPage = ({ params }) => {
+  const { id } = params;
   return (
     <div>
-    
-    <CourseDetails id={id}/>
-    
+      <CourseDetails id={id} />
     </div>
-  )
-}
+  );
+};
 
-export default CourseDetailsPage
+export default CourseDetailsPage;

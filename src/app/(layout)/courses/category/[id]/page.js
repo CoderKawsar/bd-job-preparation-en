@@ -1,7 +1,7 @@
 import CategoryCourses from "@/components/pages/AllCourses/categories/CategoryCourses";
 
 export const metadata = {
-  title: "কোর্স ক্যাটাগরি",
+  title: "Course Category",
 };
 const CategoryPage = ({ params }) => {
   const id = params?.id;

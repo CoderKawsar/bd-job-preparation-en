@@ -92,14 +92,14 @@ const AddCourseForm = () => {
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
-        title: "আপনি এই কোর্সটি মুছে ফেলার বিষয়ে নিশ্চিত?",
-        text: "আপনি যদি এটি মুছতে চান তবে 'হ্যাঁ মুছুন' বোতামে ক্লিক করুন অন্যথায় 'বাতিল' বোতামে ক্লিক করুন।",
+        title: "Are you sure you want to delete this course?",
+        text: "If you are sure to delete this course, click 'Yes' otherwise click 'No'.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "হ্যাঁ মুছুন",
-        cancelButtonText: "বাতিল",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
       });
 
       if (result.isConfirmed) {

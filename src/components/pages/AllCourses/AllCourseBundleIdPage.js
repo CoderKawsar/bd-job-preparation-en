@@ -29,7 +29,7 @@ const AllCourseBundleIdPage = ({ id }) => {
     content = (
       <>
         <div className="flex justify-center items-center font-bold bg-green-400  text-white py-3 rounded text-lg">
-          <h5>এখন কোন বান্ডল কোর্স নাই</h5>
+          <h5>No course bundle found</h5>
         </div>
       </>
     );

@@ -4,13 +4,16 @@ import AllCourseBundleIdPage from "@/components/pages/AllCourses/AllCourseBundle
 const CourseBundleIdPage = ({ params }) => {
   const id = params?.id;
   const breadcrumbItems = [
-    { label: "হোম", link: "/" },
-    { label: "সব কোর্স", link: "/courses" },
-    { label: " সব বান্ডল কোর্স" },
+    { label: "Home", link: "/" },
+    { label: "All Courses", link: "/courses" },
+    { label: "All Course Bundles" },
   ];
   return (
     <>
-      <Commonbanner title="সব বান্ডল কোর্স" breadcrumbItems={breadcrumbItems} />
+      <Commonbanner
+        title="All Course Bundles"
+        breadcrumbItems={breadcrumbItems}
+      />
       <div className="lg:mx-14">
         <AllCourseBundleIdPage id={id} />
       </div>

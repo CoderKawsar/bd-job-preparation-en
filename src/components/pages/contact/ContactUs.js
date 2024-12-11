@@ -1,20 +1,16 @@
-import Commonbanner from "@/components/banners/Commonbanner"
+import Commonbanner from "@/components/banners/Commonbanner";
 import GetInTouch from "./GetInTouch";
 import OurMap from "./OurMap";
 
-
 const ContactUs = () => {
-  const breadcrumbItems = [
-    { label: 'হোম', link: '/' },
-    { label: 'যোগাযোগ' },
-  ];
+  const breadcrumbItems = [{ label: "Home", link: "/" }, { label: "Contact" }];
   return (
     <div>
-      <Commonbanner title="যোগাযোগ করুন" breadcrumbItems={breadcrumbItems} />
+      <Commonbanner title="Contact" breadcrumbItems={breadcrumbItems} />
       <GetInTouch />
       <OurMap />
     </div>
-  )
-}
+  );
+};
 
-export default ContactUs
+export default ContactUs;

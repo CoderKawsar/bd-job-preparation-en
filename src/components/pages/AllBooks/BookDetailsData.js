@@ -25,11 +25,11 @@ const BookDetailsData = ({ data, isError, isLoading }) => {
 
     if (existingBook) {
       toast.error(
-        "আপনি এই বইটি ইতিমধ্যে ঝুড়িতে যোগ করেছেন | অনুগ্রহ করে ঝুড়িতে দেখুন।"
+        "You have already added this book to your cart. View your cart."
       );
     } else {
       dispatch(addToCart(data));
-      toast.success("বইটি ঝুড়িতে যোগ হয়েছে সফলভাবে");
+      toast.success("Book added to cart successfully");
     }
   };
 
@@ -38,7 +38,7 @@ const BookDetailsData = ({ data, isError, isLoading }) => {
   if (isLoading) {
     content = (
       <>
-        <div>লোডিং...</div>
+        <div>Loading...</div>
       </>
     );
   }
@@ -67,32 +67,32 @@ const BookDetailsData = ({ data, isError, isLoading }) => {
             <div className="space-y-4 mb-10">
               <h2 className="text-2xl font-bold">{data?.title}</h2>
               <p>{data?.description}</p>
-              <p>লেখক: {data?.writer}</p>
+              <p>Writer: {data?.writer}</p>
               <p>
-                সাব ক্যাটাগরি:{" "}
+                Sub-category:{" "}
                 <span className=" text-yellowPrimary">
                   {data?.course_id[0]?.sub_category_id?.category_id?.title}
                 </span>{" "}
                 <span className=" text-bluePrimary pl-5 font-semibold">
                   {" "}
-                  ক্যাটাগরি: {data?.course_id[0]?.sub_category_id?.title}{" "}
+                  Category: {data?.course_id[0]?.sub_category_id?.title}{" "}
                 </span>
               </p>
-              <p>বইটি ধরনঃ {data?.format}</p>
+              <p>Book Format: {data?.format}</p>
 
-              <p>{data?.price} টাকা</p>
+              <p>${data?.price}</p>
               <button
                 onClick={() => handleAddBook(data)}
                 className="bg-yellowPrimary text-white py-2 px-10 transition-all duration-300 rounded  hover:bg-bluePrimary "
               >
-                ঝুড়িতে যোগ করুন
+                Add To Cart
               </button>
 
               <button
                 onClick={onOpenPDFModal}
                 className="bg-bluePrimary text-white py-2 px-10 transition-all duration-300 rounded  hover:bg-yellowPrimary ml-3"
               >
-                বইটি পড়ুন
+                Read Book
               </button>
             </div>
           </div>

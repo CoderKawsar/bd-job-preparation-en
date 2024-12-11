@@ -35,8 +35,8 @@ function SubjectBooksShow({ params }) {
 
   const subjectTitle =
     !isSubjectLoading && !isSubjectError && subject?.title
-      ? `${subject?.title} বিষয়ের বইসমুহ`
-      : "সাবজেক্টটি নেই";
+      ? `${subject?.title} Books`
+      : "No Subject Found!";
 
   let content;
 

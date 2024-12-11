@@ -1,13 +1,12 @@
-'use client'
+"use client";
 import Error from "@/components/Loader/Error";
 import InitialLoader from "@/components/Loader/InitialLoader";
 import { useGetMyQuestionsEnrollHistoryQuery } from "@/redux/api/questionsApi";
 import { useState } from "react";
 
-
-
 const UserExam = ({ exam_id }) => {
-  const { data, isLoading, isError } = useGetMyQuestionsEnrollHistoryQuery(exam_id);
+  const { data, isLoading, isError } =
+    useGetMyQuestionsEnrollHistoryQuery(exam_id);
   const [selectedOptions, setSelectedOptions] = useState({});
   const handleCheckboxChange = (questionId, option) => {
     setSelectedOptions((prevOptions) => ({
@@ -68,11 +67,7 @@ const UserExam = ({ exam_id }) => {
     ));
   }
 
-  return (
-    <div>
-      {content}
-    </div>
-  );
+  return <div>{content}</div>;
 };
 
 export default UserExam;

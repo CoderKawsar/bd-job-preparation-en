@@ -29,13 +29,13 @@ const UserPdfCardShow = ({ bookId, order, index }) => {
           />
           <div className="px-5 mb-6">
             <h2 className="text-xl font-bold py-4">
-              {data?.title ? data?.title : "বইটি নাই"}
+              {data?.title ? data?.title : "Not found"}
             </h2>
             <button
               onClick={onOpenPDFModal}
               className="rounded-lg font-bold text-lg bg-yellowPrimary text-white px-10 py-3"
             >
-              বইটি পড়ুন
+              Read Book
             </button>
           </div>
         </div>

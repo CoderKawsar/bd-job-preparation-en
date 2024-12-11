@@ -23,7 +23,7 @@ const AdminNoticeCreatePage = () => {
 
   return (
     <div>
-      <h2 className="text-center font-bold text-3xl my-4"> নোটিশ যোগ করুন </h2>
+      <h2 className="text-center font-bold text-3xl my-4"> Add Notice </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
         <div className="mb-4">

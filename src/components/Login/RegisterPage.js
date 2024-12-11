@@ -35,7 +35,7 @@ const RegisterPage = () => {
       if (res?.accessToken) {
         // (res, " from res");
         storeUserInfo({ accessToken: res?.accessToken });
-        toast.success("ইউজার সফল্ভাবে রেজিস্টার হয়েছে ।");
+        toast.success("User registered successfully");
         router.push("/");
       } else {
         toast.error(
@@ -52,7 +52,7 @@ const RegisterPage = () => {
     <div className="bg-white border rounded shadow-lg max-w-md mx-auto py-5 my-10 z-0">
       <div>
         <h2 className="text-lg font-bold text-center pb-10 pt-5 text-cyanPrimary">
-          বিডি জব প্রিপারেশনে আপনাকে স্বাগতম।
+          Welcome to BD Job Preparation
         </h2>
 
         <div className="mb-10">
@@ -72,7 +72,7 @@ const RegisterPage = () => {
               <input
                 type="text"
                 {...register("name")}
-                placeholder="আপনার নাম"
+                placeholder="Your Name"
                 className="border py-4 px-3 rounded outline-none hover:border-gray-500  w-80  bg-gray-200"
                 required
               />
@@ -81,7 +81,7 @@ const RegisterPage = () => {
               <input
                 type="email"
                 {...register("email")}
-                placeholder="আপনার ইমেইল abc@gmail.com"
+                placeholder="Your Email"
                 className="border py-4 px-3 rounded outline-none hover:border-gray-500  w-80  bg-gray-200"
               />
             </div>
@@ -96,18 +96,18 @@ const RegisterPage = () => {
               <input
                 type="number"
                 {...register("contact_no", {
-                  required: "মোবাইল নাম্বার প্রয়োজন",
+                  required: "Mobile number is required",
                   pattern: {
                     value: /^\d{11}$/,
                     message:
-                      "মোবাইল নাম্বারটি  ১১ টি সংখ্যা হতে হবে এবং এমন হবে 01742561023",
+                      "Mobile number must be exactly 11 digits. Example: 01742561023",
                   },
                   // pattern: {
                   //   value: /^[0-9]{11}$/, // Regular expression for exactly 11 digits
                   //   message: "মোবাইল নাম্বারটি ১১ টি সংখ্যা হতে হবে",
                   // },
                 })}
-                placeholder=" 01742561023 আপনার মোবাইল নাম্বার "
+                placeholder="Your Mobile Number"
                 className="border py-4 px-3 rounded outline-none hover:border-gray-500  w-80  bg-gray-200"
               />
             </div>
@@ -119,7 +119,7 @@ const RegisterPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  placeholder="পাসওয়ার্ড লিখুন"
+                  placeholder="Enter Password"
                   className="border py-4 px-3 rounded outline-none hover:border-gray-500 w-full bg-gray-200 pr-10"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -137,7 +137,7 @@ const RegisterPage = () => {
 
             <input
               type="submit"
-              value="রেজিস্টার করুন"
+              value="Register"
               className="bg-bluePrimary text-white py-4 px-3 transition-all duration-300 rounded hover:bg-cyanPrimary w-80 ml-16 cursor-pointer"
             />
           </form>
@@ -145,12 +145,12 @@ const RegisterPage = () => {
           <div className="py-5 text-center">
             <p>
               {" "}
-              আপনার এক্যাউন্ট আছে ?{" "}
+              Do you have an account ?{" "}
               <Link
                 href="/login"
                 className="text-bold text-bluePrimary text-lg hover:underline"
               >
-                লগইন করুন
+                Login
               </Link>
             </p>
           </div>

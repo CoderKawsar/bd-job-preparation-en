@@ -13,24 +13,24 @@ const AllOrdersDetials = ({ item }) => {
       <th className="border">
         <AllOrderBookDetails key={item?.id} bookOrder={item} />{" "}
       </th>
-      <td className="border">৳ {item?.total_price}</td>
+      <td className="border">$ {item?.total_price}</td>
       <td className="border">{humanReadableFormatLocal}</td>
       <td className="border">{item?.trx_id}</td>
       <td className="border">
         <div className="w-36">
           {item?.shipping_address ? (
             <div className="w-36">
-              <strong>নাম:</strong>{" "}
+              <strong>Name:</strong>{" "}
               {(item?.shipping_address &&
                 JSON.parse(item?.shipping_address)?.billing_name) ||
                 "N/A"}{" "}
               <br />
-              <strong>যোগাযোগ:</strong>{" "}
+              <strong>Contact:</strong>{" "}
               {(item?.shipping_address &&
                 JSON.parse(item?.shipping_address)?.contact_no) ||
                 "N/A"}{" "}
               <br />
-              <strong>ঠিকানা:</strong>{" "}
+              <strong>Address:</strong>{" "}
               {item?.shipping_address && JSON.parse(item?.shipping_address)
                 ? `${JSON.parse(item?.shipping_address)?.address || "N/A"}, ${
                     JSON.parse(item?.shipping_address)?.upazilla || "N/A"
@@ -39,7 +39,7 @@ const AllOrdersDetials = ({ item }) => {
                   }, ${JSON.parse(item?.shipping_address)?.division || "N/A"}`
                 : "N/A"}{" "}
               <br />
-              <strong>ঢাকার বাইরে:</strong>{" "}
+              <strong>Outside Dhaka:</strong>{" "}
               {item?.shipping_address &&
               JSON.parse(item?.shipping_address)?.outside_dhaka
                 ? "Yes"

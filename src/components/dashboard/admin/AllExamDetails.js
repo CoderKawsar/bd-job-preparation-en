@@ -3,7 +3,6 @@
 import { useExamResultQuery } from "@/redux/api/resultApi";
 import { useState } from "react";
 import GiveMark from "./GiveMark";
-import { useGetAllQuestionsQuery } from "@/redux/api/questionsApi";
 
 const AllExamDetails = ({ item, refetchUserExam }) => {
   const isQuiz = item?.exam_id?.exam_type === "0";
@@ -14,8 +13,11 @@ const AllExamDetails = ({ item, refetchUserExam }) => {
     user_id: item?.user_id?.id,
   });
   const examResultData = examResult?.exams?.data[0];
-  const totalObtainedMarks = examResultData?.question_mark?.reduce((total, mark) => total + mark?.mark_obtained, 0);
-  (totalObtainedMarks);
+  const totalObtainedMarks = examResultData?.question_mark?.reduce(
+    (total, mark) => total + mark?.mark_obtained,
+    0
+  );
+  totalObtainedMarks;
   return (
     <tr className="block md:table-row">
       <td className="py-2  px-1 border-b md:table-cell flex">
@@ -28,14 +30,14 @@ const AllExamDetails = ({ item, refetchUserExam }) => {
         {item?.exam_id?.title}
       </td>
       <td className="py-2 px-4 border-b md:table-cell">
-        {item?.exam_id?.duration_in_minutes} মিনিট
+        {item?.exam_id?.duration_in_minutes} Minute
       </td>
       <td className="py-2 px-4 border-b md:table-cell">
         {" "}
         {item?.exam_id?.exam_type === "0" ? "Quiz" : "Questions"}
       </td>
       <td className="py-2 px-4 border-b md:table-cell">
-        {item?.exam_id?.fee} টাকা
+        {item?.exam_id?.fee} Taka
       </td>
       <td className="py-2 px-4 border-b md:table-cell">
         {item?.exam_id?.total_marks}
@@ -51,9 +53,7 @@ const AllExamDetails = ({ item, refetchUserExam }) => {
         )}
       </td>
       <td>{examResultData?.total_correct_answer || 0}</td>
-      <td className="py-2 px-4 border-b md:table-cell">
-        {totalObtainedMarks}
-      </td>
+      <td className="py-2 px-4 border-b md:table-cell">{totalObtainedMarks}</td>
       {/* <td><Link href={`/admin/givemarks/showexam/${item?.id}`} className="py-2 px-4 border-b md:table-cell text-red-500">মার্ক্স দিন</Link  ></td> */}
       <td>
         {isQuiz ? (
@@ -63,7 +63,7 @@ const AllExamDetails = ({ item, refetchUserExam }) => {
             onClick={() => setModalOpen(true)}
             className="py-2 px-4 border-b md:table-cell text-red-500"
           >
-            মার্ক্স দিন
+            Give Mark
           </button>
         )}
       </td>

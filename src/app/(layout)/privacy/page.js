@@ -116,12 +116,8 @@ const PrivactPage = () => {
           <p>
             <strong>Website</strong> refers to BD Job Preparation, accessible
             from{" "}
-            <a
-              href="http://localhost:3000/"
-              rel="external nofollow noopener"
-              target="_blank"
-            >
-              http://localhost:3000/
+            <a href="/" rel="external nofollow noopener" target="_blank">
+              BD Job Preparation
             </a>
           </p>
         </li>

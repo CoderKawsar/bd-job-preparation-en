@@ -54,8 +54,8 @@ const SubCategory = ({ id }) => {
     ));
   }
   const breadcrumbItems = [
-    { label: "হোম", link: "/" },
-    { label: "কোর্সসমূহ", link: "/courses" },
+    { label: "Home", link: "/" },
+    { label: "Courses", link: "/courses" },
     // { label: 'ক্যাটাগরি', link:'/courses/category' },
     {
       label: `${subCategory?.category_id?.title || ""} - ${
@@ -67,7 +67,7 @@ const SubCategory = ({ id }) => {
   return (
     <div>
       {!isLoading ? (
-        <Commonbanner title="সাব ক্যাটাগরি" breadcrumbItems={breadcrumbItems} />
+        <Commonbanner title="Sub-Category" breadcrumbItems={breadcrumbItems} />
       ) : (
         <Loading />
       )}
@@ -81,7 +81,7 @@ const SubCategory = ({ id }) => {
             href={`/courses/category/subcategory/courseBundle/${id}`}
             className=" bg-bluePrimary text-white hover:bg-yellowPrimary    rounded transition-all duration-500 delay-200 font-bold text-xl border px-10 py-3 lg:mb-0 mb-5"
           >
-            সব কোর্স একসাথে কিনুন
+            Buy All Course Together
           </Link>
         </div>
       </div>

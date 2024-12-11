@@ -1,15 +1,15 @@
 import NoticePage from "@/components/pages/NoticePage";
 
 export const metadata = {
-    title:" নোটিশ"
-}
+  title: " Notice",
+};
 
 const AllNotices = () => {
-    return (
-        <div className="mx-14">
-            <NoticePage/>
-        </div>
-    );
+  return (
+    <div className="mx-14">
+      <NoticePage />
+    </div>
+  );
 };
 
 export default AllNotices;

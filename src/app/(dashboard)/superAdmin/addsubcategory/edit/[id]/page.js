@@ -1,8 +1,6 @@
 "use client";
 
 import EditSubCategory from "@/components/dashboard/admin/EditSubCategory";
-import axios from "axios";
-import { useParams } from "next/navigation";
 
 const EditSubCategoryPage = ({ params }) => {
   // const params = useParams();

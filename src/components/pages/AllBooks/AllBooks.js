@@ -13,7 +13,7 @@ const AllBooks = () => {
     limit,
     page,
   });
-  (data);
+  data;
 
   const booksData = data?.books?.data;
   const totalData = data?.books?.meta?.total;
@@ -24,7 +24,7 @@ const AllBooks = () => {
   if (isLoading) {
     content = (
       <>
-        <div>লোডিং ...</div>
+        <div>Loading ...</div>
       </>
     );
   }
@@ -46,23 +46,30 @@ const AllBooks = () => {
     content = booksData?.map((item) => (
       <BookSectionCard key={item?._id} item={item} />
     ));
-  } 
+  }
 
-  const breadcrumbItems = [{ label: "হোম", link: "/" }, { label: "সকল বইসমূহ" }];
+  const breadcrumbItems = [
+    { label: "Home", link: "/" },
+    { label: "All Books" },
+  ];
   return (
     <div>
-      <Commonbanner title="সকল বইসমূহ" breadcrumbItems={breadcrumbItems} />
+      <Commonbanner title="All Books" breadcrumbItems={breadcrumbItems} />
       <div className="px-14 py-10">
         <div className="">
           <h2 className="text-2xl font-bold  rounded text-center py-10">
             {" "}
-            সকল বইসমূহ
+            All Books
           </h2>
         </div>
         <div className="grid lg:grid-cols-3  gap-4">{content}</div>
-        <Pagination totalPages={totalPages} currentPage={page} setPage={setPage}/>
+        <Pagination
+          totalPages={totalPages}
+          currentPage={page}
+          setPage={setPage}
+        />
       </div>
-    </div> 
+    </div>
   );
 };
 

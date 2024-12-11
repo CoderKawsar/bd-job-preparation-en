@@ -162,16 +162,16 @@ const CourseSubscribe = ({ course_id }) => {
   }
 
   const breadcrumbItems = [
-    { label: "হোম", link: "/" },
-    { label: "কোর্স ", link: "/courses" },
+    { label: "Home", link: "/" },
+    { label: "Courses ", link: "/courses" },
 
-    { label: "কোর্স সাবস্ক্রাইব" },
+    { label: "Course Subscribe" },
   ];
 
   return (
     <div>
       <Commonbanner
-        title="কোর্স সাবস্ক্রাইব"
+        title="Course Subscribe"
         breadcrumbItems={breadcrumbItems}
       />
       <div className="py-10 mx-14">

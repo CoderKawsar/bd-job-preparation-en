@@ -98,7 +98,7 @@ function CourseSubscriptions({ course_id }) {
   if (!isLoading && !isError && subscriptionData?.length === 0) {
     content = (
       <h5 className=" font-semibold bg-green-600  text-white p-3 rounded text-md">
-        সাবস্ক্রিপশন কোর্স শীঘ্রই আসছে
+        Subsription Course Comming Soon
       </h5>
     );
   }
@@ -108,7 +108,7 @@ function CourseSubscriptions({ course_id }) {
       <tr className="hover" key={subscription?._id}>
         <td>{subscription?.name}</td>
         <td>{subscription?.subscription_duration_in_months} Months</td>
-        <td>{subscription?.cost} টাকা</td>
+        <td>${subscription?.cost}</td>
         <td>
           <p
             onClick={() => {
@@ -117,7 +117,7 @@ function CourseSubscriptions({ course_id }) {
             }}
             className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary z-0  cursor-pointer w-fit"
           >
-            কোর্স কিনুন
+            Buy Course
           </p>
         </td>
       </tr>
@@ -131,10 +131,10 @@ function CourseSubscriptions({ course_id }) {
           {/* head */}
           <thead>
             <tr className="text-[16px]">
-              <th>সাবস্ক্রিপশন নাম</th>
-              <th>সময়কাল</th>
-              <th>মূল্য</th>
-              <th>অ্যাকশন </th>
+              <th>Subscription Name</th>
+              <th>Duration</th>
+              <th>Amount</th>
+              <th>Action </th>
             </tr>
           </thead>
           <tbody>{content}</tbody>

@@ -1,12 +1,7 @@
 "use client";
 import UsersDetails from "@/components/dashboard/admin/UsersDetails";
-import {
-  useGetAllUsersQuery,
-  useMakeAdminMutation,
-} from "@/redux/api/usersApi";
-import { getUserInfo } from "@/services/auth.service";
+import { useGetAllUsersQuery } from "@/redux/api/usersApi";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import Pagination from "../../Pagination";
 
 const AdminAllUsers = () => {
@@ -92,9 +87,11 @@ const AdminAllUsers = () => {
             </tbody>
           </table>
 
-
-          <Pagination totalPages={totalPages} currentPage={page} setPage={setPage}/>
-
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            setPage={setPage}
+          />
         </div>
       ) : (
         <p>No users available.</p>

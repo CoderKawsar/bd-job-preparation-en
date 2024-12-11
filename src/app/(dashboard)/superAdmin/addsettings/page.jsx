@@ -6,7 +6,7 @@ import OutsideShippingCharge from "@/components/dashboard/admin/OutsideShippingC
 const Settings = () => {
   return (
     <div>
-      <h2 className="text-center font-bold text-3xl my-4">সেটিংস</h2>
+      <h2 className="text-center font-bold text-3xl my-4">Settings</h2>
       <InsideShippingCharge />
       <OutsideShippingCharge />
     </div>

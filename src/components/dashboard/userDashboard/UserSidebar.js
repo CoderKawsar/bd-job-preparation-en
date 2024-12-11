@@ -71,7 +71,7 @@ const UserSidebar = () => {
                         pathname === "/profile" ? "active" : ""
                       }`}
                     >
-                      <ImProfile fontSize={20} /> প্রোফাইল
+                      <ImProfile fontSize={20} /> Profile
                     </a>
                   </Link>
                 </li>
@@ -85,7 +85,7 @@ const UserSidebar = () => {
                         }`}
                       >
                         <SiCoursera />
-                        কোর্স যোগ করুন
+                        Course
                       </a>
                     </Link>
                   </li>
@@ -103,7 +103,7 @@ const UserSidebar = () => {
                         }`}
                       >
                         <MdSubscriptions fontSize={20} />
-                        সাবস্ক্রিপশন যোগ করুন
+                        Subscription
                       </a>
                     </Link>
                   </li>
@@ -117,7 +117,7 @@ const UserSidebar = () => {
                         }`}
                       >
                         <FaFileVideo />
-                        ভিডিও যোগ করুন
+                        Video
                       </a>
                     </Link>
                   </li>
@@ -131,7 +131,7 @@ const UserSidebar = () => {
                         }`}
                       >
                         <PiExamFill />
-                        পরীক্ষা যোগ করুন
+                        Exam
                       </a>
                     </Link>
                   </li>
@@ -145,7 +145,7 @@ const UserSidebar = () => {
                           pathname === "/admin/addquiz" ? "active" : ""
                         }`}
                       >
-                        <MdQuiz /> কুইজ যোগ করুন
+                        <MdQuiz /> Quiz
                       </a>
                     </Link>
                   </li>
@@ -158,7 +158,7 @@ const UserSidebar = () => {
                           pathname === "/admin/addquestions" ? "active" : ""
                         }`}
                       >
-                        <BsFillQuestionSquareFill /> লিখিত প্রশ্ন যোগ করুন
+                        <BsFillQuestionSquareFill /> Question
                       </a>
                     </Link>
                   </li>
@@ -172,7 +172,7 @@ const UserSidebar = () => {
                         }`}
                       >
                         <FaBookOpen />
-                        বই যোগ করুন
+                        Book
                       </a>
                     </Link>
                   </li>
@@ -186,7 +186,7 @@ const UserSidebar = () => {
                         }`}
                       >
                         <FaBookOpen />
-                        সব অর্ডার সমূহ
+                        Orders
                       </a>
                     </Link>
                   </li>
@@ -205,7 +205,7 @@ const UserSidebar = () => {
                         }`}
                       >
                         <FaBookOpen />
-                        সব কেনা কোর্স সমূহ
+                        Subscribed Courses
                       </a>
                     </Link>
                   </li>
@@ -219,7 +219,7 @@ const UserSidebar = () => {
                         }`}
                       >
                         <FaBookOpen />
-                        সব পরিক্ষা সমূহ
+                        Exams
                       </a>
                     </Link>
                   </li>
@@ -236,7 +236,7 @@ const UserSidebar = () => {
                         pathname === "/profile" ? "active" : ""
                       }`}
                     >
-                      <ImProfile fontSize={20} /> প্রোফাইল
+                      <ImProfile fontSize={20} /> Profile
                     </a>
                   </Link>
                 </li>
@@ -248,7 +248,7 @@ const UserSidebar = () => {
                       }`}
                     >
                       <ImProfile fontSize={20} />
-                      ব্যবহারকারী
+                      Users
                     </a>
                   </Link>
                 </li>
@@ -260,7 +260,7 @@ const UserSidebar = () => {
                       }`}
                     >
                       <ImProfile fontSize={20} />
-                      সকল এডমিন
+                      Admins
                     </a>
                   </Link>
                 </li>
@@ -276,7 +276,7 @@ const UserSidebar = () => {
                       }`}
                     >
                       <FaAddressBook />
-                      সকল বিভাগ
+                      Category
                     </a>
                   </Link>
                 </li>
@@ -293,7 +293,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaAddressBook />
-                      সকল উপ বিভাগ
+                      Sub-Category
                     </a>
                   </Link>
                 </li>
@@ -306,7 +306,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <SiCoursera fontSize={20} />
-                      কোর্স যোগ করুন
+                      Course
                     </a>
                   </Link>
                 </li>
@@ -319,7 +319,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <MdSubscriptions fontSize={20} />
-                      সাবস্ক্রিপশন যোগ করুন
+                      Subscription
                     </a>
                   </Link>
                 </li>
@@ -332,7 +332,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaFileVideo />
-                      ভিডিও যোগ করুন
+                      Video
                     </a>
                   </Link>
                 </li>
@@ -345,7 +345,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <PiExamFill />
-                      পরীক্ষা যোগ করুন
+                      Exam
                     </a>
                   </Link>
                 </li>
@@ -357,7 +357,7 @@ const UserSidebar = () => {
                       }`}
                     >
                       {" "}
-                      <MdQuiz /> কুইজ যোগ করুন
+                      <MdQuiz /> Quiz
                     </a>
                   </Link>
                 </li>
@@ -369,7 +369,7 @@ const UserSidebar = () => {
                       }`}
                     >
                       {" "}
-                      <BsFillQuestionSquareFill /> লিখিত প্রশ্ন যোগ করুন
+                      <BsFillQuestionSquareFill /> Written Questions
                     </a>
                   </Link>
                 </li>
@@ -382,7 +382,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaBook />
-                      বই যোগ করুন
+                      Book
                     </a>
                   </Link>
                 </li>
@@ -395,7 +395,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaNewspaper />
-                      সাবজেক্ট যোগ করুন
+                      Subject
                     </a>
                   </Link>
                 </li>
@@ -408,7 +408,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaBookOpen />
-                      সব অর্ডার সমূহ
+                      Orders
                     </a>
                   </Link>
                 </li>
@@ -421,7 +421,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaBookOpen />
-                      সব কেনা কোর্স সমূহ
+                      Subscribed Courses
                     </a>
                   </Link>
                 </li>
@@ -434,7 +434,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaBookOpen />
-                      সব পরিক্ষা সমূহ
+                      Exams
                     </a>
                   </Link>
                 </li>
@@ -447,7 +447,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaBell size={22} />
-                      নোটিশ যোগ করুন
+                      Notice
                     </a>
                   </Link>
                 </li>
@@ -464,7 +464,7 @@ const UserSidebar = () => {
                     >
                       {" "}
                       <FaCog size={22} />
-                      সেটিংস
+                      Settings
                     </a>
                   </Link>
                 </li>
@@ -480,7 +480,7 @@ const UserSidebar = () => {
                         pathname === "/profile" ? "active" : ""
                       }`}
                     >
-                      <ImProfile fontSize={20} /> প্রোফাইল
+                      <ImProfile fontSize={20} /> Profile
                     </a>
                   </Link>
                 </li>
@@ -491,7 +491,7 @@ const UserSidebar = () => {
                         pathname === "/user/mycourses" ? "active" : ""
                       }`}
                     >
-                      <SiCoursera fontSize={18} /> আমার কোর্স
+                      <SiCoursera fontSize={18} /> Courses
                     </a>
                   </Link>
                 </li>
@@ -502,7 +502,7 @@ const UserSidebar = () => {
                         pathname === "/user/mypdfbook" ? "active" : ""
                       }`}
                     >
-                      <SiCoursera fontSize={18} /> আমার কেনা বইসমুহ
+                      <SiCoursera fontSize={18} /> Books
                     </a>
                   </Link>
                 </li>
@@ -513,7 +513,7 @@ const UserSidebar = () => {
                         pathname === "/user/myexams" ? "active" : ""
                       }`}
                     >
-                      <SiCoursera fontSize={18} /> আমার পরিক্ষাসমুহ
+                      <SiCoursera fontSize={18} /> Exams
                     </a>
                   </Link>
                 </li>
@@ -524,7 +524,7 @@ const UserSidebar = () => {
                         pathname === "/user/myresults" ? "active" : ""
                       }`}
                     >
-                      <SiCoursera fontSize={18} /> আমার রেজাল্টসমূহ
+                      <SiCoursera fontSize={18} /> Results
                     </a>
                   </Link>
                 </li>
@@ -535,7 +535,7 @@ const UserSidebar = () => {
                         pathname === "/user/userorder" ? "active" : ""
                       }`}
                     >
-                      <FaBorderAll fontSize={18} /> অর্ডার হিসট্রি
+                      <FaBorderAll fontSize={18} /> Order History
                     </a>
                   </Link>
                 </li>

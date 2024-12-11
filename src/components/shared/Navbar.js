@@ -116,7 +116,7 @@ const Navbar = () => {
               height={0}
             />
             <span className="dark:text-cyanPrimary hover:text-bluePrimary">
-              বিডি জব প্রিপারেশন
+              BD Job Preparation
             </span>
           </Link>
 
@@ -127,11 +127,11 @@ const Navbar = () => {
               href="/"
               className="block dark:text-black hover:text-bluePrimary font-bold"
             >
-              হোম
+              Home
             </Link>
             <li className="relative group">
               <span className="cursor-pointer flex items-center  hover:text-bluePrimary font-bold">
-                কোর্সসমূহ <IoIosArrowDown />
+                Courses <IoIosArrowDown />
               </span>
               {categoriesData && (
                 <ul
@@ -190,26 +190,26 @@ const Navbar = () => {
               href="/about"
               className="block dark:text-black hover:text-bluePrimary font-bold"
             >
-              আমাদের সম্পর্কে
+              About Us
             </Link>
             <Link
               href="/contact"
               className="block dark:text-black hover:text-bluePrimary font-bold"
             >
-              যোগাযোগ
+              Contact
             </Link>
 
             <Link
               href="/routines"
               className="block dark:text-black hover:text-bluePrimary font-bold"
             >
-              ক্লাস রুটিন
+              Class Routine
             </Link>
             <Link
               href="/notice"
               className="block dark:text-black hover:text-bluePrimary font-bold"
             >
-              নোটিশ
+              Notice
             </Link>
 
             {userLoggedIn && (
@@ -217,7 +217,7 @@ const Navbar = () => {
                 href="/profile"
                 className="block dark:text-black hover:text-bluePrimary font-bold"
               >
-                ড্যাসবোর্ড
+                Dashboard
               </Link>
             )}
           </ul>
@@ -271,7 +271,7 @@ const Navbar = () => {
                             href="/profile"
                             className="block  py-2 text-lg hover:bg-gray-100 "
                           >
-                            প্রোফাইল
+                            Profile
                           </Link>
                         </li>
 
@@ -280,7 +280,7 @@ const Navbar = () => {
                             onClick={logout}
                             className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary"
                           >
-                            লগআউট
+                            Logout
                           </button>
                         </li>
                       </>
@@ -293,7 +293,7 @@ const Navbar = () => {
                 href="/login"
                 className="hidden lg:flex items-center text-cyanPrimary hover:text-bluePrimary font-bold"
               >
-                লগইন/রেজিস্টার
+                Login/Register
               </Link>
             )}
           </div>

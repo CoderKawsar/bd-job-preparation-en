@@ -98,12 +98,12 @@ const MobileNavbar = () => {
           href="/"
           className="block dark:text-black hover:text-white font-bold"
         >
-          হোম
+          Home
         </Link>
         <li className="relative group text-center">
           <div className="flex justify-center py-2">
             <span className="cursor-pointer flex items-center   hover:text-white font-bold">
-              কোর্সসমূহ <IoIosArrowDown />
+              Courses <IoIosArrowDown />
             </span>
           </div>
           {categoriesData && (
@@ -158,19 +158,19 @@ const MobileNavbar = () => {
           href="/contact"
           className="block dark:text-black hover:text-white font-bold"
         >
-          আমাদের সম্পর্কে
+          About Us
         </Link>
         <Link
           href="/contact"
           className="block dark:text-black hover:text-white font-bold"
         >
-          যোগাযোগ
+          Contact
         </Link>
         <Link
           href="/notice"
           className="block dark:text-black hover:text-white font-bold"
         >
-          নোটিশ
+          Notice
         </Link>
 
         <li className="relative group">
@@ -182,7 +182,7 @@ const MobileNavbar = () => {
             href="/profile"
             className="block dark:text-black hover:text-white font-bold"
           >
-            ড্যাসবোর্ড
+            Dashboard
           </Link>
         )}
       </ul>
@@ -201,7 +201,7 @@ const MobileNavbar = () => {
               onClick={logout}
               className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary"
             >
-              লগআউট
+              Logout
             </button>
           </>
         ) : (
@@ -209,7 +209,7 @@ const MobileNavbar = () => {
             href="/login"
             className=" lg:flex items-center text-white hover:text-white font-bold"
           >
-            লগইন/রেজিস্টার
+            Login/ Register
           </Link>
         )}
       </div>

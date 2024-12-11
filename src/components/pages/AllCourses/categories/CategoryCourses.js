@@ -70,14 +70,14 @@ const CategoryCourses = ({ id }) => {
   }
 
   const breadcrumbItems = [
-    { label: "হোম", link: "/" },
-    { label: "কোর্সসমূহ", link: "/courses" },
+    { label: "Home", link: "/" },
+    { label: "Courses", link: "/courses" },
     { label: `${category?.title}` },
   ];
 
   return (
     <div>
-      <Commonbanner title="ক্যাটাগরি" breadcrumbItems={breadcrumbItems} />
+      <Commonbanner title="Category" breadcrumbItems={breadcrumbItems} />
 
       <div className="mx-14 my-20">
         <div className="grid lg:grid-cols-3  gap-4">{content}</div>

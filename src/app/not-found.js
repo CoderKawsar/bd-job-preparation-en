@@ -16,10 +16,10 @@ const notFound = () => {
             />
           </div>
           <div className="text-center py-10">
-            <h1 className="text-4xl pb-5">পেইজটি খুজে পাওয়া যাচ্ছেনা</h1>
+            <h1 className="text-4xl pb-5">Page Not Found</h1>
             <Link href="/">
               <button className="bg-blue-700 text-white text-lg  px-7 py-3 rounded transition-all hover:bg-blue-900">
-                হোমে ফিরে যান
+                Return to Home
               </button>
             </Link>
           </div>

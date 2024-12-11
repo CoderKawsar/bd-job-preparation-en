@@ -36,7 +36,7 @@ const AllSubjectsPage = () => {
       <>
         {" "}
         <div className="flex justify-center items-center font-bold bg-green-400  text-white py-3 rounded text-lg">
-          <h5>এখনো কোন বিষয় নাই</h5>
+          <h5>There is no subject</h5>
         </div>
       </>
     );
@@ -52,7 +52,7 @@ const AllSubjectsPage = () => {
     <div>
       <div className="flex justify-center">
         <h2 className="text-center font-bold text-3xl my-4 w-fit border-b-2 border-gray-300 pb-2">
-          সাবজেক্টসমূহ
+          Subjects
         </h2>
       </div>
       <div className="my-5 space-y-4">{content}</div>

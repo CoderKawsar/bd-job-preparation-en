@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useUserSignupMutation } from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { storeUserInfo } from "@/services/auth.service";
 
 const AdminRegisterPage = () => {
   const [userSignup] = useUserSignupMutation();
@@ -26,7 +25,7 @@ const AdminRegisterPage = () => {
       // const res = await userSignup({ ...data }).unwrap();
       await userSignup({ ...data }).unwrap();
       // (res, ' from res');
-      toast.success("ইউজার সফল্ভাবে রেজিস্টার হয়েছে ।");
+      toast.success("User registered successfully");
     } catch (err) {
       if (
         err.data?.statusCode === 500 &&
@@ -44,7 +43,7 @@ const AdminRegisterPage = () => {
     <div className="bg-white border rounded shadow-lg max-w-md mx-auto py-5 my-10 z-0">
       <div>
         <h2 className="text-lg font-bold text-center pb-10 pt-5 text-cyanPrimary">
-          বিডি জব প্রিপারেশনে আপনাকে স্বাগতম।
+          Welcome to BD Job Preparation
         </h2>
 
         <div className="mb-10">
@@ -53,7 +52,7 @@ const AdminRegisterPage = () => {
               <input
                 type="text"
                 {...register("name")}
-                placeholder="আপনার নাম"
+                placeholder="Your Name"
                 className="border py-4 px-3 rounded outline-none hover:border-gray-500  w-80  bg-gray-200"
                 required
               />
@@ -62,7 +61,7 @@ const AdminRegisterPage = () => {
               <input
                 type="email"
                 {...register("email")}
-                placeholder="আপনার ইমেইল"
+                placeholder="Your Email"
                 className="border py-4 px-3 rounded outline-none hover:border-gray-500  w-80  bg-gray-200"
               />
             </div>
@@ -70,7 +69,7 @@ const AdminRegisterPage = () => {
               <input
                 type="number"
                 {...register("contact_no")}
-                placeholder="আপনার মোবাইল নাম্বার"
+                placeholder="Your Mobile Number"
                 className="border py-4 px-3 rounded outline-none hover:border-gray-500  w-80  bg-gray-200"
                 required
               />
@@ -80,7 +79,7 @@ const AdminRegisterPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  placeholder="পাসওয়ার্ড লিখুন"
+                  placeholder="Enter Password"
                   className="border py-4 px-3 rounded outline-none hover:border-gray-500 w-full bg-gray-200 pr-10"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -98,7 +97,7 @@ const AdminRegisterPage = () => {
 
             <input
               type="submit"
-              value="রেজিস্টার করুন"
+              value="Register"
               className="bg-bluePrimary text-white py-4 px-3 transition-all duration-300 rounded hover:bg-cyanPrimary w-80 ml-16 cursor-pointer"
             />
           </form>
@@ -106,12 +105,12 @@ const AdminRegisterPage = () => {
           <div className="py-5 text-center">
             <p>
               {" "}
-              আপনার এক্যাউন্ট আছে ?{" "}
+              Do you have an account ?{" "}
               <Link
                 href="/login"
                 className="text-bold text-bluePrimary text-lg hover:underline"
               >
-                লগইন করুন
+                Login
               </Link>
             </p>
           </div>

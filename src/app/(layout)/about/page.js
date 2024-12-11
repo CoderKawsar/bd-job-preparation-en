@@ -1,15 +1,15 @@
-import AboutUs from "@/components/pages/about/AboutUs"
+import AboutUs from "@/components/pages/about/AboutUs";
 
 export const metadata = {
-    title:" আমাদের সম্পর্কে"
-}
+  title: " About Us",
+};
 
 const AboutPage = () => {
   return (
     <div>
-        <AboutUs/>
+      <AboutUs />
     </div>
-  )
-}
+  );
+};
 
-export default AboutPage
+export default AboutPage;

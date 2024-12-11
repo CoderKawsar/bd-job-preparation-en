@@ -48,7 +48,7 @@ const CourseAllExams = ({ course_id }) => {
       const isExamDue = dueExamIds.find((dueExamId) => dueExamId === exam?.id);
       if (isExamDue) {
         toast(
-          "আপনি এই পরীক্ষার জন্য অলরেডি পেমেন্ট করেছেন। পরীক্ষা দিতে আপনার ড্যাসবোর্ডে যান।"
+          "You have already paid for this exam. Please go to your dashboard to take the exam."
         );
         return;
       }
@@ -102,7 +102,7 @@ const CourseAllExams = ({ course_id }) => {
       <>
         {" "}
         <div className="flex justify-center items-center font-bold bg-green-400  text-white py-3 rounded text-lg mt-5">
-          <h5> এই কোর্সে এখনও কোনো কুইজ/ পরীক্ষা নেই।</h5>
+          <h5>No quiz/exam found on this course</h5>
         </div>
       </>
     );
@@ -123,32 +123,32 @@ const CourseAllExams = ({ course_id }) => {
             }}
             className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary z-0  cursor-pointer w-fit"
           >
-            পরিক্ষা দিন
+            Attend Exam
           </p>
         </td>
       </tr>
     ));
   }
   const breadcrumbItems = [
-    { label: "হোম", link: "/" },
-    { label: " সব কোর্স", link: "/courses" },
-    { label: "পরিক্ষা/ কুইজ" },
+    { label: "Home", link: "/" },
+    { label: "All Courses", link: "/courses" },
+    { label: "Exam/ Quiz" },
   ];
 
   return (
     <>
-      <Commonbanner title="পরিক্ষা/ কুইজ" breadcrumbItems={breadcrumbItems} />
+      <Commonbanner title="Exam/ Quiz" breadcrumbItems={breadcrumbItems} />
       <div className="mx-20 py-20 ">
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
             <thead>
               <tr className="text-[16px]">
-                <th>পরীক্ষার শিরোনাম</th>
-                <th>পরীক্ষার ধরণ</th>
-                <th>মোট নাম্বার </th>
-                <th>ফি</th>
-                <th>অ্যাকশন</th>
+                <th>Exam Title</th>
+                <th>Exam Type</th>
+                <th>Total Marks</th>
+                <th>Fee</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody className="">

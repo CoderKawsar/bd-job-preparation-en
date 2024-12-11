@@ -469,9 +469,9 @@ const AddQuiz = () => {
                 </table> */}
       <div className="overflow-x-auto">
         <div className="text-center py-5">
-          <h2 className="text-2xl font-semibold mb-4">সব কুইজ এখানে আছে</h2>
+          <h2 className="text-2xl font-semibold mb-4">All Quizzes</h2>
           <p>
-            নির্দিষ্ট পরীক্ষার সমস্ত কুইজ দেখতে, পরীক্ষার শিরোনামে ক্লিক করুন।
+            To see all the quizzes for a specific exam, click on the exam name.
           </p>
         </div>
         {isFilteredQuestionLoading ? (

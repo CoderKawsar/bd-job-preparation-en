@@ -25,7 +25,7 @@ export default function BundleCourse({ course_id, cost }) {
               <h5 className="text-yellowPrimary text-lg">
                 {singleCourse?.author}
               </h5>
-              <p> প্রতিটি কোর্সের মূল্য {cost} টাকা</p>
+              <p> Unit Price: ${cost}</p>
             </div>
           </div>
         </div>

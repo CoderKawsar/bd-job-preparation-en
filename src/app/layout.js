@@ -3,7 +3,7 @@ import "./globals.css";
 import ToastProvider from "@/lib/ToastProvider";
 
 export const metadata = {
-  title: "বিডি জব প্রিপারেশন ",
+  title: "BD Job Preparation",
   description: "BD Job Preparation | BD Job Preparation",
 };
 

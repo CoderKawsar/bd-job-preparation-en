@@ -60,7 +60,7 @@ function ProstutiBooksShow({ params }) {
     <div className="mb-16">
       <div className="flex justify-center">
         <h2 className="w-fit border-b-2 border-gray-300 pb-2 mt-16 font-bold text-3xl mb-12">
-          {decodeURIComponent(title)} প্রস্তুতির বইসমুহঃ
+          {decodeURIComponent(title)} Preparation Books
         </h2>
       </div>
       {content}

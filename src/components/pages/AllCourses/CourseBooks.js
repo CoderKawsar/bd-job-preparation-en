@@ -23,7 +23,7 @@ function CourseBooks({ course_id }) {
   if (!isLoading && !isError && books?.length === 0) {
     content = (
       <h5 className="font-semibold bg-green-600 text-white p-3 rounded text-md">
-        এই কোর্সে আপাতত কোনো বই নেই।
+        No book found on this course
       </h5>
     );
   }

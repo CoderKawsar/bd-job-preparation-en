@@ -107,9 +107,9 @@ const CheckOut = () => {
 
   // constants
   const breadcrumbItems = [
-    { label: "হোম", link: "/" },
-    { label: "কার্ট", link: "/cart" },
-    { label: "চেকআউট" },
+    { label: "Home", link: "/" },
+    { label: "Cart", link: "/cart" },
+    { label: "Checkout" },
   ];
 
   // handle change
@@ -226,7 +226,7 @@ const CheckOut = () => {
   } else {
     return (
       <div>
-        <Commonbanner title="চেকআউট" breadcrumbItems={breadcrumbItems} />
+        <Commonbanner title="Checkout" breadcrumbItems={breadcrumbItems} />
         <form className="mx-14" onSubmit={handleSubmit(handleFormSubmit)}>
           <div
             className={`grid lg:grid-cols-2 auto-cols-auto gap-5 py-20 justify-center`}
@@ -235,13 +235,13 @@ const CheckOut = () => {
               {shippingCharge ? (
                 <div>
                   <h2 className="font-semibold text-yellowPrimary pb-5 text-xl">
-                    আপনার শিপিং ঠিকানা
+                    Your Shipping Address
                   </h2>
                   <div className="bg-white border rounded">
                     <div className="max-w-md mx-auto mt-8">
                       <div className="col-span-2 mb-4">
                         <label className="block text-sm font-medium text-gray-700">
-                          বিলিং নাম
+                          Billing Name
                         </label>
                         <input
                           {...register("billing_name", {
@@ -259,7 +259,7 @@ const CheckOut = () => {
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700">
-                            বিভাগ
+                            Division
                           </label>
                           <select
                             {...register("division", {
@@ -267,14 +267,14 @@ const CheckOut = () => {
                             })}
                             className="mt-1 h-10 w-full border"
                           >
-                            <option value="Rajshahi">রাজশাহী</option>
-                            <option value="Dhaka">ঢাকা</option>
-                            <option value="Mymensingh">ময়মনসিংহ</option>
-                            <option value="Rangpur">রংপুর</option>
-                            <option value="Khulna">খুলনা</option>
-                            <option value="Chattogram">চট্টগ্রাম</option>
-                            <option value="Barishal">বরিশাল</option>
-                            <option value="Sylhet">সিলেট</option>
+                            <option value="Rajshahi">Rajshahi</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Mymensingh">Mymensingh</option>
+                            <option value="Rangpur">Rangpur</option>
+                            <option value="Khulna">Khulna</option>
+                            <option value="Chattogram">Chattogram</option>
+                            <option value="Barishal">Barishal</option>
+                            <option value="Sylhet">Sylhet</option>
                           </select>
                           {errors.division && (
                             <p className="text-red-500 text-sm">
@@ -285,7 +285,7 @@ const CheckOut = () => {
 
                         <div>
                           <label className="block text-sm font-medium text-gray-700">
-                            জেলা
+                            District
                           </label>
                           <input
                             {...register("district", {
@@ -304,7 +304,7 @@ const CheckOut = () => {
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-700">
-                            উপজেলা
+                            Upazilla
                           </label>
                           <input
                             {...register("upazilla", {
@@ -324,7 +324,7 @@ const CheckOut = () => {
 
                         <div>
                           <label className="block text-sm font-medium text-gray-700">
-                            যোগাযোগের মোবাইল নম্বর
+                            Contact Number
                           </label>
                           <input
                             {...register("contact_no", {
@@ -374,7 +374,7 @@ const CheckOut = () => {
                         </div> */}
                         <div className="col-span-2">
                           <label className="block text-sm font-medium text-gray-700">
-                            ঠিকানা
+                            Address
                           </label>
                           <textarea
                             {...register("address", {
@@ -416,7 +416,7 @@ const CheckOut = () => {
 
             <div>
               <h2 className="font-semibold text-yellowPrimary pb-5 text-xl">
-                আপনার অর্ডারকৃত বইসমূহ
+                Your Ordered Books
               </h2>
               <CheckoutCart shippingCharge={shippingCharge} total={total} />
             </div>
@@ -430,7 +430,7 @@ const CheckOut = () => {
                 <span className="font-bold pr-3">
                   <FaArrowLeftLong />
                 </span>
-                ঝুড়িতে ফিরে যান
+                Return to Cart
               </Link>
               {userLoggedIn ? (
                 <button
@@ -438,7 +438,7 @@ const CheckOut = () => {
                   onClick={handlePlaceOrderBtn}
                   className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary  flex items-center"
                 >
-                  অর্ডার প্লেস করুন
+                  Place Order
                   <span className="font-bold pl-3">
                     <FaArrowRightLong />
                   </span>
@@ -449,7 +449,7 @@ const CheckOut = () => {
                     type="button"
                     className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary  flex items-center"
                   >
-                    অর্ডার প্লেস করতে লগ ইন করুন
+                    Login to place order
                     <span className="font-bold pl-3">
                       <FaArrowRightLong />
                     </span>

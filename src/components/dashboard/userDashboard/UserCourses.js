@@ -26,7 +26,7 @@ const UserCourses = () => {
     content = (
       <div>
         <h5 className="font-bold bg-green-600  text-white py-3 px-4 rounded text-lg">
-          এখনও কোনো কোর্স কেনা হয়নি
+          No course bought yet
         </h5>
       </div>
     );
@@ -71,11 +71,11 @@ const UserCourses = () => {
               className="text-blue-500 hover:underline"
             >
               <button className="bg-blue-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full">
-                রুটিন দেখুন
+                View routine
               </button>
             </a>
           ) : (
-            <p className="text-orange-600">রুটিন শীঘ্রই আসছে</p>
+            <p className="text-orange-600">Routine coming soon</p>
           )}
 
           <hr></hr>
@@ -86,7 +86,7 @@ const UserCourses = () => {
               className="text-lg text-yellowPrimary hover:text-green-500 cursor-pointer"
             >
               {" "}
-              কোর্সটি শুরু করুন
+              Start Course
             </Link>
           </div>
         </div>

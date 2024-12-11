@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import Pagination from "../../Pagination";
 const AdminAddSubCategory = () => {
   const [limit, setLimit] = useState(15);
   const [page, setPage] = useState(1);

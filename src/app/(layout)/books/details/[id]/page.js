@@ -1,7 +1,7 @@
 import BookDetails from "@/components/pages/AllBooks/BookDetails";
 
 export const metadata = {
-  title: "বই ডেটেইলস",
+  title: "Book Details",
 };
 
 const BookDetailsPage = ({ params }) => {

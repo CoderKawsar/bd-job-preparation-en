@@ -77,7 +77,7 @@ const BundleCourses = ({ bundle, i, isLast, sub_category_id }) => {
   return (
     <div className={`mb-12 ${isLast ? "" : "pb-16 border-dashed border-b-2"}`}>
       <h2 className="text-4xl text-center mb-10 font-bold py-4">
-        {bundle?.subscription_duration_in_months} মাসের কোর্স বান্ডিল
+        Course Bundle Duration: {bundle?.subscription_duration_in_months}
       </h2>
 
       <div className="flex justify-center gap-20">
@@ -94,8 +94,7 @@ const BundleCourses = ({ bundle, i, isLast, sub_category_id }) => {
         <div className="border rounded mt-10 ">
           <div className="py-5 px-5 flex flex-col justify-center items-center">
             <h3 className="text-xl text-center font-bold pb-5">
-              {" "}
-              মোট {bundle?.total_cost} টাকা
+              Total Cost: ${bundle?.total_cost}
             </h3>
             <button
               // onClick={() =>
@@ -109,7 +108,7 @@ const BundleCourses = ({ bundle, i, isLast, sub_category_id }) => {
               }}
               className="bg-yellowPrimary text-white py-3 px-10 transition-all duration-300 rounded  hover:bg-bluePrimary "
             >
-              বান্ডিল কোর্সটি কিনুন
+              Buy Bundle Course
             </button>
           </div>
         </div>

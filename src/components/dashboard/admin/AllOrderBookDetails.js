@@ -7,9 +7,9 @@ const AllOrderBookDetails = ({ bookOrder }) => {
       {/* head */}
       <thead>
         <tr>
-          <th>বইয়ের নাম </th>
-          <th>প্রতিটি বইয়ের মূল্য</th>
-          <th>পরিমান</th>
+          <th>Book Title </th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
         </tr>
       </thead>
       <tbody>

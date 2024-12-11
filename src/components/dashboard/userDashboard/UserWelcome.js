@@ -16,13 +16,13 @@ const UserWelcome = () => {
       const currentHour = new Date().getHours();
 
       if (currentHour >= 6 && currentHour < 12) {
-        setTimeOfDay("শুভ সকাল");
+        setTimeOfDay("Good Morning, ");
       } else if (currentHour >= 12 && currentHour < 17) {
-        setTimeOfDay("শুভ অপরাহ্ন");
+        setTimeOfDay("Good Afternoon, ");
       } else if (currentHour >= 17 && currentHour < 20) {
-        setTimeOfDay("শুভ সন্ধ্যা");
+        setTimeOfDay("Good Evening, ");
       } else {
-        setTimeOfDay("শুভ রাত");
+        setTimeOfDay("Good Night, ");
       }
     };
 
@@ -39,9 +39,9 @@ const UserWelcome = () => {
         <h2 className="text-2xl font-bold pb-3 text-cyan-900 ">
           {`${timeOfDay} ${data?.name}`}
         </h2>
-        <h5 className="text-cyan-900   text-lg">
-          ক্লাসের খুঁটিনাটি সব জেনে নাও তোমার{" "}
-          <span className="text-cyan-900">বিডি জব প্রিপারেশন</span> ড্যাশবোর্ডে
+        <h5 className="text-cyan-900 text-lg">
+          Get started with{" "}
+          <span className="text-cyan-900">BD Job Preparation</span> Dashboard
         </h5>
       </div>
     </div>

@@ -29,11 +29,11 @@ const DashNavbar = () => {
       <div className="navbar px-5">
         <div className="navbar-start ">
           <Link href="/" className="text-lg font-bold text-cyan-900">
-            বিডি জব প্রিপারেশন
+            BD Job Preparation
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <p className="px-3 text-lg font-bold"> ড্যাশবোর্ড</p>
+          <p className="px-3 text-lg font-bold"> Dashboard</p>
         </div>
         <div className="navbar-end">
           {/* <ToggleTheme /> */}
@@ -45,13 +45,13 @@ const DashNavbar = () => {
                 onClick={logout}
               >
                 <FiLogOut fontSize={20} />
-                <button className=" ">লগ আউট</button>
+                <button className=" ">Logout</button>
               </div>
             </>
           ) : (
             <div className="flex items-center gap-3 bg-blue-600 text-white transition-all  hover:bg-blue-900 cursor-pointer px-3 py-2 rounded">
               <Link href="/login" className="text-xl ">
-                লগইন
+                Login
               </Link>
             </div>
           )}

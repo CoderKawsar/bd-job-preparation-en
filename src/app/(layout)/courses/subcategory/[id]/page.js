@@ -1,18 +1,17 @@
 import SubCategory from "@/components/pages/AllCourses/SubCategory";
 
 export const metadata = {
-    title:"কোর্স সাব ক্যাটাগরি"
-  }
+  title: "Coure Sub-category",
+};
 
-const CourseSubCategoryPages = ({params}) => {
-    const id = params?.id;
-    
-    return (
-        <div>
-           
-            <SubCategory id={id}/>
-        </div>
-    );
+const CourseSubCategoryPages = ({ params }) => {
+  const id = params?.id;
+
+  return (
+    <div>
+      <SubCategory id={id} />
+    </div>
+  );
 };
 
 export default CourseSubCategoryPages;

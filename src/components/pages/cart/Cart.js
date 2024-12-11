@@ -95,41 +95,41 @@ const Cart = () => {
   // };
 
   const breadcrumbItems = [
-    { label: "হোম", link: "/" },
-    { label: "সকল  বইসমূহ", link: "/books" },
+    { label: "Home", link: "/" },
+    { label: "All Books", link: "/books" },
     // { label: "বুকস্ Details", link: "/books/:id" },
-    { label: " ঝুড়ি" },
+    { label: " Cart" },
   ];
- 
+
   return (
     <>
-      <Commonbanner title="কার্ট" breadcrumbItems={breadcrumbItems} />
+      <Commonbanner title="Cart" breadcrumbItems={breadcrumbItems} />
       <div className=" py-10 max-w-3xl mx-auto">
         <div className="">
           <div className="flex items-center mb-10 space-x-5">
-            <h2 className="font-bold text-2xl text-bluePrimary"> আপনার ঝুড়ি </h2>
-            <h2 className="font-bold text-xl "> {books?.length} টি</h2>
+            <h2 className="font-bold text-2xl text-bluePrimary">Your Cart</h2>
+            <h2 className="font-bold text-xl "> {books?.length}</h2>
           </div>
           <div className="bg-white px-4 py-5 border rounded shadow-md ">
             <div className=" grid grid-cols-4 gap-10">
               <div>
                 <h2 className="font-bold text-xl text-gray-400 py-4">
-                   বই ডিটেইলস
+                  Book Details
                 </h2>
-              </div> 
-              <div>
-                <h2 className="font-bold text-xl text-gray-400 py-4">
-                  পরিমাণ
-                </h2> 
               </div>
               <div>
                 <h2 className="font-bold text-xl text-gray-400 py-4">
-                  ১টার দাম
-                </h2> 
+                  Quantity
+                </h2>
               </div>
               <div>
                 <h2 className="font-bold text-xl text-gray-400 py-4">
-                 মোট দাম
+                  Unit Price
+                </h2>
+              </div>
+              <div>
+                <h2 className="font-bold text-xl text-gray-400 py-4">
+                  Total Price
                 </h2>
               </div>
             </div>
@@ -137,7 +137,7 @@ const Cart = () => {
               {books?.length === 0 ? (
                 <div className="font-bold text-red-400 text-xl">
                   {" "}
-                  আপনার ঝুড়ি এখন খালি 
+                  Your Cart is Empty
                 </div>
               ) : (
                 <>
@@ -159,16 +159,14 @@ const Cart = () => {
                             <h2>{item?.title} </h2>
                             <button
                               className="text-red-500 lg:w-[50px] font-bold"
-                             
                               onClick={() => {
                                 dispatch(removeFromCart(item));
-                                toast.success('বইটি সফলভাবে মুছে ফেলা হয়েছে');
+                                toast.success("Book removed from cart");
                               }}
-                              
                             >
-                              বাদ দিন
+                              Remove
                             </button>
-                          </div> 
+                          </div>
                         </div>
                       </div>
                       <div>
@@ -204,13 +202,13 @@ const Cart = () => {
                       </div>
                       <div>
                         <div className="flex items-center space-x-3 font-semibold">
-                          <h5>{item?.discount_price} {" "}টাকা</h5>
+                          <h5>${item?.discount_price}</h5>
                         </div>
                       </div>
 
                       <div>
                         <div className="flex items-center space-x-3 font-semibold">
-                          <h5>{item?.quantity * item?.discount_price} {" "}টাকা</h5>
+                          <h5>${item?.quantity * item?.discount_price}</h5>
                         </div>
                       </div>
                     </>
@@ -221,13 +219,11 @@ const Cart = () => {
 
             <hr className="my-5" />
             <div className="flex justify-between items-center ">
-              <h2 className="font-bold text-xl text-bluePrimary">
-                আপনার অর্ডার  
-              </h2>
+              <h2 className="font-bold text-xl text-bluePrimary">Your Order</h2>
               <div>
-                <h2 className="font-bold text-xl text-gray-400"> মোট </h2>
+                <h2 className="font-bold text-xl text-gray-400"> Total </h2>
                 <h2 className="font-bold text-xl text-bluePrimary">
-                  {total.toFixed(2)} {" "}টাকা
+                  ${total.toFixed(2)}
                 </h2>
               </div>
             </div>
@@ -243,14 +239,14 @@ const Cart = () => {
                 <span className="font-bold pr-3">
                   <FaArrowLeftLong />
                 </span>
-                আরও বাজার করুন 
+                Buy More
               </Link>
               {books?.length > 0 && (
                 <Link
                   href="/checkout"
                   className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary  flex items-center"
-                > 
-                  চেকআউট পেজে যান{" "}
+                >
+                  Go to Checkout{" "}
                   <span className="font-bold pl-3">
                     <FaArrowRightLong />
                   </span>

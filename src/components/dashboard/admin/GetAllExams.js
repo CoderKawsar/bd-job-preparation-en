@@ -4,17 +4,9 @@ import Pagination from "@/app/(dashboard)/Pagination";
 import EmptyContent from "@/components/Loader/EmptyContent";
 import Error from "@/components/Loader/Error";
 import InitialLoader from "@/components/Loader/InitialLoader";
-import {
-  useDeleteExamMutation,
-  useGetAllExamsQuery,
-  useUpdateStatusChangeMutation,
-} from "@/redux/api/examsApi";
-import Link from "next/link";
+import { useGetAllExamsQuery } from "@/redux/api/examsApi";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import Swal from "sweetalert2";
 import ExamApprovedByAdmin from "./ExamApprovedByAdmin";
-import { useGetAllQuestionsQuery } from "@/redux/api/questionsApi";
 
 const GetAllExams = () => {
   const [limit, setLimit] = useState(25);

@@ -84,11 +84,11 @@ function ExamLists({ exams }) {
         <table className="table table-auto min-w-full bg-white border border-gray-300">
           <thead>
             <tr className="text-[16px]">
-              <th className="py-2 px-1 md:px-4">পরীক্ষার শিরোনাম</th>
-              <th className="py-2 px-1 md:px-4">পরীক্ষার ধরণ</th>
-              <th className="py-2 px-1 md:px-4">মোট নাম্বার</th>
-              <th className="py-2 px-1 md:px-4">ফি</th>
-              <th className="py-2 px-1 md:px-4">অ্যাকশন</th>
+              <th className="py-2 px-1 md:px-4">Exam Title</th>
+              <th className="py-2 px-1 md:px-4">Exam Type</th>
+              <th className="py-2 px-1 md:px-4">Total Marks</th>
+              <th className="py-2 px-1 md:px-4">Fee</th>
+              <th className="py-2 px-1 md:px-4">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -99,7 +99,7 @@ function ExamLists({ exams }) {
                   {exam?.exam_type === "0" ? "MCQ" : "Written"}
                 </td>
                 <td className="py-2 px-1 md:px-4">{exam?.total_marks}</td>
-                <td className="py-2 px-1 md:px-4">{exam?.fee} টাকা</td>
+                <td className="py-2 px-1 md:px-4">${exam?.fee}</td>
                 <td className="py-2 px-1 md:px-4">
                   <button
                     onClick={() => {
@@ -108,7 +108,7 @@ function ExamLists({ exams }) {
                     }}
                     className="bg-bluePrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-cyanPrimary z-0 cursor-pointer lg:w-[100px]"
                   >
-                    পরিক্ষা দিন
+                    Start Exam
                   </button>
                 </td>
               </tr>

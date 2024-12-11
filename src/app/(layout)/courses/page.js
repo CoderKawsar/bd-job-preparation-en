@@ -1,15 +1,15 @@
-import AllCourses from "@/components/pages/AllCourses/AllCourses"
+import AllCourses from "@/components/pages/AllCourses/AllCourses";
 
-export const  metaData = {
-    title:" কোর্সসমূহ "
-}
+export const metaData = {
+  title: " Courses ",
+};
 
 const AllCoursePage = () => {
   return (
     <div>
-        <AllCourses/>
+      <AllCourses />
     </div>
-  )
-}
+  );
+};
 
-export default AllCoursePage
+export default AllCoursePage;
