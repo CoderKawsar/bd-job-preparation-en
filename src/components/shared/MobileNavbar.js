@@ -2,12 +2,7 @@
 
 import { authKey } from "@/constants/storage";
 import { useGetSingleUserQuery } from "@/redux/api/authApi";
-import { useGetAllCartsByUserQuery } from "@/redux/api/cartApi";
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
-import {
-  useGetAllCoursesQuery,
-  useGetAllCoursesRoutineQuery,
-} from "@/redux/api/courseApi";
 import { useGetAllSubcategoriesQuery } from "@/redux/api/subcategoryApi";
 import {
   getUserInfo,
@@ -19,7 +14,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
-import avatar from "../../assets/images/avatar.png";
 import Link from "next/link";
 import Header1 from "./Header1";
 

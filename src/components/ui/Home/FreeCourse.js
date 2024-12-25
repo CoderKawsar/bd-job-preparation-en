@@ -71,12 +71,12 @@ const FreeCourse = () => {
     <div>
       <div className="lg:px-14 mb-20 px-3 pt-6">
         <div className="flex gap-5 pb-4">
-          <h2 className="text-2xl font-bold px-2  rounded ">ফ্রী কোর্সসমূহ</h2>
+          <h2 className="text-2xl font-bold px-2  rounded ">Free Courses</h2>
           <Link
             href="/courses"
-            className=" bg-bluePrimary hover:bg-cyanPrimary w-44 text-white px-7 py-3 rounded transition-all duration-500 delay-200"
+            className=" bg-bluePrimary hover:bg-cyanPrimary text-white px-7 py-3 rounded transition-all duration-500 delay-200"
           >
-            সব কোর্স দেখুন
+            All Courses
           </Link>
         </div>
 

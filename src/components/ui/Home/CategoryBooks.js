@@ -74,8 +74,8 @@ const CategoryBooks = () => {
             </h2>
           </div>
           <div className="grid grid-cols-2">
-            <p className="text-center border-r border-black py-2">সফট কপি</p>
-            <p className="text-center py-2">প্রিন্ট কপি</p>
+            <p className="text-center border-r border-black py-2">PDF Book</p>
+            <p className="text-center py-2">Hard Copy</p>
           </div>
           <div className={`w-full bg-yellowPrimary text-center rounded-b-md`}>
             {/* link to the category, since sub-category not available for this category */}
@@ -84,7 +84,7 @@ const CategoryBooks = () => {
               href={`/books/category/${item?._id}`}
               className={`block w-full py-2 text-white transition-all duration-300 hover:bg-bluePrimary rounded-b-md`}
             >
-              কিনুন
+              Buy
             </Link>
           </div>
         </div>
@@ -100,12 +100,12 @@ const CategoryBooks = () => {
             দেশসেরা ইন্সট্রাক্টরদের সেরা সব কোর্স এখন এক প্ল্যাটফর্মে।
           </h5> */}
           <h2 className="lg:text-3xl md:text-2xl font-semibold mb-2">
-            আমাদের বই সংগ্রহ করুন
+            Collect Your Desired Books:
           </h2>
         </div>
       </div>
       <div className="mt-4 mb-2">
-        <h4 className="text-xl font-semibold">১&#41; জব ক্যাটাগরি অনুসারেঃ</h4>
+        <h4 className="text-xl font-semibold">1&#41; Job Category:</h4>
       </div>
 
       <div className="">

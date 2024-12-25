@@ -106,7 +106,7 @@ const CategorySubCategoryCourses = () => {
                         index === 0 && "rounded-bl-md"
                       }`}
                     >
-                      ভর্তি হোন
+                      Enroll
                     </Link>
                   </div>
                 </div>
@@ -130,7 +130,7 @@ const CategorySubCategoryCourses = () => {
                       href={`/courses/category/${item?._id}`}
                       className={`block w-full py-2 text-white transition-all duration-300 hover:bg-bluePrimary  rounded-b-md`}
                     >
-                      ভর্তি হোন
+                      Enroll
                     </Link>
                   </div>
                 </div>
@@ -148,8 +148,8 @@ const CategorySubCategoryCourses = () => {
           {/* <h5 className="lg:text-xl py-4 mb-3">
             দেশসেরা ইন্সট্রাক্টরদের সেরা সব কোর্স এখন এক প্ল্যাটফর্মে।
           </h5> */}
-          <h2 className="lg:text-3xl md:text-2xl font-semibold mb-2">
-            আমাদের কোর্সসমূহ থেকে বেছে নিন আপনার পছন্দের কোর্সঃ
+          <h2 className="lg:text-3xl md:text-2xl font-semibold mb-2 font-raleway">
+            Choose Your Favourite Course:
           </h2>
         </div>
       </div>

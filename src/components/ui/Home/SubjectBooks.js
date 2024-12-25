@@ -73,8 +73,8 @@ const SubjectBooks = () => {
             </h2>
           </div>
           <div className="grid grid-cols-2">
-            <p className="text-center border-r border-black py-2">সফট কপি</p>
-            <p className="text-center py-2">প্রিন্ট কপি</p>
+            <p className="text-center border-r border-black py-2">PDF Book</p>
+            <p className="text-center py-2">Hard Copy</p>
           </div>
           <div className={`w-full bg-yellowPrimary text-center rounded-b-md`}>
             {/* link to the category, since sub-category not available for this category */}
@@ -83,7 +83,7 @@ const SubjectBooks = () => {
               href={`/books/subject/${item?._id}`}
               className={`block w-full py-2 text-white transition-all duration-300 hover:bg-bluePrimary rounded-b-md`}
             >
-              কিনুন
+              Buy
             </Link>
           </div>
         </div>
@@ -94,7 +94,7 @@ const SubjectBooks = () => {
   return (
     <div className="px-14 pt-4">
       <div className="mt-4 mb-2">
-        <h4 className="text-xl font-semibold">২&#41; বিষয়-ভিত্তিকঃ</h4>
+        <h4 className="text-xl font-semibold">2&#41; Subject:</h4>
       </div>
 
       <div className="">

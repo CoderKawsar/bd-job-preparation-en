@@ -8,16 +8,6 @@ import HomeQuiz from "./HomeQuiz";
 import ScrollToTopButton from "./ScrollToTopButton";
 import SelectCarreer from "./SelectCarreer";
 import Faq from "./Faq";
-import {
-  bankPriliSubId,
-  bankWrittenSubId,
-  bcsPriliSubId,
-  bcsWrittenSubId,
-  ntrcaPriliSubId,
-  ntrcaWrittenSubId,
-  primaryPriliSubId,
-} from "@/utils/subCategoryId";
-import FilteringCourseBooks from "./FilteringCourseBooks";
 import CategorySubCategoryCourses from "./CategorySubCategoryCourses";
 import CategoryBooks from "./CategoryBooks";
 import CategorySubCategoryExams from "./CategorySubCategoryExams";

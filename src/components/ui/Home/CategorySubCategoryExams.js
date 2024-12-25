@@ -106,7 +106,7 @@ const CategorySubCategoryExams = () => {
                         index === 0 && "rounded-bl-md"
                       }`}
                     >
-                      পরীক্ষা দিন
+                      Give Exam
                     </Link>
                   </div>
                 </div>
@@ -130,7 +130,7 @@ const CategorySubCategoryExams = () => {
                       href={`/exams/category/${item?._id}`}
                       className={`block w-full py-2 text-white transition-all duration-300 hover:bg-bluePrimary  rounded-b-md`}
                     >
-                      পরীক্ষা দিন
+                      Give Exam
                     </Link>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ const CategorySubCategoryExams = () => {
       <div className="lg:flex items-center justify-between my-4">
         <div>
           <h2 className="lg:text-3xl md:text-2xl font-semibold mb-2">
-            পরীক্ষায় অংশগ্রহণ করে নিজের মেধা যাচাই করুনঃ
+            Participate in the exam and put your knowledge to the test:
           </h2>
         </div>
       </div>

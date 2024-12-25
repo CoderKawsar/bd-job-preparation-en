@@ -23,11 +23,10 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
   };
   const dispatch = useDispatch();
 
-  
   const handleAddBook = (item) => {
     const existingBook = cartItems?.find((book) => book?._id === item?._id);
 
-    console.log('data', existingBook);
+    console.log("data", existingBook);
 
     if (existingBook) {
       toast.error("বইটি ইতিমধ্যে ঝুড়িতে যোগ করা হয়েছে");
@@ -36,7 +35,6 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
       toast.success("বইটি ঝুড়িতে যোগ হয়েছে সফলভাবে");
     }
   };
- 
 
   return (
     <>
@@ -46,7 +44,7 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
             onClick={onOpenPDFModal}
             className="text-bluePrimary cursor-pointer"
           >
-            বইটি একটু পড়ুন
+            Read
           </button>
         </div>
 
@@ -58,8 +56,6 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
             width={400}
             height={100}
           />
-
-  
 
           <p className="absolute top-0 left-0 bg-yellowPrimary text-white p-1  ">
             {item?.course_id[0]?.sub_category_id?.category_id?.title}
@@ -103,20 +99,20 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
                 className="text-bluePrimary pl-5"
                 href={`/books/details/${item?._id}`}
               >
-                আর দেখুন
+                Read More
               </Link>
             </div>
-            <div>
-              
-            </div>
+            <div></div>
           </div>
 
           <hr />
           <div className="flex justify-between items-center mt-3">
             <p className="text-sm font-semibold py-3">
               {" "}
-              কোর্সের মূল্যঃ{" "}
-              <del className="text-gray-400  "> -{item?.price} </del>{" "}
+              Price: <del className="text-gray-400  ">
+                {" "}
+                -{item?.price}{" "}
+              </del>{" "}
               <span className="font-bold pl-2">{item?.discount_price}</span> Tk
             </p>
             {item?.discount_price == 0 ? (
@@ -124,26 +120,28 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
                 onClick={openPDFModal}
                 className="bg-yellowPrimary text-white py-2 px-4 transition-all duration-300 rounded  hover:bg-bluePrimary "
               >
-                বইটি পড়ুন
+                Read
               </button>
             ) : (
               <button
                 onClick={() => handleAddBook(item)}
                 className="bg-yellowPrimary text-white py-2 px-4 transition-all duration-300 rounded  hover:bg-bluePrimary "
               >
-                ঝুড়িতে যোগ করুন
+                Add to Cart
               </button>
             )}
-            
           </div>
-          {
-              cartItems?.find((book) => book?._id === item?._id)? <div className="text-center my-3">
-                <Link href="/cart">
-              <button className="bg-bluePrimary hover:bg-green-600 text-white py-2 px-4 transition-all duration-300 rounded text-center">ঝুড়িতে দেখুন</button>
+          {cartItems?.find((book) => book?._id === item?._id) ? (
+            <div className="text-center my-3">
+              <Link href="/cart">
+                <button className="bg-bluePrimary hover:bg-green-600 text-white py-2 px-4 transition-all duration-300 rounded text-center">
+                  Watch Cart
+                </button>
               </Link>
-              </div> : <> </>
-            }
-          
+            </div>
+          ) : (
+            <> </>
+          )}
         </div>
         {showPDFModal && (
           <PDFViewerModal

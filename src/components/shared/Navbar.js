@@ -125,35 +125,43 @@ const Navbar = () => {
           <ul className="md:flex space-x-5 hidden">
             <Link
               href="/"
-              className="block dark:text-black hover:text-bluePrimary font-bold"
+              className="block dark:text-black hover:text-bluePrimary font-medium"
             >
               Home
             </Link>
             <li className="relative group">
-              <span className="cursor-pointer flex items-center  hover:text-bluePrimary font-bold">
+              <span
+                className={`cursor-pointer flex items-center  hover:text-bluePrimary font-medium ${
+                  hoveredCategoryId || hoveredSubCategoryId
+                    ? "text-bluePrimary"
+                    : ""
+                }`}
+              >
                 Courses <IoIosArrowDown />
               </span>
               {categoriesData && (
                 <ul
-                  className={`absolute hidden min-w-[14em] px-4 text-white py-2 space-y-2 shadow-md group-hover:block text-left rounded-md transition-all duration-300 bg-bluePrimary`}
+                  className={`absolute hidden min-w-[14em] shadow-md group-hover:block text-left rounded-md transition-all duration-300 bg-white`}
                 >
                   {categoriesData?.map((category) => (
                     <li
                       key={category._id}
-                      className="group relative hover:text-yellowPrimary"
+                      className="group relative hover:text-white hover:bg-bluePrimary border-b border-b-gray-200"
                       onMouseEnter={() => setHoveredCategoryId(category._id)}
                       onMouseLeave={() => setHoveredCategoryId(null)}
                     >
                       <Link href={`/courses/category/${category?._id}`}>
-                        <span className="cursor-pointer flex items-center">
+                        <span className="px-4 py-3 cursor-pointer flex items-center">
                           {category?.title}
-                          <IoIosArrowDown />
+                          {hoveredCategoryId === category._id && (
+                            <IoIosArrowDown />
+                          )}
                         </span>
                       </Link>
                       {hoveredCategoryId === category._id &&
                         subCategoriesData && (
                           <ul
-                            className={`absolute top-0 left-full space-y-2 text-white bg-bluePrimary py-2 shadow-md rounded-md`}
+                            className={`absolute top-0 left-full bg-white text-black shadow-md rounded-md`}
                           >
                             {subCategoriesData
                               .filter(
@@ -163,7 +171,7 @@ const Navbar = () => {
                               .map((subCategory) => (
                                 <li
                                   key={subCategory?._id}
-                                  className="group relative hover:text-yellowPrimary"
+                                  className="group relative hover:text-white hover:bg-bluePrimary"
                                   onMouseEnter={() =>
                                     setHoveredSubCategoryId(subCategory._id)
                                   }
@@ -173,7 +181,7 @@ const Navbar = () => {
                                 >
                                   <Link
                                     href={`/courses/category/subcategory/${subCategory?._id}`}
-                                    className="block px-4 py-2"
+                                    className="block px-4 py-3"
                                   >
                                     {subCategory?.title}
                                   </Link>
@@ -188,26 +196,26 @@ const Navbar = () => {
             </li>
             <Link
               href="/about"
-              className="block dark:text-black hover:text-bluePrimary font-bold"
+              className="block dark:text-black hover:text-bluePrimary font-medium"
             >
               About Us
             </Link>
             <Link
               href="/contact"
-              className="block dark:text-black hover:text-bluePrimary font-bold"
+              className="block dark:text-black hover:text-bluePrimary font-medium"
             >
               Contact
             </Link>
 
             <Link
               href="/routines"
-              className="block dark:text-black hover:text-bluePrimary font-bold"
+              className="block dark:text-black hover:text-bluePrimary font-medium"
             >
               Class Routine
             </Link>
             <Link
               href="/notice"
-              className="block dark:text-black hover:text-bluePrimary font-bold"
+              className="block dark:text-black hover:text-bluePrimary font-medium"
             >
               Notice
             </Link>
@@ -215,7 +223,7 @@ const Navbar = () => {
             {userLoggedIn && (
               <Link
                 href="/profile"
-                className="block dark:text-black hover:text-bluePrimary font-bold"
+                className="block dark:text-black hover:text-bluePrimary font-medium"
               >
                 Dashboard
               </Link>

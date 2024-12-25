@@ -46,7 +46,7 @@ const CourseCard = ({ item }) => {
             <div className="flex items-center">
               <p className="text-sm font-semibold py-3 ">
                 {" "}
-                <span className="pr-5">মেম্বারশিপ ধরন</span>{" "}
+                <span className="pr-5">Memebership Type</span>{" "}
                 <span
                   className={`bg-blue-200 font-bold px-2 py-1 rounded ${
                     item?.membership_type === "1" ? "text-paid" : "text-free"
@@ -70,13 +70,13 @@ const CourseCard = ({ item }) => {
                 href={`/courses/details/${item?._id}`}
                 className="text-fuchsia-600"
               >
-                বিস্তারিত পড়ুন
+                Read More
               </Link>{" "}
               <Link
                 href={`/courses/details/${item?._id}/quiz`}
                 className="text-red-500 "
               >
-                পরিক্ষা/কুইজে অংশগ্রহন করুন
+                Give Exam
               </Link>{" "}
             </div>
           </div>
@@ -86,9 +86,7 @@ const CourseCard = ({ item }) => {
               href={buyOrStartLink}
               className="bg-yellowPrimary text-white py-4 px-4 transition-all duration-300 rounded  hover:bg-bluePrimary"
             >
-              {item?.membership_type === "0"
-                ? "কোর্সটি শুরু করুন"
-                : "কোর্সটি কিনুন"}
+              {item?.membership_type === "0" ? "Start Course" : "Buy Course"}
             </Link>
           </div>
         </div>
