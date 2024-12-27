@@ -105,7 +105,7 @@ const CategoryBooks = () => {
         </div>
       </div>
       <div className="mt-4 mb-2">
-        <h4 className="text-xl font-semibold">1&#41; Job Category:</h4>
+        <h4 className="text-xl font-semibold">1&#41; By Job Category:</h4>
       </div>
 
       <div className="">

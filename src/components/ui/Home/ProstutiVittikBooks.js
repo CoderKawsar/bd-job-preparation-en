@@ -97,7 +97,7 @@ const ProstutiVittikBooks = () => {
   return (
     <div className="px-14 pt-4">
       <div className="mt-4 mb-2">
-        <h4 className="text-xl font-semibold">3&#41; Preparation:</h4>
+        <h4 className="text-xl font-semibold">3&#41; By Preparation:</h4>
       </div>
 
       <div className="">

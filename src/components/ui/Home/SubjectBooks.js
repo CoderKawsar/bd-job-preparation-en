@@ -94,7 +94,7 @@ const SubjectBooks = () => {
   return (
     <div className="px-14 pt-4">
       <div className="mt-4 mb-2">
-        <h4 className="text-xl font-semibold">2&#41; Subject:</h4>
+        <h4 className="text-xl font-semibold">2&#41; By Subject:</h4>
       </div>
 
       <div className="">

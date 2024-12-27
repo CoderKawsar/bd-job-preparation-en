@@ -6,6 +6,8 @@ import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { IoEye } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
 
 const BookDetailsData = ({ data, isError, isLoading }) => {
   const { books: cartItems } = useSelector((state) => state.cart);
@@ -81,19 +83,29 @@ const BookDetailsData = ({ data, isError, isLoading }) => {
               <p>Book Format: {data?.format}</p>
 
               <p>${data?.price}</p>
-              <button
-                onClick={() => handleAddBook(data)}
-                className="bg-yellowPrimary text-white py-2 px-10 transition-all duration-300 rounded  hover:bg-bluePrimary "
-              >
-                Add To Cart
-              </button>
+              <div className="flex items-center gap-x-2">
+                <IoEye
+                  onClick={onOpenPDFModal}
+                  className="text-3xl p-1 cursor-pointer rounded bg-bluePrimary text-white hover:bg-blue-500 hover:text-gray-100 transition-all duration-500 ease-in"
+                />
+                <IoCartOutline
+                  onClick={() => handleAddBook(data)}
+                  className="text-3xl p-1 cursor-pointer rounded bg-yellowPrimary text-white hover:bg-yellow-500 hover:text-gray-100 transition-all duration-500 ease-in"
+                />
+                {/* <button
+                  onClick={() => handleAddBook(data)}
+                  className="bg-yellowPrimary text-white py-2 px-10 transition-all duration-300 rounded  hover:bg-bluePrimary "
+                >
+                  Add To Cart
+                </button>
 
-              <button
-                onClick={onOpenPDFModal}
-                className="bg-bluePrimary text-white py-2 px-10 transition-all duration-300 rounded  hover:bg-yellowPrimary ml-3"
-              >
-                Read Book
-              </button>
+                <button
+                  onClick={onOpenPDFModal}
+                  className="bg-bluePrimary text-white py-2 px-10 transition-all duration-300 rounded  hover:bg-yellowPrimary ml-3"
+                >
+                  Read Book
+                </button> */}
+              </div>
             </div>
           </div>
         </div>

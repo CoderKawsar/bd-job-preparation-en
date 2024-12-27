@@ -83,9 +83,8 @@ const UserCourses = () => {
           <div className="card-actions justify-center">
             <Link
               href={`/user/mycourses/details/${item?.course_id?._id}`}
-              className="text-lg text-yellowPrimary hover:text-green-500 cursor-pointer"
+              className="text-lg text-bluePrimary hover:text-green-500 cursor-pointer"
             >
-              {" "}
               Start Course
             </Link>
           </div>

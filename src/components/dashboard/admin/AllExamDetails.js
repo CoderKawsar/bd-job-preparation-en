@@ -57,7 +57,7 @@ const AllExamDetails = ({ item, refetchUserExam }) => {
       {/* <td><Link href={`/admin/givemarks/showexam/${item?.id}`} className="py-2 px-4 border-b md:table-cell text-red-500">মার্ক্স দিন</Link  ></td> */}
       <td>
         {isQuiz ? (
-          <button>Nothing to do</button>
+          <button>N/A</button>
         ) : (
           <button
             onClick={() => setModalOpen(true)}

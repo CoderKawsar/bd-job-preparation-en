@@ -13,12 +13,19 @@ import CategoryBooks from "./CategoryBooks";
 import CategorySubCategoryExams from "./CategorySubCategoryExams";
 import SubjectBooks from "./SubjectBooks";
 import ProstutiVittikBooks from "./ProstutiVittikBooks";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const HomePage = () => {
+  const router = useRouter();
   // const {data} = useGetAllCoursesQuery({
   //   title:"Course title here"
   // });
   // (data)
+  useEffect(() => {
+    router.refresh();
+  }, []);
+
   return (
     <div className="">
       <Hero />

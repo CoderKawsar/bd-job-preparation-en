@@ -93,7 +93,7 @@ const Category = () => {
     <div className=" px-14 py-20 ">
       <div className="lg:flex items-center justify-between my-4">
         <div>
-          <h2 className="lg:text-3xl md:text-2xl font-semibold ">
+          <h2 className="lg:text-3xl md:text-2xl font-semibold">
             Choose Your Favourite Course
           </h2>
           <h5 className="lg:text-xl py-4 mb-3">

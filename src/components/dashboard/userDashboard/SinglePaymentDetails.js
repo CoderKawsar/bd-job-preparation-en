@@ -80,7 +80,7 @@ const SinglePaymentDetails = ({ item }) => {
       <td>paid</td>
       <td>
         {isQuiz ? (
-          <p>nothing to do</p>
+          <p>N/A</p>
         ) : (
           // <button onClick={() => document.getElementById('my_modal_3').showModal()} className="px-2 py-2 bg-green-600 text-white rounded-sm">See All Questions</button>
           <button
@@ -97,7 +97,7 @@ const SinglePaymentDetails = ({ item }) => {
             href={`/user/myexams/details/${item?.exam_id?.id}`}
             className="text-red-500 font-bold "
           >
-            Participate in Quiz
+            Start Now
           </Link>
         ) : (
           <button

@@ -148,7 +148,7 @@ const CategorySubCategoryCourses = () => {
           {/* <h5 className="lg:text-xl py-4 mb-3">
             দেশসেরা ইন্সট্রাক্টরদের সেরা সব কোর্স এখন এক প্ল্যাটফর্মে।
           </h5> */}
-          <h2 className="lg:text-3xl md:text-2xl font-semibold mb-2 font-raleway">
+          <h2 className="lg:text-3xl md:text-2xl font-semibold mb-2">
             Choose Your Favourite Course:
           </h2>
         </div>

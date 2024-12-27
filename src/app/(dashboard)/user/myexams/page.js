@@ -22,9 +22,11 @@ const MyExamPages = () => {
 
   if (!isLoading && isError) {
     // content = <Error />;
-    content = <tr className="flex justify-center items-center font-bold bg-green-400  text-white py-3 px-3  my-5 rounded text-lg">
-      <h5>এখনও কোনো পরীক্ষা কেনা হয়নি</h5>
-    </tr>;
+    content = (
+      <tr className="flex justify-center items-center font-bold bg-green-400  text-white py-3 px-3  my-5 rounded text-lg">
+        <h5>এখনও কোনো পরীক্ষা কেনা হয়নি</h5>
+      </tr>
+    );
   }
 
   if (!isLoading && !isError && paymentsData?.length === 0) {
@@ -50,7 +52,8 @@ const MyExamPages = () => {
           <tr key={item?.id}>
             <td colSpan="8">
               <p className="text-red-500 font-bold">
-                This quiz  or written is currently inactive. please, be patient, when admin approved then you can give exam.
+                This quiz or written is currently inactive. please, be patient,
+                when admin approved then you can give exam.
               </p>
             </td>
           </tr>
@@ -58,9 +61,6 @@ const MyExamPages = () => {
       }
     });
   }
-
-
-
 
   return (
     <div>
@@ -70,26 +70,21 @@ const MyExamPages = () => {
             {/* head */}
             <thead>
               <tr>
-                <th>কোর্স নাম </th>
-                <th>পরিক্ষা্র নাম </th>
-                <th>পরিক্ষা ফী </th>
-                <th>পরিক্ষা্র ধরন</th>
-                <th>কেনার তারিখ</th>
-                <th>ট্রান্সজেকশন আইডি</th>
-                <th>পেমেন্ট</th>
-                <th>সমস্ত প্রশ্ন দেখুন</th>
-                <th>পরিক্ষা দিন</th>
+                <th>Course</th>
+                <th>Exam</th>
+                <th>Fee</th>
+                <th>Exam Type</th>
+                <th>Purchase Date</th>
+                <th>Trx ID</th>
+                <th>Payment</th>
+                <th>Questions</th>
+                <th>Start Exam</th>
               </tr>
             </thead>
-            <tbody>
-              {content}
-
-
-            </tbody>
+            <tbody>{content}</tbody>
           </table>
         </div>
       </div>
-
     </div>
   );
 };

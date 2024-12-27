@@ -9,6 +9,8 @@ import { addToCart } from "@/redux/features/cart/cartSlice";
 import { useState } from "react";
 import PDFViewerModal from "@/components/ohters/PDFViewerModal";
 import decryptLink from "@/helpers/decryptLink";
+import { IoEye } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
 
 const BookSectionCard = ({ item, onOpenPDFModal }) => {
   const { books: cartItems } = useSelector((state) => state.cart);
@@ -39,15 +41,6 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
   return (
     <>
       <div className="card w-[350px]   shadow-xl cursor-pointer transition ease-in-out delay-150  duration-300 rounded bg-white">
-        <div>
-          <button
-            onClick={onOpenPDFModal}
-            className="text-bluePrimary cursor-pointer"
-          >
-            Read
-          </button>
-        </div>
-
         <figure className="relative">
           <Image
             className="rounded w-full h-72"
@@ -113,7 +106,7 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
                 {" "}
                 -{item?.price}{" "}
               </del>{" "}
-              <span className="font-bold pl-2">{item?.discount_price}</span> Tk
+              <span className="font-bold pl-2">{item?.discount_price}</span> $
             </p>
             {item?.discount_price == 0 ? (
               <button
@@ -123,12 +116,16 @@ const BookSectionCard = ({ item, onOpenPDFModal }) => {
                 Read
               </button>
             ) : (
-              <button
-                onClick={() => handleAddBook(item)}
-                className="bg-yellowPrimary text-white py-2 px-4 transition-all duration-300 rounded  hover:bg-bluePrimary "
-              >
-                Add to Cart
-              </button>
+              <div className="flex justify-end items-center">
+                <IoEye
+                  onClick={onOpenPDFModal}
+                  className="text-3xl p-1 rounded hover:bg-gray-100  transition-all duration-500 ease-in"
+                />
+                <IoCartOutline
+                  onClick={() => handleAddBook(item)}
+                  className="text-3xl p-1 rounded hover:bg-bluePrimary hover:text-white transition-all duration-500 ease-in"
+                />
+              </div>
             )}
           </div>
           {cartItems?.find((book) => book?._id === item?._id) ? (
